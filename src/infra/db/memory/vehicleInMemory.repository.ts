@@ -24,6 +24,9 @@ export class VehicleInMemoryRepository implements IVehicleRepository {
     return vehicle;
   }
   async delete(id: number): Promise<void> {
+    if (!this.vehicles.find((vehicle) => vehicle.id === id)) {
+      throw new Error('Vehicle not found');
+    }
     this.vehicles = this.vehicles.filter((vehicle) => vehicle.id !== id);
   }
 }
