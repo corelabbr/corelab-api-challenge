@@ -1,4 +1,4 @@
-import { IVehicle } from 'domain/entities/vehicle.entity';
+import { IVehicle } from '@domain/entities/vehicle.entity';
 
 export interface IVehicleRepository {
   findAll(): Promise<IVehicle[]>;

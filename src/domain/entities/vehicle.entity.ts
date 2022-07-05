@@ -20,6 +20,9 @@ export class Vehicle implements IVehicle {
   createdAt: Date;
 
   constructor(vehicle: IVehicle) {
+    if (!this.isHex(vehicle.color)) {
+      throw new Error('Color must be a hexadecimal color');
+    }
     Object.assign(this, vehicle);
     if (!vehicle.id) {
       this.createdAt = new Date();
