@@ -36,7 +36,8 @@ describe('Test Repository Vehicles', () => {
   it('should be able to find all vehicles - with 0 vehicles', async () => {
     const repository = new VehicleInMemoryRepository();
     const vehicles = await repository.findAll();
-    expect(vehicles).toHaveLength(0);
+    expect(vehicles.total).toBe(0);
+    expect(vehicles.data).toStrictEqual([]);
   });
 
   it('should be able to find all vehicles - with 1 vehicle', async () => {
@@ -44,7 +45,8 @@ describe('Test Repository Vehicles', () => {
     const vehicle = newVehicle();
     await repository.create(vehicle);
     const vehicles = await repository.findAll();
-    expect(vehicles).toHaveLength(1);
+    expect(vehicles.total).toBe(1);
+    expect(vehicles.data).toStrictEqual([vehicle]);
   });
 
   it('should be able to update a vehicle', async () => {
@@ -67,7 +69,7 @@ describe('Test Repository Vehicles', () => {
     await repository.delete(vehicleCreated.id);
 
     const vehicles = await repository.findAll();
-    expect(vehicles).toHaveLength(0);
+    expect(vehicles.total).toBe(0);
   });
 
   it('should be able to delete a vehicle - with 2 vehicles', async () => {
@@ -79,7 +81,7 @@ describe('Test Repository Vehicles', () => {
     await repository.delete(vehicleCreated1.id);
 
     const vehicles = await repository.findAll();
-    expect(vehicles).toHaveLength(1);
+    expect(vehicles.total).toBe(1);
   });
 
   it('should be able to find a vehicle', async () => {

@@ -4,8 +4,11 @@ import { IVehicleRepository } from '@domain/interfaces/vehicle.repository';
 export class VehicleInMemoryRepository implements IVehicleRepository {
   vehicles: IVehicle[] = [];
 
-  async findAll(): Promise<IVehicle[]> {
-    return this.vehicles;
+  async findAll(): Promise<{ total: number; data: IVehicle[] }> {
+    return {
+      total: this.vehicles.length,
+      data: this.vehicles,
+    };
   }
   async findOne(id: number): Promise<IVehicle> {
     return this.vehicles.find((vehicle) => vehicle.id === id);
