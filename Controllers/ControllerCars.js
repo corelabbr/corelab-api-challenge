@@ -51,8 +51,40 @@ const Controllers = {
         res.status(200).json({ message : 'Carro deletado com sucesso' })
     },
 
-    editCar : function (req, res){
-        res.status(200)
+    editCar : async function (req, res){
+
+        const { name, brand, color, year, board } = await req.body
+
+        const newData = {
+            name : await name,
+            brand : await brand,
+            color : await color,
+            year : await year,
+            board : await board,
+        }
+
+        if(newData.name == undefined || !newData.name){
+            delete newData.name
+        }
+
+        if(newData.brand == undefined || !newData.brand){
+            delete newData.brand
+        }
+
+        if(newData.color == undefined || !newData.color){
+            delete newData.color
+        }
+
+        if(newData.year == undefined || !newData.year){
+            delete newData.year
+        }
+
+        if(newData.board == undefined || !newData.board){
+            delete newData.board
+        }
+
+        const CarEdit = await CarModel.findOneAndUpdate({ board : board }, newData)
+        res.json(CarEdit)
     }
 
 }
