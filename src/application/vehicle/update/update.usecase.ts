@@ -1,7 +1,7 @@
-import { IVehicle } from '@domain/entities/vehicle.entity';
+import { IVehicle } from '@domain/interfaces/vehicle.entity';
 import { IVehicleRepository } from '@domain/interfaces/vehicle.repository';
 
-export class updateVehicleUseCase {
+export class UpdateVehicleUseCase {
   constructor(private vehicleRepository: IVehicleRepository) {}
 
   private isPropertyEligible(vehicle: Partial<IVehicle>): boolean {
@@ -23,7 +23,12 @@ export class updateVehicleUseCase {
     if (!this.isPropertyEligible(vehicle)) {
       throw new Error('Vehicle properties cannot be updated');
     }
+
     Object.assign(vehicleFound, vehicle);
+    if (vehicle?.color) {
+      vehicleFound.changeColor(vehicle.color);
+    }
+
     return this.vehicleRepository.update(vehicleFound);
   }
 }

@@ -1,4 +1,5 @@
-import { IVehicle, Vehicle } from '@domain/entities/vehicle.entity';
+import { Vehicle } from '@domain/entities/vehicle.entity';
+import { IVehicle } from '@domain/interfaces/vehicle.entity';
 import { IVehicleRepository } from '@domain/interfaces/vehicle.repository';
 
 export class ListAllVehiclesUseCase {

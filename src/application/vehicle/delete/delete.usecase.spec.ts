@@ -12,9 +12,10 @@ describe('DeleteVehicleUseCase', () => {
       color: '#FFF',
       price: 10000,
       plate: 'ABC-1234',
+      description: '',
     });
 
-    const newVehicle = await vehicleRepository.create(vehicle);
+    const newVehicle = await vehicleRepository.save(vehicle);
 
     await deleteVehicleUseCase.execute(newVehicle.id);
 

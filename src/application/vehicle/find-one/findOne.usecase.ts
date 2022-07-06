@@ -1,7 +1,7 @@
-import { IVehicle } from '@domain/entities/vehicle.entity';
+import { IVehicle } from '@domain/interfaces/vehicle.entity';
 import { IVehicleRepository } from '@domain/interfaces/vehicle.repository';
 
-export class findOneVehicleUseCase {
+export class FindOneVehicleUseCase {
   constructor(private readonly vehicleRepo: IVehicleRepository) {}
 
   async execute(id: number): Promise<IVehicle> {

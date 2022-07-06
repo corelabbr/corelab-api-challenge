@@ -1,15 +1,7 @@
-export interface IVehicle {
-  id?: number;
-  name: string;
-  year: number;
-  color: string;
-  price: number;
-  createdAt?: Date;
-  plate: string;
-}
+import { IVehicle } from '@domain/interfaces/vehicle.entity';
 
 export class Vehicle implements IVehicle {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   plate: string;
@@ -20,11 +12,8 @@ export class Vehicle implements IVehicle {
   createdAt: Date;
 
   constructor(vehicle: IVehicle) {
-    if (!this.isHex(vehicle.color)) {
-      throw new Error('Color must be a hexadecimal color');
-    }
     Object.assign(this, vehicle);
-    if (!vehicle.id) {
+    if (!vehicle?.id) {
       this.createdAt = new Date();
     }
   }

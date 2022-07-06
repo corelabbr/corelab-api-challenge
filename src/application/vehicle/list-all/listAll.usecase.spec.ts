@@ -1,4 +1,4 @@
-import { IVehicle } from '@domain/entities/vehicle.entity';
+import { IVehicle } from '@domain/interfaces/vehicle.entity';
 import { VehicleInMemoryRepository } from '@infra/db/memory/vehicleInMemory.repository';
 import { ListAllVehiclesUseCase } from './listAll.usecase';
 
@@ -12,6 +12,7 @@ describe('Test UseCase List All Vehicles', () => {
       color: '#FFF',
       price: 10000,
       plate: 'ABC-1234',
+      description: '',
     };
 
     const response = await useCase.execute();
@@ -29,6 +30,7 @@ describe('Test UseCase List All Vehicles', () => {
       color: '#FFF',
       price: 10000,
       plate: 'ABC-1234',
+      description: '',
     };
     vehicleRepository.create(vehicle);
     vehicleRepository.create({

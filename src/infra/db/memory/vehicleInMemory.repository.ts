@@ -1,28 +1,36 @@
-import { IVehicle } from '@domain/entities/vehicle.entity';
+import { Vehicle } from '@domain/entities/vehicle.entity';
+import { IVehicle } from '@domain/interfaces/vehicle.entity';
 import { IVehicleRepository } from '@domain/interfaces/vehicle.repository';
 
 export class VehicleInMemoryRepository implements IVehicleRepository {
+  create(vehicle: IVehicle) {
+    throw new Error('Method not implemented.');
+  }
   vehicles: IVehicle[] = [];
 
-  async findAll(): Promise<{ total: number; data: IVehicle[] }> {
+  async findAll(): Promise<{ total: number; data: Vehicle[] }> {
     return {
       total: this.vehicles.length,
-      data: this.vehicles,
+      data: this.vehicles as Vehicle[],
     };
   }
-  async findOne(id: number): Promise<IVehicle> {
-    return this.vehicles.find((vehicle) => vehicle.id === id);
+
+  async findOne(id: number): Promise<Vehicle> {
+    return this.vehicles.find((vehicle) => vehicle.id === id) as Vehicle;
   }
-  async create(vehicle: IVehicle): Promise<IVehicle> {
+
+  async save(vehicle: IVehicle): Promise<IVehicle> {
     vehicle.id = this.vehicles.length + 1;
     this.vehicles.push(vehicle);
     return vehicle;
   }
+
   async update(vehicle: IVehicle): Promise<IVehicle> {
     const index = this.vehicles.findIndex((v) => v.id === vehicle.id);
     this.vehicles[index] = vehicle;
     return vehicle;
   }
+
   async delete(id: number): Promise<void> {
     if (!this.vehicles.find((vehicle) => vehicle.id === id)) {
       throw new Error('Vehicle not found');

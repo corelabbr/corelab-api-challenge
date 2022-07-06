@@ -1,4 +1,5 @@
-import { IVehicle, Vehicle } from '@domain/entities/vehicle.entity';
+import { Vehicle } from '@domain/entities/vehicle.entity';
+import { IVehicle } from '@domain/interfaces/vehicle.entity';
 import { IVehicleRepository } from '@domain/interfaces/vehicle.repository';
 
 export class CreateVehicleUseCase {
@@ -6,6 +7,6 @@ export class CreateVehicleUseCase {
 
   async execute(vehicle: IVehicle): Promise<IVehicle> {
     const newVehicle = new Vehicle(vehicle);
-    return this.vehicleRepo.create(newVehicle);
+    return this.vehicleRepo.save(newVehicle);
   }
 }
