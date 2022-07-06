@@ -43,8 +43,12 @@ const Controllers = {
 
     },
 
-    deleteCar : function (req, res){
+    deleteCar : async function (req, res){
 
+        const board = await req.body.board
+        await CarModel.findOneAndDelete({ board : board })
+
+        res.status(200).json({ message : 'Carro deletado com sucesso' })
     },
 
     editCar : function (req, res){
