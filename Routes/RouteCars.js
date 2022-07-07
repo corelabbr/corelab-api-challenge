@@ -1,7 +1,14 @@
 const express = require('express')
 const router = express.Router()
+const cors = require('cors')
 
 const Controllers = require('../Controllers/ControllerCars')
+
+const config = {
+    origin : 'http://localhost:3001'
+}
+
+router.use(cors(config))
 
 // ----------------GET---------------- //
 router.get('/cars', Controllers.showCars)
