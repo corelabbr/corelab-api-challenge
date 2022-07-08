@@ -13,6 +13,7 @@ describe('Test Repository Vehicles', () => {
       price: 10000,
       plate: 'ABC-1234',
       description: '',
+      brand: '',
     };
 
     await useCase.execute(vehicle);
@@ -29,6 +30,7 @@ describe('Test Repository Vehicles', () => {
       price: 10000,
       plate: 'ABC-1234',
       description: '',
+      brand: '',
     };
 
     await useCase.execute(vehicle);
@@ -38,25 +40,5 @@ describe('Test Repository Vehicles', () => {
     });
 
     expect(vehicleRepository.vehicles).toHaveLength(2);
-  });
-
-  it('should be able create vehicle with property invalid', async () => {
-    const vehicleRepository = new VehicleInMemoryRepository();
-    const useCase = new CreateVehicleUseCase(vehicleRepository);
-    const vehicle: IVehicle = {
-      name: 'Fusca',
-      year: 2010,
-      color: '#FFF',
-      price: 10000,
-      plate: 'ABC-1234',
-      description: '',
-    };
-
-    await expect(
-      useCase.execute({
-        ...vehicle,
-        color: 'F3F',
-      }),
-    ).rejects.toThrowError('Color must be a hexadecimal color');
   });
 });
