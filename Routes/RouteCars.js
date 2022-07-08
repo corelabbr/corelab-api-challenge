@@ -15,15 +15,15 @@ router.get('/cars', Controllers.showCars)
 
 
 // ----------------POST---------------- //
-router.post('/new-car', express.json(), Controllers.newCar)
+router.post('/new-car', express.urlencoded(), Controllers.newCar)
 
 
 // ----------------DEL---------------- //
-router.delete('/del-car', express.json(), Controllers.deleteCar)
+router.delete('/del-car', express.urlencoded(), Controllers.deleteCar)
 
 
 // ----------------PUT---------------- //
-router.put('/edit-car', express.json(), Controllers.editCar)
+router.put('/edit-car', express.urlencoded(), Controllers.editCar)
 
 
 module.exports = router
