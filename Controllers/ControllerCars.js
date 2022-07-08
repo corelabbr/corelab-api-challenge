@@ -13,6 +13,8 @@ const Controllers = {
                 color : e.color,
                 year : e.year,
                 board : e.board,
+                price : e.price,
+                isFavorite : e.isFavorite
             }
         })
 
@@ -21,7 +23,7 @@ const Controllers = {
 
     newCar : async function (req, res){
         
-        const { name, brand, color, year, board } = await req.body
+        const { name, brand, color, year, board, price, isFavorite } = await req.body
         const checkBoard = await CarModel.findOne({ board : board })
 
         if(checkBoard == null){
@@ -31,11 +33,13 @@ const Controllers = {
                 brand : brand,
                 color : color,
                 year : year,
-                board : board
+                board : board,
+                price : price,
+                isFavorite : isFavorite
             })
 
              register.save()
-             res.status(200).json({ message : 'O carro foi salvo' })
+             res.status(200)
         }else{
             res.status(200).json({ message : 'A placa já está registrada' })
         }
@@ -51,7 +55,7 @@ const Controllers = {
 
     editCar : async function (req, res){
 
-        const { name, brand, color, year, board } = await req.body
+        const { name, brand, color, year, board, price, } = await req.body
         const findCar = await CarModel.findOne({ board : board })
 
         const newData = {
@@ -60,6 +64,7 @@ const Controllers = {
             color : await color,
             year : await year,
             board : await board,
+            price : await price,
         }
 
         if(newData.name == undefined || !newData.name){
@@ -80,6 +85,10 @@ const Controllers = {
 
         if(newData.board == undefined || !newData.board){
             delete newData.board
+        }
+
+        if(newData.price == undefined || !newData.price){
+            delete newData.price
         }
 
         await CarModel.findOneAndUpdate({ board : findCar.board }, newData)

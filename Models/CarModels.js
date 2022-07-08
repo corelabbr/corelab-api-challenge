@@ -6,6 +6,8 @@ const CarModel = mongoose.Schema({
     color : { type : String },
     year : { type : Number },
     board : { type : String },
+    price : { type : Number },
+    isFavorite : { type : Boolean, default : false }
 })
 
 module.exports = mongoose.model('CarModel', CarModel)
