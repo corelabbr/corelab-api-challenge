@@ -19,7 +19,7 @@ router.post('/new-car', express.urlencoded(), Controllers.newCar)
 
 
 // ----------------DEL---------------- //
-router.delete('/del-car', express.urlencoded(), Controllers.deleteCar)
+router.delete('/del-car', express.json(), Controllers.deleteCar)
 
 
 // ----------------PUT---------------- //
