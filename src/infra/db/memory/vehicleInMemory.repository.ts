@@ -3,9 +3,6 @@ import { IVehicle } from '@domain/interfaces/vehicle.entity';
 import { IVehicleRepository } from '@domain/interfaces/vehicle.repository';
 
 export class VehicleInMemoryRepository implements IVehicleRepository {
-  create(vehicle: IVehicle) {
-    throw new Error('Method not implemented.');
-  }
   vehicles: IVehicle[] = [];
 
   async findAll(): Promise<{ total: number; data: Vehicle[] }> {

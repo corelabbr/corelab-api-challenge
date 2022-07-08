@@ -32,6 +32,8 @@ export class VehiclesController {
   @Post()
   async createVehicle(@Body() vehicle: InputVehiclesDto): Promise<IVehicle> {
     try {
+      console.log(vehicle);
+
       const vehicleCreated = await this.createVehicleUseCase.execute(vehicle);
 
       return vehicleCreated;

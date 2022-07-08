@@ -9,6 +9,7 @@ describe('Test Entity Vehicle', () => {
       color: '#FFF',
       price: 10000,
       plate: 'ABC-1234',
+      description: 'Carro de luxo',
     });
 
   it('Create Entity', () => {
@@ -42,15 +43,6 @@ describe('Test Entity Vehicle', () => {
 
     expect(vehicle.color).toBe('#000');
   });
-
-  //TODO - Teste para verificar se ocorreu erro ao tentar mudar a cor para um valor inválido
-  // it('Change Color with invalid property', async () => {
-  //   const vehicle = newVehicle();
-
-  //   expect(vehicle.changeColor('white')).rejects.toThrow(
-  //     'Color must be a hexadecimal color',
-  //   );
-  // });
 
   it('Change Price', () => {
     const vehicle = newVehicle();

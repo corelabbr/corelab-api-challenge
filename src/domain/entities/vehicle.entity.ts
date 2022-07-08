@@ -3,6 +3,7 @@ import { IVehicle } from '@domain/interfaces/vehicle.entity';
 export class Vehicle implements IVehicle {
   id?: number;
   name: string;
+  brand: string;
   description: string;
   plate: string;
   isFavorite: boolean;
@@ -18,19 +19,11 @@ export class Vehicle implements IVehicle {
     }
   }
 
-  private isHex(color: string) {
-    const hex = /^#(?:[0-9a-fA-F]{3}){1,2}$/;
-    return hex.test(color);
-  }
-
   setFavorite() {
     this.isFavorite = !this.isFavorite;
   }
 
   changeColor(color: string) {
-    if (!this.isHex(color)) {
-      throw new Error('Color must be a hexadecimal color');
-    }
     this.color = color;
   }
 

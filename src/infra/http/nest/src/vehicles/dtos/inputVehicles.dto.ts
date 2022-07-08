@@ -1,10 +1,12 @@
-import { IsString, IsNumber, IsHexColor } from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator';
 export class InputVehiclesDto {
   @IsString()
   name: string;
 
   @IsString()
-  @IsHexColor()
+  brand: string;
+
+  @IsString()
   color: string;
 
   @IsString()
@@ -13,9 +15,9 @@ export class InputVehiclesDto {
   @IsString()
   plate: string;
 
-  @IsNumber()
+  @IsNotEmpty()
   year: number;
 
-  @IsNumber()
+  @IsNotEmpty()
   price: number;
 }

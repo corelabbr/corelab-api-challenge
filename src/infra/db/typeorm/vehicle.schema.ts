@@ -11,6 +11,11 @@ export const VehicleSchema = new EntitySchema<Vehicle>({
       generated: 'increment',
     },
 
+    brand: {
+      type: 'varchar',
+      nullable: false,
+    },
+
     name: {
       type: 'varchar',
       nullable: false,
