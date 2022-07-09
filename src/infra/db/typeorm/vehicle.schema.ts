@@ -1,62 +1,56 @@
+import { User } from '@domain/entities/user.entity';
 import { Vehicle } from '@domain/entities/vehicle.entity';
-import { EntitySchema } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { UserEntityTypeorm } from './user.schema';
 
-export const VehicleSchema = new EntitySchema<Vehicle>({
-  name: 'vehicles',
-  target: Vehicle,
-  columns: {
-    id: {
-      primary: true,
-      type: 'int',
-      generated: 'increment',
-    },
+@Entity('vehicles')
+export class VehicleEntityTypeorm implements Vehicle {
+  @PrimaryGeneratedColumn({ type: 'int' })
+  id: number;
 
-    brand: {
-      type: 'varchar',
-      nullable: false,
-    },
+  @Column()
+  name: string;
 
-    name: {
-      type: 'varchar',
-      nullable: false,
-    },
+  @Column()
+  brand: string;
 
-    description: {
-      type: 'varchar',
-      nullable: true,
-    },
+  @Column()
+  description: string;
 
-    plate: {
-      type: 'varchar',
-      nullable: false,
-    },
+  @Column()
+  plate: string;
 
-    price: {
-      type: 'decimal',
-      precision: 10,
-      scale: 2,
-      nullable: false,
-    },
+  @Column()
+  year: number;
 
-    year: {
-      type: 'int',
-      nullable: false,
-    },
+  @Column()
+  color: string;
 
-    color: {
-      type: 'varchar',
-      nullable: false,
-    },
+  @Column()
+  price: number;
 
-    isFavorite: {
-      type: 'boolean',
-      nullable: false,
-      default: false,
-    },
+  @CreateDateColumn()
+  createdAt: Date;
 
-    createdAt: {
-      type: 'datetime',
-      default: 'now()',
-    },
-  },
-});
+  @ManyToOne(() => UserEntityTypeorm, (user) => user.vehicles)
+  user: User;
+
+  changeColor(color: string): void {
+    this.color = color;
+  }
+
+  changePrice(price: number): void {
+    this.price = price;
+  }
+
+  setUser(user: User): void {
+    this.user = user;
+  }
+}

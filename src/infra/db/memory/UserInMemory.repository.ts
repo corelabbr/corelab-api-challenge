@@ -1,5 +1,5 @@
 import { User } from '@domain/entities/user.entity';
-import { IUser } from '@domain/interfaces/user.interface';
+import { IUser } from '@domain/interfaces/user.entity';
 import { IUsersRepository } from '@domain/interfaces/user.repository';
 
 export class UserInMemoryRepository implements IUsersRepository {

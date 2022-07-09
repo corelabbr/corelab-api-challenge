@@ -1,3 +1,5 @@
+import { User } from '@domain/entities/user.entity';
+
 export interface IVehicle {
   id?: number;
   name: string;
@@ -8,4 +10,5 @@ export interface IVehicle {
   price: number;
   createdAt?: Date;
   plate: string;
+  user?: Partial<User>;
 }

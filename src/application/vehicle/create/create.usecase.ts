@@ -7,6 +7,7 @@ export class CreateVehicleUseCase {
 
   async execute(vehicle: IVehicle): Promise<IVehicle> {
     const newVehicle = new Vehicle(vehicle);
+
     return this.vehicleRepo.save(newVehicle);
   }
 }

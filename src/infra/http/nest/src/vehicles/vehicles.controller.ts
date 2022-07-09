@@ -4,6 +4,8 @@ import { FindOneVehicleUseCase } from '@application/vehicle/find-one/findOne.use
 import { ListAllVehiclesUseCase } from '@application/vehicle/list-all/listAll.usecase';
 import { SetFavoriteVehicleUseCase } from '@application/vehicle/set-favorite/setFavorite.usecase';
 import { UpdateVehicleUseCase } from '@application/vehicle/update/update.usecase';
+import { User } from '@domain/entities/user.entity';
+import { Vehicle } from '@domain/entities/vehicle.entity';
 import { IVehicle } from '@domain/interfaces/vehicle.entity';
 import {
   BadRequestException,
@@ -14,7 +16,11 @@ import {
   Param,
   Post,
   Put,
+  UnauthorizedException,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { GetUser } from '../custom/decorators/user.decorator';
 import { InputVehiclesDto } from './dtos/inputVehicles.dto';
 import { UpdateVehiclesDto } from './dtos/updateVehicle.dto';
 
@@ -29,13 +35,15 @@ export class VehiclesController {
     private readonly setFavoriteVehicleUseCase: SetFavoriteVehicleUseCase,
   ) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
-  async createVehicle(@Body() vehicle: InputVehiclesDto): Promise<IVehicle> {
+  async createVehicle(
+    @GetUser() user: User,
+    @Body() vehicleDto: InputVehiclesDto,
+  ): Promise<IVehicle> {
     try {
-      console.log(vehicle);
-
+      const vehicle = new Vehicle(vehicleDto, user);
       const vehicleCreated = await this.createVehicleUseCase.execute(vehicle);
-
       return vehicleCreated;
     } catch (error) {
       throw new BadRequestException(error.message);
@@ -44,12 +52,21 @@ export class VehiclesController {
 
   @Get()
   async listVehicles(): Promise<{ total: number; data: IVehicle[] }> {
-    return this.listVehiclesUseCase.execute();
+    return this.listVehiclesUseCase.all();
   }
 
   @Get('/:id')
   async findOneVehicle(@Param('id') id: string): Promise<IVehicle> {
     return this.findOneVehiclesUseCase.execute(+id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/:id/favorite')
+  async findFavoriteVehicle(
+    @GetUser() user: User,
+    @Param('id') id: string,
+  ): Promise<{ total: number; data: IVehicle[] }> {
+    return this.listVehiclesUseCase.favorite(+id);
   }
 
   @Put('/:id')
@@ -69,9 +86,18 @@ export class VehiclesController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put('/:id/favorite')
-  async favoriteVehicle(@Param('id') id: string): Promise<IVehicle> {
-    return this.setFavoriteVehicleUseCase.execute(+id);
+  async favoriteVehicle(
+    @GetUser() user: User,
+    @Param('id') id: string,
+  ): Promise<void> {
+    console.log(user);
+
+    if (!user) {
+      throw new UnauthorizedException('Unauthorized');
+    }
+    await this.setFavoriteVehicleUseCase.execute(+id, user);
   }
 
   @Delete('/:id')

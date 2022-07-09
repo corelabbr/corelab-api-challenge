@@ -1,5 +1,5 @@
 import { User } from '@domain/entities/user.entity';
-import { IUser } from './user.interface';
+import { IUser } from './user.entity';
 
 export interface IUsersRepository {
   save(user: IUser): Promise<User>;

@@ -4,10 +4,13 @@ import { FindOneVehicleUseCase } from '@application/vehicle/find-one/findOne.use
 import { ListAllVehiclesUseCase } from '@application/vehicle/list-all/listAll.usecase';
 import { SetFavoriteVehicleUseCase } from '@application/vehicle/set-favorite/setFavorite.usecase';
 import { UpdateVehicleUseCase } from '@application/vehicle/update/update.usecase';
-import { Vehicle } from '@domain/entities/vehicle.entity';
+import { IUsersRepository } from '@domain/interfaces/user.repository';
 import { IVehicleRepository } from '@domain/interfaces/vehicle.repository';
 import { VehicleInMemoryRepository } from '@infra/db/memory/vehicleInMemory.repository';
+import { UserTypeormRepository } from '@infra/db/typeorm/user-typeorm.repository';
+import { UserEntityTypeorm } from '@infra/db/typeorm/user.schema';
 import { VehicleTypeormRepository } from '@infra/db/typeorm/vehicle-typeorm.repository';
+import { VehicleEntityTypeorm } from '@infra/db/typeorm/vehicle.schema';
 
 import { getDataSourceToken } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
@@ -16,7 +19,9 @@ export const vehiclesProviders = [
   {
     provide: VehicleTypeormRepository,
     useFactory: (dataSource: DataSource) =>
-      new VehicleTypeormRepository(dataSource.getRepository(Vehicle)),
+      new VehicleTypeormRepository(
+        dataSource.getRepository(VehicleEntityTypeorm),
+      ),
     inject: [getDataSourceToken()],
   },
   {
@@ -55,8 +60,10 @@ export const vehiclesProviders = [
   },
   {
     provide: SetFavoriteVehicleUseCase,
-    useFactory: (repository: IVehicleRepository) =>
-      new SetFavoriteVehicleUseCase(repository),
-    inject: [VehicleTypeormRepository],
+    useFactory: (
+      vehicleRepository: IVehicleRepository,
+      userRepository: IUsersRepository,
+    ) => new SetFavoriteVehicleUseCase(userRepository, vehicleRepository),
+    inject: [VehicleTypeormRepository, UserTypeormRepository],
   },
 ];

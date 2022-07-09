@@ -10,6 +10,7 @@ describe('Test Entity Vehicle', () => {
       price: 10000,
       plate: 'ABC-1234',
       description: 'Carro de luxo',
+      brand: 'Volkswagen',
     });
 
   it('Create Entity', () => {
@@ -17,23 +18,6 @@ describe('Test Entity Vehicle', () => {
 
     expect(vehicle).toBeInstanceOf(Vehicle);
     expect(vehicle.id).toBe(1);
-  });
-
-  it('Set Favorite True', () => {
-    const vehicle = newVehicle();
-
-    vehicle.setFavorite();
-
-    expect(vehicle.isFavorite).toBe(true);
-  });
-
-  it('Set Favorite False', () => {
-    const vehicle = newVehicle();
-
-    vehicle.setFavorite();
-    vehicle.setFavorite();
-
-    expect(vehicle.isFavorite).toBe(false);
   });
 
   it('Change Color', () => {
@@ -51,13 +35,4 @@ describe('Test Entity Vehicle', () => {
 
     expect(vehicle.price).toBe(20000);
   });
-
-  //TODO - Teste para verificar se ocorreu erro ao tentar mudar o preço para um valor inválido
-  // it('Change Price with invalid property', async () => {
-  //   const vehicle = newVehicle();
-
-  //   expect(vehicle.changePrice(-1)).rejects.toThrow(
-  //     'Price must be greater than zero',
-  //   );
-  // });
 });

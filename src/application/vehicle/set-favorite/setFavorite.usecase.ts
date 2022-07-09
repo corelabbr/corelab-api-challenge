@@ -1,13 +1,19 @@
-import { IVehicle } from '@domain/interfaces/vehicle.entity';
+import { User } from '@domain/entities/user.entity';
+import { IUsersRepository } from '@domain/interfaces/user.repository';
 import { IVehicleRepository } from '@domain/interfaces/vehicle.repository';
 
 export class SetFavoriteVehicleUseCase {
-  constructor(private readonly vehicleRepository: IVehicleRepository) {}
+  constructor(
+    private readonly userRepository: IUsersRepository,
+    private readonly vehicleRepository: IVehicleRepository,
+  ) {}
 
-  async execute(id: number): Promise<IVehicle> {
-    const vehicle = await this.vehicleRepository.findOne(id);
-    vehicle.setFavorite();
+  async execute(idVehicle: number, { id }: User): Promise<void> {
+    const user = await this.userRepository.findById(id);
+    console.log(user);
 
-    return this.vehicleRepository.save(vehicle);
+    const vehicle = await this.vehicleRepository.findOne(idVehicle);
+    user.favorites.push(vehicle);
+    await this.userRepository.save(user);
   }
 }

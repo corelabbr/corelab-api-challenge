@@ -2,9 +2,17 @@ import { Vehicle } from '@domain/entities/vehicle.entity';
 import { IVehicle } from '@domain/interfaces/vehicle.entity';
 import { IVehicleRepository } from '@domain/interfaces/vehicle.repository';
 import { Repository } from 'typeorm';
+import { VehicleEntityTypeorm } from './vehicle.schema';
 
 export class VehicleTypeormRepository implements IVehicleRepository {
-  constructor(private readonly ormRepo: Repository<Vehicle>) {}
+  constructor(private readonly ormRepo: Repository<VehicleEntityTypeorm>) {}
+  async findFavorite(id: number): Promise<{ total: number; data: Vehicle[] }> {
+    const [data, total] = await this.ormRepo.findAndCount({
+      where: { id },
+    });
+
+    return { total, data };
+  }
 
   async findAll(): Promise<{ total: number; data: Vehicle[] }> {
     const [data, total] = await this.ormRepo.findAndCount();

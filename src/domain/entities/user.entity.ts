@@ -1,4 +1,5 @@
-import { IUser } from '@domain/interfaces/user.interface';
+import { IUser } from '@domain/interfaces/user.entity';
+import { Vehicle } from './vehicle.entity';
 
 export class User implements IUser {
   id?: number;
@@ -6,6 +7,8 @@ export class User implements IUser {
   username: string;
   password: string;
   createdAt: Date;
+  vehicles: Vehicle[];
+  favorites: Vehicle[];
 
   constructor(user: IUser) {
     Object.assign(this, user);
@@ -13,5 +16,6 @@ export class User implements IUser {
     if (!user?.id) {
       this.createdAt = new Date();
     }
+    this.vehicles = [];
   }
 }
