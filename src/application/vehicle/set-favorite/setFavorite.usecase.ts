@@ -1,4 +1,3 @@
-import { User } from '@domain/entities/user.entity';
 import { IUsersRepository } from '@domain/interfaces/user.repository';
 import { IVehicleRepository } from '@domain/interfaces/vehicle.repository';
 
@@ -8,11 +7,13 @@ export class SetFavoriteVehicleUseCase {
     private readonly vehicleRepository: IVehicleRepository,
   ) {}
 
-  async execute(idVehicle: number, { id }: User): Promise<void> {
-    const user = await this.userRepository.findById(id);
-    console.log(user);
-
+  async execute(idVehicle: number, idUser: number): Promise<void> {
+    const user = await this.userRepository.findById(idUser);
     const vehicle = await this.vehicleRepository.findOne(idVehicle);
+
+    if (!vehicle) {
+      throw new Error('Vehicle not found');
+    }
     user.favorites.push(vehicle);
     await this.userRepository.save(user);
   }

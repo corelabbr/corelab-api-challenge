@@ -55,18 +55,19 @@ export class VehiclesController {
     return this.listVehiclesUseCase.all();
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get('/favorites')
+  async findFavoriteVehicle(
+    @GetUser() user: User,
+  ): Promise<{ total: number; data: IVehicle[] }> {
+    console.log(user);
+
+    return this.listVehiclesUseCase.favorite(user.id);
+  }
+
   @Get('/:id')
   async findOneVehicle(@Param('id') id: string): Promise<IVehicle> {
     return this.findOneVehiclesUseCase.execute(+id);
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Get('/:id/favorite')
-  async findFavoriteVehicle(
-    @GetUser() user: User,
-    @Param('id') id: string,
-  ): Promise<{ total: number; data: IVehicle[] }> {
-    return this.listVehiclesUseCase.favorite(+id);
   }
 
   @Put('/:id')
@@ -97,7 +98,7 @@ export class VehiclesController {
     if (!user) {
       throw new UnauthorizedException('Unauthorized');
     }
-    await this.setFavoriteVehicleUseCase.execute(+id, user);
+    await this.setFavoriteVehicleUseCase.execute(+id, user.id);
   }
 
   @Delete('/:id')

@@ -3,7 +3,7 @@ import { IUser } from '@domain/interfaces/user.entity';
 import { IUsersRepository } from '@domain/interfaces/user.repository';
 
 export class UserInMemoryRepository implements IUsersRepository {
-  users: IUser[] = [];
+  public users: IUser[] = [];
 
   async findById(id: number): Promise<User> {
     return this.users.find((user) => user.id === id) as User;

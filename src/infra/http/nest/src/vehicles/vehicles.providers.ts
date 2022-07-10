@@ -20,6 +20,7 @@ export const vehiclesProviders = [
     provide: VehicleTypeormRepository,
     useFactory: (dataSource: DataSource) =>
       new VehicleTypeormRepository(
+        dataSource.getRepository(UserEntityTypeorm),
         dataSource.getRepository(VehicleEntityTypeorm),
       ),
     inject: [getDataSourceToken()],

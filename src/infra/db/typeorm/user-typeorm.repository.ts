@@ -1,4 +1,5 @@
 import { User } from '@domain/entities/user.entity';
+import { Vehicle } from '@domain/entities/vehicle.entity';
 import { IUser } from '@domain/interfaces/user.entity';
 import { IUsersRepository } from '@domain/interfaces/user.repository';
 import { Repository } from 'typeorm';
@@ -23,5 +24,14 @@ export class UserTypeormRepository implements IUsersRepository {
 
   async findByUsername(username: string): Promise<User> {
     return this.ormRepo.findOne({ where: { username } });
+  }
+
+  async findVehiclesFavorites(id: number): Promise<Vehicle[]> {
+    const response = await this.ormRepo.findOneOrFail({
+      where: { id },
+      relations: ['favorites'],
+    });
+
+    return response.favorites;
   }
 }

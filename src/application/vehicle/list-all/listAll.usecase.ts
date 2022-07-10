@@ -8,7 +8,7 @@ export class ListAllVehiclesUseCase {
     return this.vehicleRepo.findAll();
   }
 
-  async favorite(id: number): Promise<{ total: number; data: IVehicle[] }> {
-    return this.vehicleRepo.findFavorite(id);
+  async favorite(idUser: number): Promise<{ total: number; data: IVehicle[] }> {
+    return this.vehicleRepo.findFavorite(idUser);
   }
 }

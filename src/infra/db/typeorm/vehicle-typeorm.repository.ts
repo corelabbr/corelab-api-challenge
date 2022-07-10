@@ -2,42 +2,49 @@ import { Vehicle } from '@domain/entities/vehicle.entity';
 import { IVehicle } from '@domain/interfaces/vehicle.entity';
 import { IVehicleRepository } from '@domain/interfaces/vehicle.repository';
 import { Repository } from 'typeorm';
+import { UserEntityTypeorm } from './user.schema';
 import { VehicleEntityTypeorm } from './vehicle.schema';
 
 export class VehicleTypeormRepository implements IVehicleRepository {
-  constructor(private readonly ormRepo: Repository<VehicleEntityTypeorm>) {}
+  constructor(
+    private readonly userRepo: Repository<UserEntityTypeorm>,
+    private readonly vehicleRepo: Repository<VehicleEntityTypeorm>,
+  ) {}
   async findFavorite(id: number): Promise<{ total: number; data: Vehicle[] }> {
-    const [data, total] = await this.ormRepo.findAndCount({
+    console.log(id);
+
+    const data = await this.userRepo.findOne({
       where: { id },
+      relations: ['favorites'],
     });
 
-    return { total, data };
+    return { total: data.favorites.length, data: data.favorites };
   }
 
   async findAll(): Promise<{ total: number; data: Vehicle[] }> {
-    const [data, total] = await this.ormRepo.findAndCount();
+    const [data, total] = await this.vehicleRepo.findAndCount();
 
     return { total, data };
   }
 
   async findOne(id: number): Promise<Vehicle> {
-    return this.ormRepo.findOne({ where: { id } });
+    return this.vehicleRepo.findOne({ where: { id } });
   }
 
   async save(vehicle: IVehicle): Promise<IVehicle> {
-    const newVehicle = this.ormRepo.create(vehicle);
-    await this.ormRepo.save(newVehicle);
+    const newVehicle = this.vehicleRepo.create(vehicle);
+    await this.vehicleRepo.save(newVehicle);
 
     return newVehicle;
   }
 
   async update(vehicle: Partial<IVehicle>): Promise<IVehicle> {
-    const updatedVehicle = await this.ormRepo.save(vehicle);
+    const updatedVehicle = await this.vehicleRepo.save(vehicle);
 
     return updatedVehicle;
   }
 
   async delete(id: number): Promise<void> {
-    await this.ormRepo.delete(id);
+    await this.vehicleRepo.delete(id);
   }
 }

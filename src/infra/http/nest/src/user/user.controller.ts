@@ -1,5 +1,6 @@
 import { CreateUserUseCase } from '@application/user/create/create.usecase';
 import { FindOneUserUseCase } from '@application/user/find-one/findOne.usecase';
+import { User } from '@domain/entities/user.entity';
 import {
   Controller,
   Get,
@@ -8,6 +9,7 @@ import {
   Param,
   BadRequestException,
 } from '@nestjs/common';
+import { GetUser } from '../custom/decorators/user.decorator';
 import { CreateUserDto } from './dtos/create-user.dto';
 
 @Controller('users')
