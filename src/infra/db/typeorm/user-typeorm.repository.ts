@@ -25,13 +25,4 @@ export class UserTypeormRepository implements IUsersRepository {
   async findByUsername(username: string): Promise<User> {
     return this.ormRepo.findOne({ where: { username } });
   }
-
-  async findVehiclesFavorites(id: number): Promise<Vehicle[]> {
-    const response = await this.ormRepo.findOneOrFail({
-      where: { id },
-      relations: ['favorites'],
-    });
-
-    return response.favorites;
-  }
 }
