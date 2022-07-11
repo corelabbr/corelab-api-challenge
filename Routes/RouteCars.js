@@ -4,11 +4,11 @@ const cors = require('cors')
 
 const Controllers = require('../Controllers/ControllerCars')
 
-const config = {
-    origin : 'http://localhost:3001'
-}
+// const config = {
+//     origin : 'http://localhost:3001'
+// }
 
-router.use(cors(config))
+router.use(cors())
 
 // ----------------GET---------------- //
 router.get('/cars', Controllers.showCars)
@@ -23,7 +23,7 @@ router.delete('/del-car', express.json(), Controllers.deleteCar)
 
 
 // ----------------PUT---------------- //
-router.put('/edit-car', express.urlencoded(), Controllers.editCar)
+router.post('/edit-car', express.urlencoded(), Controllers.editCar)
 
 
 module.exports = router

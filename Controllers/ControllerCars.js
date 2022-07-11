@@ -67,32 +67,32 @@ const Controllers = {
             price : await price,
         }
 
-        if(newData.name == undefined || !newData.name){
+        if(newData.name == undefined || !newData.name || ''){
             delete newData.name
         }
 
-        if(newData.brand == undefined || !newData.brand){
+        if(newData.brand == undefined || !newData.brand || ''){
             delete newData.brand
         }
 
-        if(newData.color == undefined || !newData.color){
+        if(newData.color == undefined || !newData.color || ''){
             delete newData.color
         }
 
-        if(newData.year == undefined || !newData.year){
+        if(newData.year == undefined || !newData.year || ''){
             delete newData.year
         }
 
-        if(newData.board == undefined || !newData.board){
+        if(newData.board == undefined || !newData.board ){
             delete newData.board
         }
 
-        if(newData.price == undefined || !newData.price){
+        if(newData.price == undefined || !newData.price || ''){
             delete newData.price
         }
 
         await CarModel.findOneAndUpdate({ board : findCar.board }, newData)
-        res.status(200).json({ message : 'Carro editado com sucesso' })
+        res.status(200)
     }
 
 }
