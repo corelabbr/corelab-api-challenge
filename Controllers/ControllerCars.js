@@ -8,6 +8,7 @@ const Controllers = {
         
         const allCars = cars.map((e)=>{
             return {
+                id : e._id,
                 name : e.name,
                 brand : e .brand,
                 color : e.color,
@@ -47,16 +48,16 @@ const Controllers = {
 
     deleteCar : async function (req, res){
 
-        const board = await req.body.board
-        await CarModel.findOneAndRemove({ board : board })
+        const id = await req.body.id
+        await CarModel.findOneAndRemove({ id : id })
 
         res.status(200).json({ message : 'Carro deletado com sucesso' })
     },
 
     editCar : async function (req, res){
 
-        const { name, brand, color, year, board, price, } = await req.body
-        const findCar = await CarModel.findOne({ board : board })
+        const { name, brand, color, year, board, price, id } = await req.body
+        const findCar = await CarModel.findOne({ id : id })
 
         const newData = {
             name : await name,
@@ -91,7 +92,7 @@ const Controllers = {
             delete newData.price
         }
 
-        await CarModel.findOneAndUpdate({ board : findCar.board }, newData)
+        await CarModel.findOneAndUpdate({ _id : findCar._id }, newData)
         res.status(200)
     }
 
