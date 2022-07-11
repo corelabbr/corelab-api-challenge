@@ -22,8 +22,9 @@ router.post('/new-car', express.urlencoded(), Controllers.newCar)
 router.delete('/del-car', express.json(), Controllers.deleteCar)
 
 
-// ----------------PUT---------------- //
+// ----------------EDIT---------------- //
 router.post('/edit-car', express.urlencoded(), Controllers.editCar)
+router.post('/favorite', express.json(), Controllers.Favorite)
 
 
 module.exports = router

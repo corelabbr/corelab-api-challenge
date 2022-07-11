@@ -94,6 +94,14 @@ const Controllers = {
 
         await CarModel.findOneAndUpdate({ _id : findCar._id }, newData)
         res.status(200)
+    },
+
+    Favorite : async function(req, res) {
+        const id = await req.body.id
+        const findCar = await CarModel.findById({ _id : id })
+       
+        await CarModel.findByIdAndUpdate({ _id : id }, { isFavorite : !findCar.isFavorite })
+        res.status(200).send('Atualizado com Sucesso')
     }
 
 }
