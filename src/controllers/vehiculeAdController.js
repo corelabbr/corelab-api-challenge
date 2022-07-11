@@ -2,8 +2,10 @@ import db from '../databases/mongo.js';
 
 async function createAd(req, res) {
   const ad = res.locals.ad;
+  console.log(ad);
   try {
     await db.collection('ads').insertOne(ad);
+    res.status(201).send([{text: "Anúncio criado com sucesso", label: "success"}])
   } catch (err) {
     res.status(500).send('createVehicule: \n' + err);
   }
