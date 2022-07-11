@@ -1,0 +1,27 @@
+version: '3.3'
+
+services:
+  db:
+    container_name: postgres
+    image: postgres:13
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=corelabdb
+  adonis_app:
+    container_name: adonis_app
+    restart: always
+    build:
+      context: .
+    depends_on:
+      - db
+    ports:
+      - ${PORT}:${PORT}
+      - 9229:9229 # for debug
+    env_file:
+      - .env
+    volumes:
+      - ./:/home/node/app
+    command: bash -c 'npm run migration & node ace serve --watch --node-args="--inspect=0.0.0.0"'
