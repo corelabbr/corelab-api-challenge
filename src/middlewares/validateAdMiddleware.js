@@ -5,7 +5,7 @@ import mapErrors from "../utils/errorMapper.js";
 
 
 export default async function validateAd(req, res, next) {
-  const user = req.headers;
+  const {user} = req.headers;
   const ad = req.body;
   try {
     const {_id} = db.collection("users").findOne({email: user});
