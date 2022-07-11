@@ -1,11 +1,14 @@
+import { DateTime } from "luxon";
+
 export interface IVehicle {
     id: number;
     name: string;
     description: string;
     plate: string;
-    isFavorite: boolean;
+    isFavorite: number;
     year: number;
     color: string;
     price: number;
-    createdAt: Date;
+    createdAt ?: DateTime;
+    updateAt ?: DateTime;
 }

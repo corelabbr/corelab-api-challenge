@@ -19,5 +19,11 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import VehiclesController from 'App/Controllers/VehiclesController';
 
-Route.get('/vehicles', 'VehiclesController.index');
+Route.group(() => {
+    Route.resource('/vehicles', 'VehiclesController'); 
+    
+    Route.get('/vehiclesfilter/', "VehiclesController.filter")//se for get aponta para o index
+}).prefix("/api")
+
