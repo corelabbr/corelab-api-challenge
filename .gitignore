@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Ignore build folder
+/build
+
+#ignore tmp folder
+/tmp
