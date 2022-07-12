@@ -56,9 +56,13 @@
   "dependencies": {
     "@adonisjs/core": "^5.7.6",
     "@adonisjs/repl": "^3.1.10",
+    "@types/node": "^18.0.1",
+    "class-validator": "^0.13.2",
+    "openapi-types": "^12.0.0",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
-    "source-map-support": "^0.5.21"
+    "source-map-support": "^0.5.21",
+    "uid": "^2.0.0"
   },
   "engines": {
     "node": "^16.15.0",

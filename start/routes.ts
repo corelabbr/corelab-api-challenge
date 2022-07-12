@@ -20,4 +20,10 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/vehicles', 'VehiclesController.index');
+Route.post('/create', 'VehiclesController.create')
+
+Route.get('/download', 'VehiclesController.download')
+
+Route.post('/delete', 'VehiclesController.delete')
+
+Route.post('/update', 'VehiclesController.update')
