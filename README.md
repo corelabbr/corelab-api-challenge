@@ -1,75 +1,263 @@
-## Corelab Challenge
+# API - Vehicles Ads
 
-Welcome to the **Corelab Challenge**! Here you'll show us how awesome you are at coding.
-In order to do that, we've prepared two repositories which you will fork and program.
+Esta é uma RESTful API que permite fazer um CRUD de veículos.
 
-### The Challenge
+## **Endpoints**
 
-You will create a web app which will consume an API to manage the CRUD of **vehicles**.
+### **Cadastrar um veículo**
 
-The frontend repository is this: https://github.com/corelabbr/corelab-web-challenge
+#### `POST` `/newvh`
 
-If you feel more comfortable, you can pick another React framework and show us your skills.
+Essa é a rota que será utilizada para cadastrar um novo veículo no sistema.
 
-The backend repository is this: https://github.com/corelabbr/corelab-api-challenge
+-   **Requisição**  
+    Sem parâmetros de rota ou de query.  
+    O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
 
-If you feel more comfortable, you can pick another Node JS framework and show us your skills.
+    -   nome
+    -   marca
+    -   cor
+    -   ano
+    -   placa
 
-Try to show us all the skills you have, the more you do and care about the code, the more we get impressed. That's your **CHANCE**.
+#### **Exemplo de requisição**
 
-### Mobile Layout
-The Mobile Layout can be found here: https://shorturl.ae/NTyff
-### Desktop Layout
-The Desktop Layout can be found here: https://shorturl.ae/xEIEo
+```javascript
+// POST /newvh
+{
+      "name": "Sandero",
+      "brand": "Renault",
+      "color": "Vermelho",
+      "year": 2016,
+      "plate": "PZ1020"
+}
+```
 
-### Backend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: Adonis TS or any other node framework you know.
-4. Database: Choose your own, you can even save in memory.
+#### **Exemplos de resposta**
 
-### Frontend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: React TS
-4. Sass or other preprocessor
+```javascript
+// HTTP Status 200 / 201 / 204
+{
+   "mensagem": "Veículo cadastrado com sucesso!"
+}
+```
 
-### The Required Features
-1. On clicking on an "Add new vehicle" button, a new form opens up to create a vehicle.
-2. On submitting the form, it needs to save the new vehicle.
-3. On typing at the search input, it should filter the vehicles comparing to any of the vehicles property. E.g.: it should compare the searched term to either name, or description, or price, or any other field in the vehicle.
-4. On clicking on a heart icon, it should favorite the vehicle.
-5. On clicking on an edit icon, it should open the form again to update the selected vehicle.
-6. On clicking on an delete icon, it should remove the vehicle.
-7. On clicking on the filter icon, it should open the filters form, and when the filters are selected, it should filter the vehicles based on those values.
+```javascript
+// HTTP Status 400 / 401 / 403 / 404
+{
+    "mensagem": "Não foi possivel cadastrar o veículo."
+}
+```
 
-### What are we assessing
-1. Code Quality
-2. Code Format
-3. Code Perfomance
-4. Frontend Design
-5. If your code is Easily Readable
-6. Mobile First approach
-7. Code Responsability
-8. Features Work
-9. Responsiveness
+### **Atualizar um veículo**
 
-### Want to impress us even more?
-If you feel comfortable and want to impress us even more, you can do the following:
+#### `PATCH` `/updateVehicle/:id`
 
-1. Work on correct types and interfaces
-2. Work on eslint rules
-3. Work prettier config
-4. Work on docker containers
-5. Work on tests
-6. Work on CI/CD
+Essa é a rota que será utilizada para atualizar um veículo no sistema.
 
-### What to do when you finish?
+-   **Requisição**  
+    Parâmetro de rota será o id do veículo à ser atualizado.
+    O corpo (body) deverá possuir um objeto, sendo necessária ao menos uma para atualização com as seguintes propriedades:
 
-Create a file PULL_REQUEST.md where you will describe what you did and how in as much detail as possible. Feel free to add videos for better explanation.
+    -   nome
+    -   marca
+    -   cor
+    -   ano
+    -   placa
+    -   preço
+    -   descrição
 
-Create a new pull request using the same branch name for Backend and Frontend
+#### **Exemplo de requisição**
 
-Send us the pull requests and that's all!
+```javascript
+// POST /newvh
+{
+      "name": "Sandero",
+      "brand": "Renault",
+      "color": "Vermelho",
+      "year": 2016,
+      "plate": "PZ1020",
+      "price": 201545,
+      "description": "Único dono, usado por 6 anos."
+}
+```
+
+#### **Exemplos de resposta**
+
+```javascript
+// HTTP Status 200 / 201 / 204
+{
+   "mensagem": "Veículo atualizado com sucesso!"
+}
+```
+
+```javascript
+// HTTP Status 400 / 401 / 403 / 404
+{
+    "mensagem": "Não foi possivel atualizar o veículo."
+}
+```
+
+### **Deletar um veículo**
+
+#### `DELETE` `/deleteVehicle/:id`
+
+Essa é a rota que será utilizada para deletar um veículo no sistema.
+
+-   **Requisição**  
+    O parâmetro de rota será o id do Veiculo.  
+    
+
+#### **Exemplo de requisição**
+
+```javascript
+// DELETE /deleteVehicle/:id
+
+```
+
+#### **Exemplos de resposta**
+
+```javascript
+// HTTP Status 200 / 201 / 204
+{
+   "mensagem": "Veículo deletado com sucesso!"
+}
+```
+
+```javascript
+// HTTP Status 400 / 401 / 403 / 404
+{
+    "mensagem": "Não foi possivel deletar o veículo"
+}
+```
+
+### ** Pesquisar todos os veículos *
+
+#### `GET` `/vhs/:id`
+
+Essa é a rota que será utilizada para retornar o veículo de ID cadastrado.
+
+-   **Requisição**  
+    Sem parâmetros de rota ou de query.  
+    Sem
+
+#### **Exemplo de requisição**
+
+```javascript
+// GET `/vhs`
+
+```
+
+#### **Exemplos de resposta**
+
+```javascript
+// HTTP Status 200 / 201 / 204
+[
+	{
+		"id": 1,
+		"name": "Sandero",
+		"brand": "Renault",
+		"color": "Vermelho",
+		"year": 2016,
+		"plate": "PZ1020",
+		"price": null,
+		"favorite": false,
+		"createdat": null
+	},
+	{
+		"id": 2,
+		"name": "Sandero",
+		"brand": "Renault",
+		"color": "Vermelho",
+		"year": 2018,
+		"plate": "PZ1021",
+		"price": null,
+		"favorite": false,
+		"createdat": null
+	},
+	{
+		"id": 3,
+		"name": "Sandero",
+		"brand": "BMW",
+		"color": "Prata",
+		"year": 3000,
+		"plate": "PMG5586",
+		"price": null,
+		"favorite": false,
+		"createdat": null
+	}
+]
+```
+
+```javascript
+// HTTP Status 400 / 401 / 403 / 404
+{
+    "mensagem": "Não há nenhum veículo cadastrado."
+}
+```
+### ** Pesquisar um veículo**
+
+#### `GET` `/vhs`
+
+Essa é a rota que será utilizada para retornart todos os veículos cadastrados no sistema.
+
+-   **Requisição**  
+    Sem parâmetros de rota ou de query.  
+    Sem
+
+#### **Exemplo de requisição**
+
+```javascript
+// GET `/vhs`
+
+```
+
+#### **Exemplos de resposta**
+
+```javascript
+// HTTP Status 200 / 201 / 204
+[
+	{
+		"id": 1,
+		"name": "Sandero",
+		"brand": "Renault",
+		"color": "Vermelho",
+		"year": 2016,
+		"plate": "PZ1020",
+		"price": null,
+		"favorite": false,
+		"createdat": null
+	},
+	{
+		"id": 2,
+		"name": "Sandero",
+		"brand": "Renault",
+		"color": "Vermelho",
+		"year": 2018,
+		"plate": "PZ1021",
+		"price": null,
+		"favorite": false,
+		"createdat": null
+	},
+	{
+		"id": 3,
+		"name": "Sandero",
+		"brand": "BMW",
+		"color": "Prata",
+		"year": 3000,
+		"plate": "PMG5586",
+		"price": null,
+		"favorite": false,
+		"createdat": null
+	}
+]
+```
+
+```javascript
+// HTTP Status 400 / 401 / 403 / 404
+{
+    "mensagem": "Não há nenhum veículo cadastrado."
+}
+```
+
+
