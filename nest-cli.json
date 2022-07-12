@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src/infra/http/nest/src",
+  "entryFile": "infra/http/nest/src/main"
+}
