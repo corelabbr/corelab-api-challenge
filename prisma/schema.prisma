@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Vehicle {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  brand       String
+  plate       String
+  year        String
+  color       String
+  price       String    
+  isFavorite  Boolean   @default(false)
+}
+
+
