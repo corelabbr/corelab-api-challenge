@@ -11,23 +11,13 @@ export class UpdateVehicleUseCase {
     );
   }
   async execute(id: number, vehicle: Partial<IVehicle>): Promise<IVehicle> {
+    console.log(id, vehicle);
+
     const vehicleFound = await this.vehicleRepository.findOne(id);
-    if (!vehicleFound) {
-      throw new Error('Vehicle not found');
-    }
 
-    if (Object.keys(vehicle).length === 0) {
-      throw new Error('Vehicle properties cannot be updated');
-    }
-
-    if (!this.isPropertyEligible(vehicle)) {
-      throw new Error('Vehicle properties cannot be updated');
-    }
-
+    console.log('dfsfsdfdsfdsf');
     Object.assign(vehicleFound, vehicle);
-    if (vehicle?.color) {
-      vehicleFound.changeColor(vehicle.color);
-    }
+    console.log(vehicleFound);
 
     return this.vehicleRepository.update(vehicleFound);
   }

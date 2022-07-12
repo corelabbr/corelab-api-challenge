@@ -10,9 +10,16 @@ export class VehicleTypeormRepository implements IVehicleRepository {
     private readonly userRepo: Repository<UserEntityTypeorm>,
     private readonly vehicleRepo: Repository<VehicleEntityTypeorm>,
   ) {}
-  async findFavorite(id: number): Promise<{ total: number; data: Vehicle[] }> {
-    console.log(id);
 
+  async findByUser(id: number): Promise<{ total: number; data: Vehicle[] }> {
+    const [data, total] = await this.vehicleRepo.findAndCount({
+      where: { user: { id } },
+      relations: ['user'],
+    });
+    return { total, data };
+  }
+
+  async findFavorite(id: number): Promise<{ total: number; data: Vehicle[] }> {
     const data = await this.userRepo.findOne({
       where: { id },
       relations: ['favorites'],
@@ -22,9 +29,16 @@ export class VehicleTypeormRepository implements IVehicleRepository {
   }
 
   async findAll(): Promise<{ total: number; data: Vehicle[] }> {
-    const [data, total] = await this.vehicleRepo.findAndCount();
+    const [data, total] = await this.vehicleRepo.findAndCount({
+      relations: ['user'],
+    });
+    const vehicles = data.map((vehicle) => {
+      vehicle.user.password = undefined;
+      return vehicle;
+    });
+    console.log(vehicles);
 
-    return { total, data };
+    return { total, data: vehicles };
   }
 
   async findOne(id: number): Promise<Vehicle> {

@@ -1,5 +1,6 @@
 import { CreateVehicleUseCase } from '@application/vehicle/create/create.usecase';
 import { DeleteVehicleUseCase } from '@application/vehicle/delete/delete.usecase';
+import { FindByUserVehiclesUseCase } from '@application/vehicle/find-by-user/findByUser.usecase';
 import { FindOneVehicleUseCase } from '@application/vehicle/find-one/findOne.usecase';
 import { ListAllVehiclesUseCase } from '@application/vehicle/list-all/listAll.usecase';
 import { SetFavoriteVehicleUseCase } from '@application/vehicle/set-favorite/setFavorite.usecase';
@@ -66,5 +67,12 @@ export const vehiclesProviders = [
       userRepository: IUsersRepository,
     ) => new SetFavoriteVehicleUseCase(userRepository, vehicleRepository),
     inject: [VehicleTypeormRepository, UserTypeormRepository],
+  },
+
+  {
+    provide: FindByUserVehiclesUseCase,
+    useFactory: (vehicleRepository: IVehicleRepository) =>
+      new FindByUserVehiclesUseCase(vehicleRepository),
+    inject: [VehicleTypeormRepository],
   },
 ];

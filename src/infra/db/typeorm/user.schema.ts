@@ -28,10 +28,16 @@ export class UserEntityTypeorm implements User {
   @CreateDateColumn()
   createdAt: Date;
 
-  @OneToMany(() => VehicleEntityTypeorm, (vehicle) => vehicle.user)
+  @OneToMany(() => VehicleEntityTypeorm, (vehicle) => vehicle.user, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
   vehicles: Vehicle[];
 
-  @ManyToMany(() => VehicleEntityTypeorm, (vehicle) => vehicle.user)
+  @ManyToMany(() => VehicleEntityTypeorm, (vehicle) => vehicle.user, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
   @JoinTable()
   favorites: Vehicle[];
 }

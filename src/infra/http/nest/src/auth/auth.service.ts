@@ -20,6 +20,8 @@ export class AuthService {
     username: string,
     pass: string,
   ): Promise<Partial<User> | void> {
+    console.log(username, pass);
+
     const user = await this.userFindUseCase.findByUsername(username);
     console.log(user);
 

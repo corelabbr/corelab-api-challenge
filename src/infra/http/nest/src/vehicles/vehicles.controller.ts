@@ -1,5 +1,6 @@
 import { CreateVehicleUseCase } from '@application/vehicle/create/create.usecase';
 import { DeleteVehicleUseCase } from '@application/vehicle/delete/delete.usecase';
+import { FindByUserVehiclesUseCase } from '@application/vehicle/find-by-user/findByUser.usecase';
 import { FindOneVehicleUseCase } from '@application/vehicle/find-one/findOne.usecase';
 import { ListAllVehiclesUseCase } from '@application/vehicle/list-all/listAll.usecase';
 import { SetFavoriteVehicleUseCase } from '@application/vehicle/set-favorite/setFavorite.usecase';
@@ -33,6 +34,7 @@ export class VehiclesController {
     private readonly deleteVehicleUseCase: DeleteVehicleUseCase,
     private readonly updateVehicleUseCase: UpdateVehicleUseCase,
     private readonly setFavoriteVehicleUseCase: SetFavoriteVehicleUseCase,
+    private readonly findByUserVehiclesUseCase: FindByUserVehiclesUseCase,
   ) {}
 
   @UseGuards(JwtAuthGuard)
@@ -56,6 +58,14 @@ export class VehiclesController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get('my-vehicles')
+  async myVehicles(
+    @GetUser() user: User,
+  ): Promise<{ total: number; data: IVehicle[] }> {
+    return this.findByUserVehiclesUseCase.execute(user.id);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Get('/favorites')
   async findFavoriteVehicle(
     @GetUser() user: User,
@@ -70,16 +80,22 @@ export class VehiclesController {
     return this.findOneVehiclesUseCase.execute(+id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put('/:id')
   async updateVehicle(
     @Param('id') id: string,
     @Body() vehicle: UpdateVehiclesDto,
   ): Promise<IVehicle> {
     try {
+      console.log(vehicle);
+      console.log('defsf34545345sdfsdf');
+
       const vehicleUpdated = await this.updateVehicleUseCase.execute(
         +id,
         vehicle,
       );
+
+      console.log(vehicleUpdated);
 
       return vehicleUpdated;
     } catch (error) {
@@ -101,6 +117,7 @@ export class VehiclesController {
     await this.setFavoriteVehicleUseCase.execute(+id, user.id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   async deleteVehicle(@Param('id') id: string): Promise<void> {
     return this.deleteVehicleUseCase.execute(+id);
