@@ -20,4 +20,10 @@ export default class ExceptionHandler extends HttpExceptionHandler {
   constructor() {
     super(Logger)
   }
+
+  async handle (err, { response }) {
+    const error = { message: err.message }
+    if (err instanceof Error) { return response.status(400).json(error) } 
+    return response.status(500).json(error)
+  }
 }

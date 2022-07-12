@@ -18,6 +18,7 @@ import 'reflect-metadata'
 import sourceMapSupport from 'source-map-support'
 import { Ignitor } from '@adonisjs/core/build/standalone'
 import { configure, processCliArgs, run, RunnerHooksHandler } from '@japa/runner'
+import { apiClient } from '@japa/preset-adonis'
 
 sourceMapSupport.install({ handleUncaughtExceptions: false })
 

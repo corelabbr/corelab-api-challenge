@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+
+  postgres:
+    container_name: postgres
+    image: postgres:13
+    env_file:
+      - .env
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: ${PG_DB_NAME}
+    ports:
+      - ${PG_PORT}:${PG_PORT}
+
+  adonis_app:
+    container_name: adonis_app
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    build: .
+    ports:
+      - ${PORT}:${PORT}
+      - 9229:9229
+    environment:
+      - PG_HOST=postgres
+    volumes:
+      - ./:/usr/app
+      # Uncomment the below line if you developing on MacOS
+      #- /home/node/app/node_modules
+    command: sh -c "node ace migration:run && npm run dev"
+    
+  
+volumes:
+  postgres_volume:
