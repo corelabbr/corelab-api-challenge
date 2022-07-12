@@ -13,6 +13,4 @@
 
 <br><img src='./Assets/Animação.gif' /><br>
 
-<h2>Conclusões</h2>
-
 
