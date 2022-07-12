@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express, { json } from 'express';
 import cors from 'cors';
 import vehiculeAdRoute from './routes/vehiculeAdRoute.js';
+import userRoute from "./routes/userRoute.js"
 import demoUsers from './middlewares/demoUsersMiddleware.js';
 
 dotenv.config();
@@ -11,7 +12,8 @@ app.use(json());
 app.use(cors());
 
 demoUsers();
-app.use('/vehicule', vehiculeAdRoute);
+app.use("/user", userRoute);
+app.use("/vehicule", vehiculeAdRoute);
 
 app.listen(process.env.PORT, () => {
   console.log("server is running port " + process.env.PORT )
