@@ -5,8 +5,8 @@
  * file.
  */
 
-import Env from '@ioc:Adonis/Core/Env'
-import { HashConfig } from '@ioc:Adonis/Core/Hash'
+import Env from '@ioc:Adonis/Core/Env';
+import { HashConfig } from '@ioc:Adonis/Core/Hash';
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +18,7 @@ import { HashConfig } from '@ioc:Adonis/Core/Hash'
 |
 */
 const hashConfig: HashConfig = {
-  /*
+	/*
   |--------------------------------------------------------------------------
   | Default hasher
   |--------------------------------------------------------------------------
@@ -27,10 +27,10 @@ const hashConfig: HashConfig = {
   | free to change the default value
   |
   */
-  default: Env.get('HASH_DRIVER', 'argon'),
+	default: Env.get('HASH_DRIVER', 'argon'),
 
-  list: {
-    /*
+	list: {
+		/*
     |--------------------------------------------------------------------------
     | Argon
     |--------------------------------------------------------------------------
@@ -43,16 +43,16 @@ const hashConfig: HashConfig = {
     | npm install phc-argon2
     |
     */
-    argon: {
-      driver: 'argon2',
-      variant: 'id',
-      iterations: 3,
-      memory: 4096,
-      parallelism: 1,
-      saltSize: 16,
-    },
+		argon: {
+			driver: 'argon2',
+			variant: 'id',
+			iterations: 3,
+			memory: 4096,
+			parallelism: 1,
+			saltSize: 16,
+		},
 
-    /*
+		/*
     |--------------------------------------------------------------------------
     | Bcrypt
     |--------------------------------------------------------------------------
@@ -65,11 +65,11 @@ const hashConfig: HashConfig = {
     | npm install phc-bcrypt
     |
     */
-    bcrypt: {
-      driver: 'bcrypt',
-      rounds: 10,
-    },
-  },
-}
+		bcrypt: {
+			driver: 'bcrypt',
+			rounds: 10,
+		},
+	},
+};
 
-export default hashConfig
+export default hashConfig;
