@@ -49,15 +49,15 @@ const Controllers = {
     deleteCar : async function (req, res){
 
         const id = await req.body.id
-        await CarModel.findOneAndRemove({ id : id })
+        await CarModel.findByIdAndRemove({ _id : id })
 
-        res.status(200).json({ message : 'Carro deletado com sucesso' })
+        res.status(200).send(id)
     },
 
     editCar : async function (req, res){
 
         const { name, brand, color, year, board, price, id } = await req.body
-        const findCar = await CarModel.findOne({ id : id })
+        const findCar = await CarModel.findById({ _id : id })
 
         const newData = {
             name : await name,
@@ -92,7 +92,7 @@ const Controllers = {
             delete newData.price
         }
 
-        await CarModel.findOneAndUpdate({ _id : findCar._id }, newData)
+        await CarModel.findOneAndUpdate({ _id : findCar.id }, newData)
         res.status(200)
     },
 
