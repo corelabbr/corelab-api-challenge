@@ -1,23 +1,77 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { IVehicle } from 'App/Types/Vehicle'
+import Vehicle from 'App/Models/Vehicle'
 
 export default class VehiclesController {
-    public async index(ctx: HttpContextContract) {
+  public async index({}: HttpContextContract) {
+    let allVehicles = await Vehicle.all()
 
-      const vehicles: IVehicle[] = [
-        {
-          id: 1,
-          name: 'First Vehicle',
-          description: 'This is a description of first vehicle',
-          plate: 'DDT-0012',
-          isFavorite: false,
-          year: 2018,
-          color: '#ff00ff',
-          price: 22000,
-          createdAt: new Date()
-        }
-      ]
+    return allVehicles
+  }
 
-      return vehicles
+  public async store({ request }: HttpContextContract) {
+    let myData = request.only([
+      'name',
+      'description',
+      'plate',
+      'isfavorite',
+      'year',
+      'color',
+      'price',
+    ])
+
+    const myVehicle = await Vehicle.create(myData)
+
+    return myVehicle
+  }
+
+  public async show({ params, response }: HttpContextContract) {
+    let vehicleId = params.id
+
+    const myVehicle = await Vehicle.find(vehicleId)
+
+    if (!myVehicle) {
+      response.notFound()
     }
+
+    return myVehicle
+  }
+
+  public async delete({ params, response }: HttpContextContract) {
+    let vehicleId = params.id
+
+    const myVehicle = await Vehicle.find(vehicleId)
+
+    if (!myVehicle) {
+      response.status(404)
+    }
+
+    await myVehicle?.delete()
+
+    return myVehicle
+  }
+
+  public async update({ params, request, response }: HttpContextContract) {
+    const vehicleId = params.id
+    const myVehicle = await Vehicle.find(vehicleId)
+
+    if (!myVehicle) {
+      response.status(404)
+    }
+
+    let myData = request.only([
+      'name',
+      'description',
+      'plate',
+      'isfavorite',
+      'year',
+      'color',
+      'price',
+    ])
+
+    myVehicle?.merge(myData)
+
+    await myVehicle?.save()
+
+    return myVehicle
+  }
 }

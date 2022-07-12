@@ -20,4 +20,12 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/vehicles', 'VehiclesController.index');
+Route.get('/', async () => {
+  return { hello: 'word' }
+})
+
+Route.get('/vehicles', 'VehiclesController.index')
+Route.post('/vehicles', 'VehiclesController.store')
+Route.get('/vehicles/:id', 'VehiclesController.show')
+Route.delete('vehicles/:id', 'VehiclesController.delete')
+Route.put('/vehicles/:id', 'VehiclesController.update')
