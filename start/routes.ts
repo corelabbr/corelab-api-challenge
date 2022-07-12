@@ -20,4 +20,14 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/vehicles', 'VehiclesController.index');
+Route.group(()=>{
+  Route.get('/vehicles', 'VehiclesController.index');
+  Route.get('/vehicles/:id', 'VehiclesController.show');
+  Route.post('/vehicles', 'VehiclesController.store');
+  Route.patch('/vehicles/:id', 'VehiclesController.update');
+  Route.delete('/vehicles/:id', 'VehiclesController.destroy');
+  Route.patch('/vehicles/favorite/:id', 'VehiclesController.favoriteOrUnfavorite');
+   
+}).prefix("/api")
+
+
