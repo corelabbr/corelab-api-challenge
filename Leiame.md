@@ -18,25 +18,33 @@ Se você s sentir mais confortável, pode escolher qualquer outro _framework_ de
 Tente nos mostrar tudo o que você pode fazer, quanto mais você fizer pelo código e se importar com ele, mais nós vamos nos impressionar. Essa é a sua **CHANCE**.
 
 ### Mobile Layout
+
 O Layout do Mobile pode ser encontrado aqui: https://shorturl.ae/NTyff
+
 ### Desktop Layout
+
 O Layout do Desktop pode ser encontrado aqui: https://shorturl.ae/xEIEo
 
 ### Backend
-Repositório: 
+
+Repositório:
+
 1. Node: ^16.15.0
 2. NPM: ^8.5.5
 3. _Framework_: Adonis TS ou qualquer outro que você preferir.
 4. Banco de dados: Escolha o sue próprio, você pode até mesmo salvar na memória.
 
 ### Frontend
-Repositório: 
+
+Repositório:
+
 1. Node: ^16.15.0
 2. NPM: ^8.5.5
 3. _Framework_: React TS
 4. Sass ou outro preprocessador
 
 ### As Funcionalidades Requeridas
+
 1. Ao clicar em um botão "Adicionar novo veículo", um novo formulário deve ser aberto para criar um novo veículo.
 2. Ao submeter o formulário, o novo veículo deve ser salvo.
 3. Ao digitar algo no _input_ de pesquisa, deve-se filtrar os veículos comparando qualquer que seja a propriedade do veículo. Por exemplo: deve-se comparar o termo procurado com o nome, ou a descrição, ou o preço, ou qualquer outro campo do veículo.
@@ -46,6 +54,7 @@ Repositório:
 7. Ao clicar no botão de filtro, deve-se abrir um formulário de filtros, e quando os filtros forem selecionados, deve-se filtrar os veículos baseados nos valores.
 
 ### O que estamos avaliando
+
 1. Qualidade do código
 2. Formato do código
 3. Desempenho do código
@@ -57,6 +66,7 @@ Repositório:
 9. Responsividade
 
 ### Quer nos impressionar ainda mais?
+
 Se você se sentir confortável e quiser nos impressionar ainda mais, você pode fazer o seguinte:
 
 1. Trabalhar nas typagens corretas e interfaces
