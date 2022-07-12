@@ -1,5 +1,4 @@
-export interface IVehicle {
-    id: number;
+export interface IVehicle   {
     name: string;
     description: string;
     plate: string;
