@@ -30,19 +30,6 @@ const hashConfig: HashConfig = {
   default: Env.get('HASH_DRIVER', 'argon'),
 
   list: {
-    /*
-    |--------------------------------------------------------------------------
-    | Argon
-    |--------------------------------------------------------------------------
-    |
-    | Argon mapping uses the `argon2` driver to hash values.
-    |
-    | Make sure you install the underlying dependency for this driver to work.
-    | https://www.npmjs.com/package/phc-argon2.
-    |
-    | npm install phc-argon2
-    |
-    */
     argon: {
       driver: 'argon2',
       variant: 'id',
@@ -51,20 +38,6 @@ const hashConfig: HashConfig = {
       parallelism: 1,
       saltSize: 16,
     },
-
-    /*
-    |--------------------------------------------------------------------------
-    | Bcrypt
-    |--------------------------------------------------------------------------
-    |
-    | Bcrypt mapping uses the `bcrypt` driver to hash values.
-    |
-    | Make sure you install the underlying dependency for this driver to work.
-    | https://www.npmjs.com/package/phc-bcrypt.
-    |
-    | npm install phc-bcrypt
-    |
-    */
     bcrypt: {
       driver: 'bcrypt',
       rounds: 10,

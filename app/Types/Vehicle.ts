@@ -7,5 +7,5 @@ export interface IVehicle {
     year: number;
     color: string;
     price: number;
-    createdAt: Date;
+    createdat: Date;
 }
