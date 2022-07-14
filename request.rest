@@ -1,0 +1,26 @@
+###
+POST http://localhost:3000/vehicles
+Content-Type: application/json
+
+{           
+            "name": "Celta",
+            "brand": "Chevrolet",
+            "color": "Black",
+            "price": 22.000,
+            "year": "2012",
+            "license_plate":"GFR43D"
+
+}
+###
+GET http://localhost:3000/allvehicles
+
+###
+PUT http://localhost:3000/editvehicles/:id
+Content-Type: application/json
+
+    {
+        "name": "Sandeiro",
+        "brand": "Renault"
+    }
+###
+DELETE http://localhost:3000/deletevehicles/:id
