@@ -1,0 +1,6 @@
+export * from './unauthorized-error'
+export * from './duplicate-email-error'
+export * from './invalid-input-error'
+export * from './not-found-error'
+export * from './invalid-credentials-error'
+export * from './user-already-has-wallet-error'
