@@ -1,8 +1,11 @@
 import fastify, { FastifyInstance } from 'fastify'
 import taskRoute from './routes/task-routes'
 import cors from '@fastify/cors'
+import * as dotenv from 'dotenv'
 
-const PORT: number = 8080
+dotenv.config();
+const PORT: number = Number(process.env.PORT)
+const ADDRESS: string = process.env.ADDRESS;
 
 class App {
   private app: FastifyInstance
@@ -32,7 +35,7 @@ class App {
   }
 
   private _listen() {
-    this.app.listen({ port: PORT }, (err, address) => {
+    this.app.listen({ port: PORT, host: ADDRESS }, (err, address) => {
       if (err) {
         console.error(err)
         process.exit(1)
