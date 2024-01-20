@@ -21,8 +21,8 @@
 Use o NVM para instalar o NodeJS
 
 ```sh
-nvm install node@^16.15.0
-nvm use node@^16.15.0
+nvm install 16.15.0
+nvm use 16.15.0
 ```
 
 Instale o npm@^8.5.5
