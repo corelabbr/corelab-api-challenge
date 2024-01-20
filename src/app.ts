@@ -19,7 +19,7 @@ class App {
 
   private _useRoutes() {
     this.app.register(taskRoute, {
-      prefix: 'api/v1/task/',
+      prefix: '/v1/task/',
     })
   }
 
