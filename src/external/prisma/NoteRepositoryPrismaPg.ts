@@ -1,10 +1,8 @@
 import { PrismaClient } from "@prisma/client";
-// import User from "../../core/user/model/User";
-// import UserRepository from "../../core/user/service/UserRepository";
 import Note from "../../core/notes/model/Note";
-import NoteRepository from "../../core/notes/service/NotesRepository"
+import NoteRepository from "../../core/notes/service/NoteRepository"
 
-export default class oteRepositoryPrismaPg implements NoteRepository{
+export default class NoteRepositoryPrismaPg implements NoteRepository{
     private prisma: PrismaClient
 
     constructor(){
@@ -27,6 +25,14 @@ export default class oteRepositoryPrismaPg implements NoteRepository{
         return this.prisma.note.findUnique({
             where: {
                 id
+            }
+        })
+    }
+
+    async getByColor(color: string): Promise<Note[]> {
+        return this.prisma.note.findMany({
+            where: {
+                color
             }
         })
     }

@@ -1,6 +1,6 @@
 import NoteCase from "../../shared/NoteCase";
 import Note from "../model/Note";
-import NotesRepository from "./NotesRepository";
+import NotesRepository from "./NoteRepository";
 import * as yup from 'yup';
 
 export type Response = {
@@ -8,29 +8,10 @@ export type Response = {
     data?: Note | Note[] | string,
     code: number
 }
+export default class NoteService implements NoteCase<Note | string | number, Response> {
+    constructor(readonly repository: NotesRepository) { }
 
-export const postValidation = yup.object({
-    body: yup.object({
-        title: yup.string().required().min(3),
-        desc: yup.string().required().min(3),
-        color: yup.string().required(),
-        favorite: yup.boolean().required()
-      }),
-})
-
-export const putValidation = yup.object({
-    body: yup.object({
-        title: yup.string().min(3),
-        desc: yup.string().email().min(3),
-        color: yup.string(),
-        favorite: yup.boolean()
-      }),
-})
-
-export default class NoteService implements NoteCase<Note | string | number, Response>{
-    constructor (readonly repository: NotesRepository) {}
-
-    async get (){
+    async get() {
         const response = await this.repository.get();
 
         return {
@@ -46,7 +27,7 @@ export default class NoteService implements NoteCase<Note | string | number, Res
             return {
                 message: "Note does not exists",
                 code: 404
-            } 
+            }
         }
 
         return {
@@ -62,7 +43,7 @@ export default class NoteService implements NoteCase<Note | string | number, Res
             return {
                 message: "Note does not exists",
                 code: 404
-            } 
+            }
         }
 
         return {
@@ -71,7 +52,23 @@ export default class NoteService implements NoteCase<Note | string | number, Res
         }
     }
 
-    async post (data: Note): Promise<Response>{
+    async getByColor(color: string): Promise<Response> {
+        const response = await this.repository.getByColor(color);
+
+        if (!response.length) {
+            return {
+                message: "This color does not exists",
+                code: 404
+            }
+        }
+
+        return {
+            data: response,
+            code: 200
+        }
+    }
+
+    async post(data: Note): Promise<Response> {
         const noteExists = await this.repository.getOne(data.title);
 
         if (noteExists) {
@@ -100,19 +97,47 @@ export default class NoteService implements NoteCase<Note | string | number, Res
 
     async put(id: number, data: Note): Promise<Response> {
 
-        const {title, desc, color, favorite} = data;
+        const { title, desc, color, favorite } = data;
 
         if (!this.repository.getOne(title)) {
             return {
                 message: "User does not exists",
                 code: 404
             };
-        } 
-    
-        const note = await this.repository.put(id, {title, desc, color, favorite})
+        }
+
+        try {
+            const note = await this.repository.put(id, { title, desc, color, favorite })
+
+            return {
+                data: note,
+                code: 200
+            };
+        } catch (error) {
+            const yupError = error as yup.ValidationError;
+
+            return {
+                message: yupError,
+                code: 500
+            };
+        }
+    }
+
+    async delete(id: number): Promise<Response> {
+
+        const note = await this.repository.getById(id);
+
+        if (!note) {
+            return {
+                message: "Note does not exists",
+                code: 404
+            }
+        }
+
+        const response = await this.repository.delete(id);
 
         return {
-            data: note,
+            data: response,
             code: 200
         };
     }
