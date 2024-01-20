@@ -14,19 +14,18 @@ class TaskRepositoryHandler implements TaskRepository {
       title: data.title,
       body: data.body,
       color: data.color,
-      completed: data.completed,
       favorited: data.favorited,
     })
 
     return task
   }
+
   public async save(task: Task): Promise<Task> {
     const data = await prisma.task.create({
       data: {
         title: task.title,
         body: task.body,
         color: task.color,
-        completed: task.completed ?? false,
         favorited: task.favorited,
       },
     })
@@ -36,67 +35,61 @@ class TaskRepositoryHandler implements TaskRepository {
       title: data.title,
       body: data.body,
       color: data.color,
-      completed: data.completed,
       favorited: data.favorited,
     })
 
     return newTask
   }
-  public async complete(id: string): Promise<void> {
+
+  public async update(task: Task): Promise<Task> {
+    const data = await prisma.task.update({
+      where: {
+        id: task.id,
+      },
+      data: {
+        title: task.title,
+        body: task.body,
+        color: task.color,
+        favorited: task.favorited,
+      },
+    })
+
+    const updatedTask = Task.create({
+      id: data.id,
+      title: data.title,
+      body: data.body,
+      color: data.color,
+      favorited: data.favorited,
+    })
+
+    return updatedTask
+  }
+
+  public async delete(id: string): Promise<void> {
     try {
-      await prisma.task.update({
+      prisma.task.delete({
         where: {
           id,
-        },
-        data: {
-          completed: true,
         },
       })
     } catch (error) {
       throw new Error(error)
     }
   }
-  public async uncomplete(id: string): Promise<void> {
-    try {
-      await prisma.task.update({
-        where: {
-          id,
-        },
-        data: {
-          completed: false,
-        },
+
+  public async getAll(): Promise<Task[]> {
+    const data = await prisma.task.findMany()
+    const tasks = data.map((task) => {
+      return Task.create({
+        id: task.id,
+        title: task.title,
+        body: task.body,
+        color: task.color,
+        favorited: task.favorited,
       })
-    } catch (error) {
-      throw new Error(error)
-    }
-  }
-  public async favorite(id: string): Promise<void> {
-    try {
-      prisma.task.update({
-        where: {
-          id,
-        },
-        data: {
-          favorited: true,
-        },
-      })
-    } catch (error) {
-      throw new Error(error)
-    }
-  }
-  public async unfavorite(id: string): Promise<void> {
-    try {
-      prisma.task.update({
-        where: {
-          id,
-        },
-        data: {
-          favorited: false,
-        },
-      })
-    } catch (error) {
-      throw new Error(error)
-    }
+    })
+
+    return tasks
   }
 }
 

@@ -4,36 +4,44 @@ import { TaskRepository } from '../repositories/task-repository'
 class TaskUseCase {
   constructor(private readonly taskRepository: TaskRepository) {}
 
-  public async createTask({ title, body, favorited, completed, color }: TaskDTO) {
+  public async createTask({ title, body, favorited, color }: TaskDTO) {
     const task = await this.taskRepository.save({
       title,
       body,
       favorited,
-      completed,
       color,
     })
 
     return task
   }
 
-  public async completeTask(id: string) {
-    if (!id) throw new Error('Missing params')
-    await this.taskRepository.complete(id)
+  public async updateTask({ id, title, body, favorited, color }: TaskDTO) {
+    const task = await this.taskRepository.update({
+      id,
+      title,
+      body,
+      favorited,
+      color,
+    })
+
+    return task
   }
 
-  public async uncompleteTask(id: string) {
+  public async deleteTask(id: string) {
     if (!id) throw new Error('Missing params')
-    await this.taskRepository.uncomplete(id)
+    await this.taskRepository.delete(id)
   }
 
-  public async favoriteTask(id: string) {
+  public async getTaskById(id: string) {
     if (!id) throw new Error('Missing params')
-    await this.taskRepository.favorite(id)
+    const task = await this.taskRepository.findById(id)
+    if (!task) throw new Error('Task not found')
+    return task
   }
 
-  public async unfavoriteTask(id: string) {
-    if (!id) throw new Error('Missing params')
-    await this.taskRepository.unfavorite(id)
+  public async getAllTasks() {
+    const tasks = await this.taskRepository.getAll()
+    return tasks
   }
 }
 

@@ -1,18 +1,16 @@
 export type TaskDTO = {
   id?: string | null
   title: string
-  body?: string | null
+  body: string
   color: string
-  completed?: boolean | null
   favorited: boolean
 }
 
 export class Task {
   public id?: string | null
   public title: string
-  public body?: string | null
+  public body: string
   public color: string
-  public completed?: boolean | null
   public favorited: boolean
 
   private constructor(props: TaskDTO) {
@@ -20,7 +18,6 @@ export class Task {
     this.title = props.title
     this.body = props.body
     this.color = props.color
-    this.completed = props.completed
     this.favorited = props.favorited
   }
 

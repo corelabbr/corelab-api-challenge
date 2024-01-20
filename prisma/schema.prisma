@@ -13,8 +13,7 @@ datasource db {
 model Task {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   title     String
-  body      String?
-  completed Boolean
+  body      String
   favorited  Boolean
   color     String
   createdAt DateTime @default(now())

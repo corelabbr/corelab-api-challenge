@@ -21,31 +21,25 @@ class TaskRepositoryInMemory implements TaskRepository {
       title: task.title,
       body: task.body,
       color: task.color,
-      completed: task.completed ?? false,
       favorited: task.favorited,
     })
     this.tasks.push(newTask)
     return newTask
   }
 
-  public async complete(id: string): Promise<void> {
-    const taskIndex = this.tasks.findIndex((task) => task.id === id)
-    this.tasks[taskIndex].completed = true
+  public async update(task: Task): Promise<Task> {
+    const taskIndex = this.tasks.findIndex((task) => task.id === task.id)
+    this.tasks[taskIndex] = task
+    return task
   }
 
-  public async uncomplete(id: string): Promise<void> {
+  public async delete(id: string): Promise<void> {
     const taskIndex = this.tasks.findIndex((task) => task.id === id)
-    this.tasks[taskIndex].completed = false
+    this.tasks.splice(taskIndex, 1)
   }
 
-  public async favorite(id: string): Promise<void> {
-    const taskIndex = this.tasks.findIndex((task) => task.id === id)
-    this.tasks[taskIndex].favorited = true
-  }
-
-  public async unfavorite(id: string): Promise<void> {
-    const taskIndex = this.tasks.findIndex((task) => task.id === id)
-    this.tasks[taskIndex].favorited = false
+  public async getAll(): Promise<Task[]> {
+    return this.tasks
   }
 }
 
