@@ -4,8 +4,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "tsx ./src/index.ts --watch",
-    "start": "node ./src/index.js",
+    "dev": "tsx watch ./src/index.ts",
+    "start": "tsx ./src/index.ts",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
     "test": "jest",
