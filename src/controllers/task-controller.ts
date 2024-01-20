@@ -6,7 +6,7 @@ import { TaskDTO } from '../models/task'
 export async function registerTaskHandler(request: FastifyRequest, reply: FastifyReply) {
   const { title, body, favorited, color } = request.body as TaskDTO
 
-  if (!title || !body || !favorited || !color) {
+  if (!title || !body || !color) {
     reply.code(400).send({ error: 'Missing params' })
   }
 

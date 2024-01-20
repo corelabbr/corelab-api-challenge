@@ -67,7 +67,7 @@ class TaskRepositoryHandler implements TaskRepository {
 
   public async delete(id: string): Promise<void> {
     try {
-      prisma.task.delete({
+      await prisma.task.delete({
         where: {
           id,
         },
