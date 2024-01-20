@@ -9,11 +9,11 @@
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "prisma:generate": "npx prisma generate"
   },
   "eslintConfig": {
     "extends": [
-      "plugin:adonis/typescriptApp",
       "prettier"
     ],
     "plugins": [
