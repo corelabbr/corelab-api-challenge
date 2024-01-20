@@ -21,10 +21,15 @@ A estrutura de pastas do projeto foi feita da seguinte forma:
 ```
 
 `app` contém os repositórios e os usecases, que são responsáveis por fazer a comunicação com o banco de dados e a regra de negócio, respectivamente.
+
 `controllers` contém os controllers, que são responsáveis por fazer a comunicação com a camada de rede.
+
 `database` contém os arquivos de configuração do banco de dados.
+
 `models` contém a entidade como um objeto para ser usada nas regras de negócio.
+
 `routes` contém os arquivos de configuração das rotas.
+
 `tests` contém o repositório em memoria para ser usado nos testes simulando um banco de dados.
 
 Tentei separar bem a regra de negócio do framework e da camada de rede, para que seja fácil de trocar o framework ou o banco de dados.
