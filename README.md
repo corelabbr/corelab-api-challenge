@@ -41,7 +41,8 @@ cp .env.example .env
 
 1. Clone o repositório
    ```sh
-   git clone
+   git clone https://github.com/itspedro/corelab-api-challenge.git -b dev
+   cd corelab-api-challenge
     ```
 2. Instale os pacotes NPM
     ```sh
@@ -65,8 +66,6 @@ npm run test
 ```
 
 [Documentação](./docs/routes.md)
-```
-
 
 ---
 
