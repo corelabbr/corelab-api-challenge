@@ -1,6 +1,6 @@
 {
   "include": ["**/*"],
-  "exclude": ["node_modules", "build"],
+  "exclude": ["node_modules", "build", "jest.config.ts"],
   "compilerOptions": {
     "target": "es2017",
     "outDir": "build",
@@ -13,6 +13,6 @@
       "Contracts/*": ["./contracts/*"],
       "Database/*": ["./database/*"]
     },
-    "types": ["@types/node", "@types/jest", "jest"]
+    "types": ["@types/node", "@types/jest"]
   }
 }
