@@ -7,10 +7,39 @@ import {
   getAllTasksHandler
 } from '../controllers/task-controller'
 
+
 export default async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
-  fastify.post('/', registerTaskHandler)
-  fastify.put('/', updateTaskHandler)
-  fastify.delete('/:id', deleteTaskHandler)
-  fastify.get('/:id', getTaskByIdHandler)
+  fastify.post('/', {
+    schema: {
+      body: {
+        title: { type: 'string' },
+        body: { type: 'string' },
+        favorited: { type: 'boolean' }
+      }
+    },
+  },registerTaskHandler)
+  fastify.put('/', {
+    schema: {
+      body: {
+        title: { type: 'string' },
+        body: { type: 'string' },
+        favorited: { type: 'boolean' }
+      }
+    },
+  }, updateTaskHandler)
+  fastify.delete('/:id', {
+    schema: {
+      params: {
+        id: { type: 'string' },
+      }
+    },
+  }, deleteTaskHandler)
+  fastify.get('/:id', {
+    schema: {
+      params: {
+        id: { type: 'string' },
+      }
+    },
+  },getTaskByIdHandler)
   fastify.get('/', getAllTasksHandler)
 }
