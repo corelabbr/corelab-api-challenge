@@ -10,6 +10,8 @@ COPY . .
 
 RUN npm run prisma:generate
 
+RUN npm run build
+
 EXPOSE 8080
 
 ENV ADDRESS=0.0.0.0 PORT=8080
