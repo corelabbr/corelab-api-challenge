@@ -31,12 +31,6 @@ Instale o npm@^8.5.5
 npm install -g npm@^8.5.5
 ```
 
-Crie um cluster no [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) e crie um arquivo .env com base no arquivo .env.example
-
-```sh
-cp .env.example .env
-```
-
 ### Instalação
 
 1. Clone o repositório
@@ -48,13 +42,17 @@ cp .env.example .env
     ```sh
     npm install
     ```
-3. Execute o prisma generate
+3. Crie um cluster no [MongoDB Atlas](https://www.mongodb.com/docs/guides/atlas/cluster/) e crie um arquivo .env com base no arquivo .env.example
+    ```sh
+    cp .env.example .env
+    ```
+4. Execute o prisma generate
     ```sh
     npm run prisma:generate
     ```
 4. Inicie o servidor
     ```sh
-    npm run dev
+    npm start
     ```
 
 ## Testes
@@ -64,8 +62,13 @@ Para rodar os testes, execute o comando abaixo
 ```sh
 npm run test
 ```
+[De volta ao topo](#readme-top)
 
-[Documentação](./docs/routes.md)
+## Links úteis
+
+* [Desenvolvimento do projeto](./PULL_REQUEST.md)
+* [Documentação](./docs/routes.md)
+
 
 ---
 

@@ -1,10 +1,11 @@
-# Desenvolvimento
+# Desenvolvimento (BackEnd)
 
 Primeiramente explicarei os motivos de ter escolhido as tecnologias utilizadas no projeto.
+
 Utilizei o framework [Fastify](https://www.fastify.dev/) para desenvolver a API, pois acho que ele é um framework performático e simples de se utilizar.
 Para o banco de dados, utilizei o [MongoDB](https://www.mongodb.com/), pois é um banco de dados não relacional e que possui uma boa performance.  Também relacionado a banco de dados, foi utilizado o ORM [Prisma](https://www.prisma.io/), para manter o código bem modularizado e facilitar a manutenção.
 
-Decidi fazer pela metodologia de TDD (Test Driven Development), pois acredito que seja uma boa prática para desenvolver um código mais limpo com menos bugs e rápido. Assim apenas rodando `npm test` consigo ter certeza que esta funcionando a regra de negócio sem precisar fazer um request HTTP.
+Decidi fazer pela metodologia de TDD (Test Driven Development), pois acredito que seja uma boa prática para desenvolver um código mais limpo com menos bugs e com rapidez. Assim apenas rodando `npm test` consigo ter certeza que esta funcionando a regra de negócio sem precisar fazer um request HTTP.
 
 A estrutura de pastas do projeto foi feita da seguinte forma:
 
@@ -34,3 +35,9 @@ A estrutura de pastas do projeto foi feita da seguinte forma:
 
 Tentei separar bem a regra de negócio do framework e da camada de rede, para que seja fácil de trocar o framework ou o banco de dados.
 
+
+## Notas
+
+- É possivel criar, listar, atualizar e deletar uma task (CRUD).
+
+[Executando o projeto](./README.md)
