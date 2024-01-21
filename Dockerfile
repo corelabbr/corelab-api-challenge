@@ -10,7 +10,7 @@ COPY . .
 
 RUN npm run prisma:generate
 
-RUN npm run build
+RUN npm run tsc
 
 EXPOSE 8080
 
