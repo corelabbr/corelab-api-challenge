@@ -1,3 +1,4 @@
+require('tsconfig-paths/register')
 import app, { init } from '@/app'
 
 const port = +process.env.PORT || 5000

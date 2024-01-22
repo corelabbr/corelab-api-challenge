@@ -8,6 +8,10 @@ import { invalidCredentialsError, userNotFoundError } from '@/errors'
 async function signIn(params: SignInParams): Promise<SignInResult> {
   const { email, password } = params
 
+  if (!email || !password) {
+    throw invalidCredentialsError()
+  }
+
   const user = await getUserOrFail(email)
 
   await validatePasswordOrFail(password, user.password)

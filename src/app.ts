@@ -1,13 +1,9 @@
-import { disconnectDB, connectDb,loadEnv} from '@/config'
 import 'reflect-metadata'
 import 'express-async-errors'
 import express, { Express, Request, Response } from 'express'
+import { disconnectDB, connectDb, loadEnv } from '@/config'
 import cors from 'cors'
-import {
-  userRouter,
-  authenticationRouter,
-  taskRouter,
-} from '@/routes'
+import { userRouter, authenticationRouter, taskRouter } from '@/routes'
 import { handleApplicationErrors } from '@/middlewares'
 
 loadEnv()
@@ -18,9 +14,9 @@ app.use(express.json())
 
 app.get('/health', (_req: Request, res: Response) => res.send('OK!'))
 
-app.use('/users', userRouter)
-app.use('/auth', authenticationRouter)
-app.use('/task',taskRouter)
+app.use('/sign-up', userRouter)
+app.use('/sign-in', authenticationRouter)
+app.use('/task', taskRouter)
 
 app.use(handleApplicationErrors)
 
