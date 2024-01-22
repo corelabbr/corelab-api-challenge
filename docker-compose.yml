@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+  api:
+    container_name: corelab-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+  db:
+    container_name: corelab-db
+    image: mongo
+    restart: always
+    command: ["--replSet", "rs0", "--bind_ip_all", "--port", "27017"]
+    ports:
+      - 27017:27017
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: echo "try { rs.status() } catch (err) { rs.initiate({_id:'rs0',members:[{_id:0,host:'host.docker.internal:27017'}]}) }" | mongosh --port 27017 --quiet
+      interval: 5s
+      timeout: 30s
+      start_period: 0s
+      retries: 30
+    volumes:
+      - db_data:/data/db
+      - db_config:/data/configdb
+
+volumes:
+  db_data:
+  db_config:
