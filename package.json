@@ -6,6 +6,8 @@
     "dev": "tsx watch ./src/index.ts",
     "start": "node ./build/index.js",
     "build": "npx prisma generate && tsc",
+    "postinstall": "npm run build",
+    "production": "node ./build/index.js",
     "tsc": "tsc",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
