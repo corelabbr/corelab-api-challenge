@@ -7,7 +7,7 @@ Para o banco de dados, utilizei o [MongoDB](https://www.mongodb.com/), pois é u
 
 Decidi fazer pela metodologia de TDD (Test Driven Development), pois acredito que seja uma boa prática para desenvolver um código mais limpo com menos bugs e com rapidez. Assim apenas rodando `npm test` consigo ter certeza que esta funcionando a regra de negócio sem precisar fazer um request HTTP.
 
-A estrutura de pastas do projeto foi feita da seguinte forma:
+## Estrutura de pastas do projeto
 
 ```sh
 └───src
@@ -33,11 +33,11 @@ A estrutura de pastas do projeto foi feita da seguinte forma:
 
 `tests` contém o repositório em memoria para ser usado nos testes simulando um banco de dados.
 
-Tentei separar bem a regra de negócio do framework e da camada de rede, para que seja fácil de trocar o framework ou o banco de dados.
-
-
 ## Notas
 
+- Docker compose para facilitar a execução do projeto.
 - É possivel criar, listar, atualizar e deletar uma task (CRUD).
+- Foi mantido um padrão de commits
+- Tentei separar bem a regra de negócio do framework e da camada de rede, para que seja fácil de trocar o framework ou o banco de dados.
 
 [Executando o projeto](./README.md)

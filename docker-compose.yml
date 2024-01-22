@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  api:
+    container_name: corelab-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+  db:
+    container_name: corelab-db
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=corelab
+      - MONGO_INITDB_DATABASE=corenotes
+    volumes:
+      - ./data/db:/data/db

@@ -11,7 +11,40 @@
   </p>
 </div>
 
-## Como executar
+
+<details open="open">
+  <summary>Tabela de conteúdos</summary>
+  <ol>
+    <li>
+      <a href="#executar-com-docker">Executar com docker</a>
+    </li>
+    <li>
+      <a href="#executar-localmente">Executar Localmente</a>
+    </li>
+    <li><a href="#testes">Testes</a></li>
+    <li><a href="#links-úteis">Links úteis</a></li>
+  </ol>
+</details>
+
+## Executar com Docker
+
+### Pré-requisitos
+
+* [Docker](https://www.docker.com/)
+
+### Instalação
+
+1. Clone o repositório
+    ```sh
+    git clone https://github.com/itspedro/corelab-api-challenge.git -b dev
+    cd corelab-api-challenge
+    ```
+2. Execute o docker-compose
+    ```sh
+    docker-compose up
+    ```
+
+## Executar Localmente
 
 ### Pré-requisitos
 
@@ -50,9 +83,13 @@ npm install -g npm@^8.5.5
     ```sh
     npm run prisma:generate
     ```
-4. Inicie o servidor
+5. Gere o build do projeto
     ```sh
-    npm start
+    npm run tsc
+    ```
+6. Execute o projeto
+    ```sh
+    npm run start
     ```
 
 ## Testes
@@ -62,6 +99,7 @@ Para rodar os testes, execute o comando abaixo
 ```sh
 npm run test
 ```
+
 [De volta ao topo](#readme-top)
 
 ## Links úteis
