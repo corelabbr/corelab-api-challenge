@@ -16,6 +16,6 @@ USER node
 
 EXPOSE 8080
 
-ENV ADDRESS=0.0.0.0 PORT=8080 DATABASE_URL="mongodb://root:corelab@localhost:27017/corenotes?retryWrites=true&w=majority"
+ENV ADDRESS=0.0.0.0 PORT=8080 DATABASE_URL="mongodb://db:27017/replicaSet=rs0"
 
 CMD ["npm", "start"]
