@@ -5,9 +5,8 @@
   "scripts": {
     "dev": "tsx watch ./src/index.ts",
     "start": "node ./build/index.js",
-    "build": "npx prisma generate && tsc",
-    "postinstall": "npm run build",
-    "production": "node ./build/index.js",
+    "postinstall": "npm run prisma:generate",
+    "build": "npm run tsc",
     "tsc": "tsc",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
