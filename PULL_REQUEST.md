@@ -141,4 +141,4 @@ You cannot use any interactivity on server components, like onClick, because it'
 
 ## More infos and screenshots
 
-https://github.com/WagDevX/corelab-web-challenge/blob/main/README.md
+https://github.com/WagDevX/to-do-fullstack-next14/blob/f90aa20557da20b08b02f5c65d3ea9407df2b53a/README.md
