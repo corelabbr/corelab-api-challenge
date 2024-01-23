@@ -15,9 +15,6 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
-      isYellowStar: {
-        type: Sequelize.BOOLEAN
-      },
       isFavorite: {
         type: Sequelize.BOOLEAN
       },

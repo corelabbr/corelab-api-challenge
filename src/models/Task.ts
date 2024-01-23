@@ -5,7 +5,6 @@ interface taskAttributes {
   id?: number;
   title?: string;
   description?: string;
-  isYellowStar?: boolean;
   isFavorite?: boolean;
   color?: string;
 
@@ -15,7 +14,6 @@ class Task extends Model implements taskAttributes {
   id?: number;
   title?: string;
   description?: string;
-  isYellowStar?: boolean;
   isFavorite?: boolean;
   color?: string;
 
@@ -34,10 +32,6 @@ Task.init({
   description: {
     allowNull: false,
     type: DataTypes.STRING
-  },
-  isYellowStar: {
-    allowNull: false,
-    type: DataTypes.BOOLEAN
   },
   isFavorite: {
     allowNull: false,
