@@ -41,7 +41,7 @@ Este projeto foi construído com base em camadas, sendo elas
 Router, Controller, Service, Repository
 ```
 
-Escolhi essa arquitetura por fazer parte da maioria dos projetos em que já desenvolvi. Não tive grandes dificuldades no desenvolvimento dessa API; enfrentei alguns desafios ao longo do percurso, mas nada que eu não pudesse resolver.
+Escolhi essa arquitetura pela separação de responsabilidades que ela propoe seguindo as boas praticas do padrão REST. Não tive grandes dificuldades no desenvolvimento dessa API; enfrentei alguns desafios ao longo do percurso, mas nada que eu não pudesse resolver.
 
 Meu pensamento sobre como construir essa API não foi dos mais extensos, pois, antes de começar a desenvolvê-la, eu já estava trabalhando em um projeto pessoal full-stack de gerenciamento financeiro. Não queria perder muito tempo para começar, então resolvi adotar a arquitetura que já domino e as tecnologias que utilizo diariamente. Isso resultou em uma API sólida, funcional e de fácil manutenção, pronta para evoluções e adição de novas funcionalidades.
 
