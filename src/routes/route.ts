@@ -1,9 +1,8 @@
 import express from 'express';
-import TaskController from '../controllers/TaskController';
 
-const routes = express.Router();
+const TaskRoot = require('./task/route')
+const routes = express();
 
-routes.get('/', TaskController.GetTasks);
-routes.post("/createTask", TaskController.CreateTask);
-routes.post("/editTask/:id", TaskController.UpdateTask);
+routes.use('/task', TaskRoot);
+
 module.exports = routes;

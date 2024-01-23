@@ -1,43 +1,29 @@
 
-# @name create-user
-POST http://localhost:3333/createUser
+# @name create-task
+POST http://localhost:3333/task/createTask
 Content-Type: application/json
 
 {
-    "name": "12",
-    "idade": "21",
-    "updatedAt": "2023-10-15T15:54:34.638Z"
+      "title": "Fazer os deveres de casa",
+      "description": "Arrumar a sala e o quarto",
+      "isFavorite": false,
+      "color": "#123"
 }
 
 
 ###
+# @name get-all-task
+GET  http://localhost:3333/task/
 
-# @name edit-user
-POST http://localhost:3333/editUser/1
+###
+
+# @name create-task
+POST http://localhost:3333/task/editTask/4
 Content-Type: application/json
 
 {
-     "name":"teste", 
-     "idade": 14 
-} 
-
-###
-
-# @name edit-user
-POST http://localhost:3333/getByIdade
-Content-Type: application/json
-
-{ 
-     "idade": 21 
+      "title": "Fazer os deveres de casa",
+      "description": "Arrumar a sala",
+      "isFavorite": false,
+      "color": "#123"
 }
-
-###
-
-# @name create-address
-POST http://localhost:3333/user/1/address
-Content-Type: application/json
-
-{ 
-     "rua": "1",
-     "casa": "N/A" 
-} 
