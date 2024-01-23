@@ -1,85 +1,116 @@
-## Corelab Challenge:
+# CoreNotes - Back-end
 
-You are tasked with building a web application that allows users to create and manage their to-do lists. The application should consist of a responsive webpage built in React, and an API built in Node.js to store and manage the to-do lists.
+Backend for CoreNotes, a todo-list.
 
+## About
 
-### The repositories
-The [frontend repository](https://github.com/corelabbr/corelab-web-challenge)
+CoreNotes is a web browser application with which you can manage your activities by creating notes to organize yourself
 
-If you feel more comfortable, you can pick another React framework and show us your skills.
+## How to run for development
 
-The [backend repository](https://github.com/corelabbr/corelab-api-challenge)
+1. Clone this repository
+2. Install all dependencies
 
-If you feel more comfortable, you can pick another Node JS framework and show us your skills.
+```bash
+npm i
+```
 
-### The Layout
-Open the [layout mockup](https://www.figma.com/file/sQrUVHTlyogq3qGdkqGTXN/mockup?node-id=7%3A2&t=ANTOTiqjqGWYuoUr-0) in desktop and mobile version and follow this design as much as possible.
+3. Create a PostgreSQL database with whatever name you want
+4. Configure the `.env.development` file using the `.env.example` file (see "Running application locally or inside docker section" for details)
+5. Run all migrations
 
+```bash
+npm run dev:migration:run
+```
 
-### The application should have the following functionality:
+6. Run the back-end in a development environment:
 
-1. Users should be able to create, read, update, and delete to-do items using the API.
-2. Users should be able to mark an item as a favorite.
-3. Users should be able to set a color for each to-do item.
-4. The React frontend should display the user's to-do list in a responsive and visually appealing manner, with the ability to filter by favorite items and color.
-5. The favorited items should be displayed at the top of the list.
+```bash
+npm run dev
+```
 
-### Technical Requirements:
-1. The backend API should be built in Node.js framework and use a database of your choice (e.g., MongoDB, PostgreSQL, etc.).
-2. The frontend should be built in React and use modern web development tools and best practices.
-3. The application should be responsive and visually appealing.
+## How to run tests
 
-### Deliverables:
-1. A link to a GitHub repository containing the complete source code for the project.
-2. A written description of how to set up and run the application locally.
+1. Follow the steps in the last section
+2. Configure the `.env.test` file using the `.env.example` file (see "Running application locally or inside docker" section for details)
+3. Run all migrations:
 
+```bash
+npm run test:migration:run
+```
 
-### Evaluation Criteria:
-1. Code Quality
-2. Code Format
-3. Code Perfomance
-4. Frontend Design
-5. If your code is Easily Readable
-6. Mobile First approach
-7. Code Responsability
-8. Features Work
-9. Responsiveness
-10. Does the application meet the functionality requirements listed above?
-11. Is the code well-organized, easy to read, and well-documented?
-12. Are modern web development tools and best practices used?
-13. Is the application visually appealing and responsive?
+4. Run test:
 
-### Backend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: Adonis TS or any other node framework you know.
-4. Database: Choose your own, you can even save in memory.
+```bash
+npm run test
+```
 
-### Frontend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: React TS
-4. Sass or other preprocessor
+## Building and starting for production
 
-### Want to impress us even more?
-If you feel comfortable and want to impress us even more, you can do the following:
+```bash
+npm run build
+npm start
+```
 
-1. Work on correct types and interfaces
-2. Work on eslint rules
-3. Work prettier config
-4. Work on docker containers
-5. Work on tests
-6. Work on CI/CD
+## Running migrations or generate prisma clients
 
-### What to do when you finish?
+Before running migrations make sure you have a postgres db running based on `.env.development` or `.env.test` file for each environment.
 
-Create a file PULL_REQUEST.md where you will describe what you did and how in as much detail as possible. Feel free to add videos for better explanation.
+You can operate on databases for different environments, but it is necessary to populate correct env variables for each environment first, so in order to perform db operations type the following commands:
 
-Create a new pull request using the same branch name for Backend and Frontend
+- `npm run dev:migration:run` - run migrations for development environment by loading envs from .env.development file. It uses [dotenv-cli](https://github.com/entropitor/dotenv-cli#readme) to load envs from .env.development file.
+- `npm run test:migration:run` - the same, but for test environment.
 
-Send us the pull requests and that's all!
+- `npm run dev:migration:generate -- --name ATOMIC_OPERATION_NAME` - generate and run migration and prisma client for development environment by loading envs from .env.development file. Replace `ATOMIC_OPERATION_NAME` by the name of the migration you want to generate.
 
+## What to do when add new ENV VARIABLES
 
-#### Good luck! The sky is the limit 🚀
+There are several things you need to do when you add new ENV VARIABLES:
+
+- Add them to `.env.example` file
+- Add them to your local `.env.development` and `.env.test` files# CoreNotes - Back-end
+
+## How to run tests
+
+1. Follow the steps in the last section
+2. Configure the `.env.test` file using the `.env.example` file (see "Running application locally or inside docker" section for details)
+3. Run all migrations:
+
+```bash
+npm run test:migration:run
+```
+
+4. Run test:
+
+```bash
+npm run test
+```
+
+## Building and starting for production
+
+```bash
+npm run build
+npm start
+```
+
+## Running migrations or generate prisma clients
+
+Before running migrations make sure you have a postgres db running based on `.env.development` or `.env.test` file for each environment.
+
+You can operate on databases for different environments, but it is necessary to populate correct env variables for each environment first, so in order to perform db operations type the following commands:
+
+- `npm run dev:migration:run` - run migrations for development environment by loading envs from .env.development file. It uses [dotenv-cli](https://github.com/entropitor/dotenv-cli#readme) to load envs from .env.development file.
+- `npm run test:migration:run` - the same, but for test environment.
+
+- `npm run dev:migration:generate -- --name ATOMIC_OPERATION_NAME` - generate and run migration and prisma client for development environment by loading envs from .env.development file. Replace `ATOMIC_OPERATION_NAME` by the name of the migration you want to generate.
+
+## What to do when add new ENV VARIABLES
+
+There are several things you need to do when you add new ENV VARIABLES:
+
+- Add them to `.env.example` file
+- Add them to your local `.env.development` and `.env.test` files
+
+## Link Deploy
+
+https://corelab-api-zmtt.onrender.com
