@@ -1,14 +1,14 @@
-const User = require('../models/User')
+const Task = require('../models/Task')
 import { Request, Response } from 'express';
 
 
-const GetUsers = async (req: Request, res: Response): Promise<Response> => {
+const GetTasks = async (req: Request, res: Response): Promise<Response> => {
     try {
-        const user = await User.findAll();
+        const task = await Task.findAll();
         return res.status(200).send({
             status: 200,
             message: 'OK',
-            data: user
+            data: task
         });
     } catch (error: any) {
         if (error != null && error instanceof Error) {
@@ -26,10 +26,10 @@ const GetUsers = async (req: Request, res: Response): Promise<Response> => {
     }
 
 }
-const CreateUser = async (req: Request, res: Response): Promise<Response> => {
+const CreateTask = async (req: Request, res: Response): Promise<Response> => {
     try {
         const { title, color, description, isFavorite } = req.body;
-        const create = await User.create(
+        const create = await Task.create(
             {
                 title,
                 description,
@@ -58,11 +58,11 @@ const CreateUser = async (req: Request, res: Response): Promise<Response> => {
         })
     }
 }
-const UpdateUser = async (req: Request, res: Response): Promise<Response> => {
+const UpdateTask = async (req: Request, res: Response): Promise<Response> => {
     try {
         const { id } = req.params;
         const { title, description, isFavorite, color } = req.body;
-        const edit = await User.findByPk(id);
+        const edit = await Task.findByPk(id);
         if (!edit) {
             return res.status(404).send({
                 status: 404,
@@ -101,7 +101,7 @@ const UpdateUser = async (req: Request, res: Response): Promise<Response> => {
 }
 
 export default {
-    GetUsers,
-    CreateUser,
-    UpdateUser,
+    GetTasks,
+    CreateTask,
+    UpdateTask,
 };
