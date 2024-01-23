@@ -1,0 +1,43 @@
+
+# @name create-user
+POST http://localhost:3333/createUser
+Content-Type: application/json
+
+{
+    "name": "12",
+    "idade": "21",
+    "updatedAt": "2023-10-15T15:54:34.638Z"
+}
+
+
+###
+
+# @name edit-user
+POST http://localhost:3333/editUser/1
+Content-Type: application/json
+
+{
+     "name":"teste", 
+     "idade": 14 
+} 
+
+###
+
+# @name edit-user
+POST http://localhost:3333/getByIdade
+Content-Type: application/json
+
+{ 
+     "idade": 21 
+}
+
+###
+
+# @name create-address
+POST http://localhost:3333/user/1/address
+Content-Type: application/json
+
+{ 
+     "rua": "1",
+     "casa": "N/A" 
+} 
