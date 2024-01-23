@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  corelab-frontend:
+    image: corelab-frontend:latest
+    build:
+      context: corenotes-frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+  corelab-backend:
+    image: corelab-web-api:latest
+    build:
+      context: corenotes-backend
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+      - 5000:5000

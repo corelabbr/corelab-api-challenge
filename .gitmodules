@@ -1,0 +1,6 @@
+[submodule "corenotes-frontend"]
+	path = corenotes-frontend
+	url = https://github.com/mateus-sartorio/corenotes-frontend.git
+[submodule "corenotes-backend"]
+	path = corenotes-backend
+	url = git@github.com:mateus-sartorio/corenotes-backend.git
