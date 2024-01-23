@@ -15,11 +15,10 @@ async function createTaskService({
 
   if (
     !title ||
-    (typeof title === 'string' && title.trim() === '') ||
-    (typeof description === 'string' && description.trim() === '') ||
+    title.trim() === '' ||
     !description ||
-    description.length === 0 ||
-    userId === undefined
+    description.trim() === '' ||
+    !userId
   ) {
     throw invalidInputError('All required fields must be filled.')
   }
@@ -91,18 +90,14 @@ async function updateTaskService({
 }: UpdateTaskParams): Promise<Task> {
   const userId = req.userId
 
-  if (userId === undefined) {
-    throw notFoundError('User ID is missing.')
-  }
+  if (!userId) throw notFoundError('User ID is missing.')
 
   const existingTask = await taskRepository.findTaskByIdAndUserId(
     taskId,
     userId,
   )
 
-  if (!existingTask) {
-    throw notFoundError('Task not found for the user')
-  }
+  if (!existingTask) throw notFoundError('Task not found for the user')
 
   if (color && !isValidHexColor(color)) {
     throw invalidInputError(
