@@ -16,6 +16,7 @@
 ## 🔥 Funcionalidades
 
 ![image](https://github.com/mateus-sartorio/corenotes/assets/69646100/64b60ed8-3902-41cc-9bee-e0269851e743)
+![image](https://github.com/mateus-sartorio/corenotes/assets/laptop_pic.png)
 
 ### 🧭 Interface minimalista que mostra apenas o necessário - sem algoritmo para consumir você
 
