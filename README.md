@@ -15,11 +15,13 @@
 
 ## 🔥 Funcionalidades
 
-### ⭐ Favorite suas tarefas, se mantenha organizado com as tarefas mais urgentes
+![image](https://github.com/mateus-sartorio/corenotes/assets/69646100/64b60ed8-3902-41cc-9bee-e0269851e743)
 ### Interface minimalista que mostra apenas o necessário - sem algoritmo para consumir você
 
 
 ![image](https://github.com/mateus-sartorio/corenotes/assets/69646100/8f43204d-13e0-43dd-b44d-08ae34bff095)
+
+### ⭐ Favorite suas tarefas, se mantenha organizado com as tarefas mais urgentes
 
 ### 🎨 Cores para todos os gostos
 ![image](https://github.com/mateus-sartorio/corenotes/assets/69646100/b4f46edc-2bb4-4c41-9d00-c29598529144)
@@ -33,7 +35,6 @@
 ### 🎨/⭐ Pesquise por cores e favoritos
 ![image](https://github.com/mateus-sartorio/corenotes/assets/69646100/614bd7a0-3dd7-4e26-996d-f923ab150880)
 
-![image](https://github.com/mateus-sartorio/corenotes/assets/69646100/64b60ed8-3902-41cc-9bee-e0269851e743)
 
 ## 🍄 Filosofia
 
