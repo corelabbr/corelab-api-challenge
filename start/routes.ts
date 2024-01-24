@@ -20,4 +20,20 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/vehicles', 'VehiclesController.index');
+Route.get('/vehicles', 'VehiclesController.index')
+
+Route.post('/notas', 'NotasController.inserirNotas')
+
+Route.get('/notasidget/:id', 'NotasController.getIdNotas')
+
+Route.get('/notasgetall', 'NotasController.getAllNotas')
+
+Route.delete('/notasdelet/:id', 'NotasController.deleteNota')
+
+Route.put('/notasedit/:id', 'NotasController.updateNota')
+
+Route.get('/notasfav', 'NotasController.getAllNotasFav')
+
+Route.get('/notasnofav', 'NotasController.getAllNotasNoFav')
+
+Route.get('/cor/:id', 'NotasController.getIdcor')
