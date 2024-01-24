@@ -1,4 +1,4 @@
-# API Projetct With Docker, Prisma, Typescript and NodeJS
+# API Project With Docker, Prisma, Typescript and NodeJS
 
 ## To run aplication, follow steps in your terminal:
 
