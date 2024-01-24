@@ -36,7 +36,7 @@
 
 ## 🍄 Filosofia
 
-Este projeto destina-se a ser simples e fácil de usar. Mantem as funcionalidades mínimas, mas refinadas.
+Este projeto destina-se a ser simples e fácil de usar. As funcionalidades são mantidas mínimas, mas refinadas.
 
 <br/>
 
