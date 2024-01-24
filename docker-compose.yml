@@ -1,6 +1,11 @@
 version: "3"
 
 services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+
   corelab-backend:
     image: corelab-web-api:latest
     build:
@@ -9,6 +14,11 @@ services:
     ports:
       - 4000:4000
       - 5000:5000
+    links:
+      - mongo
+    depends_on:
+      - mongo
+
   corelab-frontend:
     image: corelab-frontend:latest
     build:
@@ -16,3 +26,5 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
+    depends_on:
+      - corelab-backend
