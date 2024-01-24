@@ -15,29 +15,24 @@
 
 ## 🔥 Funcionalidades
 
-![image](https://github.com/mateus-sartorio/corenotes/assets/69646100/64b60ed8-3902-41cc-9bee-e0269851e743)
-![image](https://github.com/mateus-sartorio/corenotes/assets/laptop_pic.png)
+### 🖥️/📲 Interface minimalista que mostra apenas o necessário e se adequa a todas as telas
 
-### 🧭 Interface minimalista que mostra apenas o necessário - sem algoritmo para consumir você
-
-
-![image](https://github.com/mateus-sartorio/corenotes/assets/69646100/8f43204d-13e0-43dd-b44d-08ae34bff095)
-
-### ⭐ Favorite suas tarefas, se mantenha organizado com as tarefas mais urgentes
-![image](https://github.com/mateus-sartorio/corenotes/assets/69646100/a2be3340-1a36-4ba2-8028-f391408d01c2)
-
+<div align="center">
+  <img src="https://github.com/mateus-sartorio/corenotes/blob/main/assets/laptop.png" alt="" width="49%"/>
+  <img src="https://github.com/mateus-sartorio/corenotes/blob/main/assets/phone.png" alt="" width="49%"/>
+</div>
 
 ### 🎨 Cores para todos os gostos
-![image](https://github.com/mateus-sartorio/corenotes/assets/69646100/b4f46edc-2bb4-4c41-9d00-c29598529144)
 
-
-
-### 🖥️/📲 Design responsivo para todas as telas
-![image](https://github.com/mateus-sartorio/corenotes/assets/69646100/3c55adb3-01d4-47dd-94ef-0870e4e8aef6)
-![image](https://github.com/mateus-sartorio/corenotes/assets/69646100/b5463a92-ca7f-4e6e-9e68-6fd913d49080)
+<div align="center">
+  <img src="https://github.com/mateus-sartorio/corenotes/blob/main/assets/colors.png" alt="" width="80%"/>
+</div>
 
 ### 🎨/⭐ Pesquise por cores e favoritos
-![image](https://github.com/mateus-sartorio/corenotes/assets/69646100/614bd7a0-3dd7-4e26-996d-f923ab150880)
+
+<div align="center">
+  <img src="https://github.com/mateus-sartorio/corenotes/blob/main/assets/filters.png" alt="" width="80%"/>
+</div>
 
 
 ## 🍄 Filosofia
