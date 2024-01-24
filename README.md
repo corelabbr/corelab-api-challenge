@@ -15,7 +15,7 @@ Rode este projeto na sua máquina seguindo os seguintes passsos:
 2. Navegue até o diretório do projeto backend.
 
 ```bash
-  cd Corelab-api/backend
+  cd Corelab-api-challenge/backend
 ```
 
 3. Instale as dependências.
