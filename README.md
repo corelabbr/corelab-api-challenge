@@ -1,6 +1,3 @@
-
-
-<!-- <p align="center"><img align="center" src="./assets/logo.png"/></p> -->
 <p align="center"><img align="center" width="280" src="./.github/logo-light.svg#gh-light-mode-only"/></p>
 <p align="center">
   <img src="https://skillicons.dev/icons?i=typescript,next,react,redux" /> <br/>
@@ -12,6 +9,7 @@
 
 ### Tarefas simplificadas, resultados poderosos.
 
+<br/>
 
 ## 🔥 Funcionalidades
 
@@ -40,6 +38,7 @@
 
 Este projeto destina-se a ser simples e fácil de usar. Mantem as funcionalidades mínimas, mas refinadas.
 
+<br/>
 
 ## ⚙️ Configurar e executar localmente
 
@@ -142,6 +141,7 @@ npm start
 > 
 > Com o `nvm` é possível também instalar a versão 16 do Node.js, caso ainda não esteja instalada, com o comando `nvm install 16`
 
+<br/>
 
 ## ⚠️ Limitatações
 
@@ -152,8 +152,9 @@ npm start
 
 - A paleta de selecão de cores (ColorPicker) pode dar overflow na tela caso seja aberta no cartão de uma tarefa muito próxima à margem direita da tela.
 
+<br/>
 
-## Licença:
+## ⚖️ Licença:
 
 Este programa é um software livre: você pode redistribuí-lo e/ou modificá-lo sob os termos da Licença Pública Geral GNU, conforme publicada pela Free Software Foundation; seja a versão 3 da Licença, ou (a seu critério) qualquer versão posterior.
 
@@ -164,6 +165,6 @@ Você deveria ter recebido uma cópia da Licença Pública Geral GNU juntamente 
 Este programa é lançado sob a licença GNU GPL v3+.
 
 
-## Suporte:
+## 🔧 Suporte:
 
 Por favor reporte qualquer problema com a aplicação [github.com/mateus-sartorio/corenotes](https://github.com/mateus-sartorio/corenotes).
