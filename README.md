@@ -1,45 +1,33 @@
-# 🗒️ CoreNotes
-
-### Tarefas Simplificadas, Resultados Poderosos.
 
 
-<p align="center"><img align="center" width="280" src="./.github/logo-dark.svg#gh-dark-mode-only"/></p>
+<!-- <p align="center"><img align="center" src="./assets/logo.png"/></p> -->
 <p align="center"><img align="center" width="280" src="./.github/logo-light.svg#gh-light-mode-only"/></p>
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=react,vite,ts" />
-  <br/>
-  <a href="https://discord.movie-web.app"><kbd>🔵 discord</kbd></a> <a href="https://movie-web.app"><kbd>🟢 website</kbd></a>
+  <img src="https://skillicons.dev/icons?i=typescript,next,react,redux" /> <br/>
+  <img src="https://skillicons.dev/icons?i=docker,nodejs,mongo,express,jest" /> <br/>
+  <a href="#"><kbd>🟢 website</kbd></a>
 </p>
-<br/><br/>
 
-# ⚡What is movie-web?
+# 🗒️ CoreNotes
 
-movie-web is a web app for watching movies easily. Check it out at <a href="https://movie-web.app"><kbd>movie-web.app</kbd></a>.
+### Tarefas simplificadas, resultados poderosos.
 
-This service works by displaying video files from third-party providers inside an intuitive and aesthetic user interface.
+## 🔥 Funcionalidades
 
-# 🔥Features
+- Salvamento automático de nota na nuvem - acesse suas notas em qualquer lugar
+- Design responsivo - interface que se adapta a qualquer dispositivo
+- Favorite suas tarefas, se mantenha organizado com as tarefas mais urgentes
+- Interface minimalista que mostra apenas o necessário - sem algoritmo para consumir você
 
-- Automatic saving of progress - optionally synced to an account.
-- Bookmark shows or movies, keep track of what you want to watch.
-- Minimalistic interface that only shows whats required - no algorithm to consume you.
+## 🍄 Filosofia
 
-## 🍄 Philosophy
+Este projeto destina-se a ser simples e fácil de usar. Mantem as funcionalidades mínimas, mas refinadas.
 
-This project is meant to be simple and easy to use. Keep features minimal but polished.
-We do not want this project to be yet another bulky streaming site, instead it aims for minimalism.
+## ⚠️ Limitatações
 
-On top of that, hosting should be as cheap and simple as possible. Just a static website with a proxy, with an optional backend if you want cross-device syncing.
+- Não possui um sistema de cadastro e login de usuários
 
-Content is fetched from third parties and scraping is fully done on the client. This means that the hoster has no files or media on their server. All files are streamed directly from the third parties.
-
-## ⚠️ Limitations
-
-- Due to being a static site, there can be no SSR
-- To keep it cheap to host, amount of proxied requests need to be kept to a minimum
-- Also to keep it cheap, no content must ever be streamed through the proxy. So only streams not protected by CORS headers.
-
-# 🧬 Running locally for development
+## 🧬 Configurar e executar localmente para desenvolvimento
 
 To run locally, you must first clone the repository. After that run the following commands in the root of the repository:
 ```bash
@@ -57,14 +45,13 @@ pnpm build
 > [!TIP]
 > You must use pnpm (`npm i -g pnpm`) and run NodeJS 20
 
-# 🥔 Selfhosting
+## 🥔 Selfhosting
 
 A simple guide has been written to assist in hosting your own instance of movie-web. Check it out below
 
 |[Selfhosting guide](https://docs.movie-web.app)|
 |---|
 
-## 🤝 Thanks to all Contributors
-This project would not be possible without our amazing contributors and the community. Thanks a lot! Keep rocking 🍻.
+## 🐞 Bugs conhecidos
 
-[![Contributors](https://contrib.rocks/image?repo=movie-web/movie-web)](https://github.com/movie-web/movie-web/graphs/contributors)
+- Paleta de cores pode dar overflow na tela caso seja aberta no cartão de uma tarefa muito pŕoxima da margem direita da tela
