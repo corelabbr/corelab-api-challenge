@@ -27,7 +27,7 @@ Este projeto destina-se a ser simples e fácil de usar. Mantem as funcionalidade
 
 - Não possui um sistema de cadastro e login de usuários
 
-## 🧬 Configurar e executar localmente para desenvolvimento
+## ⚙️ Configurar e executar localmente
 
 To run locally, you must first clone the repository. After that run the following commands in the root of the repository:
 ```bash
@@ -54,4 +54,4 @@ A simple guide has been written to assist in hosting your own instance of movie-
 
 ## 🐞 Bugs conhecidos
 
-- Paleta de cores pode dar overflow na tela caso seja aberta no cartão de uma tarefa muito pŕoxima da margem direita da tela
+- Paleta de cores pode dar overflow na tela caso seja aberta no cartão de uma tarefa muito próxima da margem direita da tela
