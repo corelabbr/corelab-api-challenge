@@ -19,7 +19,7 @@
 
 <div align="center">
   <img src="https://github.com/mateus-sartorio/corenotes/blob/main/assets/laptop.png" alt="" width="49%"/>
-  <img src="https://github.com/mateus-sartorio/corenotes/blob/main/assets/phone.png" alt="" width="49%"/>
+  <img src="https://github.com/mateus-sartorio/corenotes/blob/main/assets/phone.png" alt="" width="25%"/>
 </div>
 
 ### 🎨 Cores para todos os gostos
