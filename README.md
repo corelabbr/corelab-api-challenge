@@ -5,7 +5,7 @@
 <p align="center">
   <img src="https://skillicons.dev/icons?i=typescript,next,react,redux" /> <br/>
   <img src="https://skillicons.dev/icons?i=docker,nodejs,mongo,express,jest" /> <br/>
-  <a href="#"><kbd>🟢 website</kbd></a>
+  <a href="https://github.com/mateus-sartorio/corenotes"><kbd>🔵 GitHub</kbd></a>
 </p>
 
 # 🗒️ CoreNotes
@@ -15,12 +15,13 @@
 
 ## 🔥 Funcionalidades
 
-### 🖥️/📲 Interface minimalista que mostra apenas o necessário e se adequa a todas as telas
+### 🖥️/📲 Interface minimalista que se adequa a todas as telas
 
 <div align="center">
   <img src="https://github.com/mateus-sartorio/corenotes/blob/main/assets/laptop.png" alt="" width="49%"/>
   <img src="https://github.com/mateus-sartorio/corenotes/blob/main/assets/phone.png" alt="" width="40%"/>
 </div>
+<br/>
 
 ### 🎨 Cores para todos os gostos
 
@@ -38,8 +39,6 @@
 ## 🍄 Filosofia
 
 Este projeto destina-se a ser simples e fácil de usar. Mantem as funcionalidades mínimas, mas refinadas.
-
-
 
 
 ## ⚙️ Configurar e executar localmente
