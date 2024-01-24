@@ -83,7 +83,7 @@ MONGODB_ENDPOINT="mongodb://mongo:27017/corelab"
 MONGODB_MOCK_ENDPOINT="mongodb://mongo:27017/corelab_mock"
 ```
 
-Caso prefira utilizar o MongoDB na nuvem, obtenha uma URL de conexão em [MongoDB Atlas](https://www.mongodb.com/atlas/database), e use a URL de conexão para inicializar as variáveis de ambiente, no formato mostrado abaixo:
+Caso prefira utilizar o MongoDB na nuvem, obtenha uma string de conexão em [MongoDB Atlas](https://www.mongodb.com/atlas/database), e use a string de conexão para inicializar as variáveis de ambiente, no formato mostrado abaixo:
 
 ```
 MONGODB_ENDPOINT="mongodb+srv://<username>:<password>@<cluster>.mongodb.net/corelab/?retryWrites=true&w=majority"
