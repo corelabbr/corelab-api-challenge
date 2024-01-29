@@ -121,3 +121,7 @@ $ npm run test
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
 | `id`      | `string` | **Obrigatório**. ID do item que você quer |
+
+
+Link do respositório Back-end → [![portfolio](https://img.shields.io/badge/-CLIQUE%20AQUI-yellowgreen)](https://github.com/osmaclean/to-do-back-devchallenge)
+Link do respositório Front-end → [![portfolio](https://img.shields.io/badge/-CLIQUE%20AQUI-yellowgreen)](https://github.com/osmaclean/to-do-front-devchallenge)
