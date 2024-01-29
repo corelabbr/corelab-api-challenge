@@ -49,7 +49,7 @@ $ npm run test
 ##### Tecnologias Utilizadas
 <div style="display: inline_block"><br>
   
-  [![My Skills](https://skillicons.dev/icons?i=nodejs,mongodb,prisma,typescript)](https://skillicons.dev) e Fastify
+  [![My Skills](https://skillicons.dev/icons?i=nodejs,mongodb,vitest,prisma,typescript)](https://skillicons.dev) e Fastify
 </div>
 
 ##### IDE Utilizada
