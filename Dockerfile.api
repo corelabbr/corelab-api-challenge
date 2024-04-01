@@ -1,0 +1,17 @@
+FROM node:16.15.0 AS build
+WORKDIR /var/www
+COPY package.json tsconfig.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+FROM node:16.15.0-alpine
+
+WORKDIR /var/www
+COPY package.json ./
+RUN npm install --only=production
+COPY --from=build /var/www/build /var/www/build
+
+COPY .env.example /var/www/build/.env
+
+EXPOSE 3333
+CMD ["node", "./build/server.js"]
