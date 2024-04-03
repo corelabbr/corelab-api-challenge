@@ -3,3 +3,9 @@ criando os containers que a mesma iria precisar, a princípio decidir criar dois
 api (nodejs, adonis) e outro para o banco de dados (mysql).
 
 Também decidir mudar o README para um rascunho do que será nosso passo a passo para construção da aplicação.
+
+03 abril 2024 16:35 - TDD - Decidir começar a criar a estrutura base da api, a metodologia escolhida foi o TDD,
+acredito que seja uma boa metodologia para se manter a cobertura de uma aplicação estável, assim como combiná-la
+com outras metodologias.
+
+Seguindo a folha de testes, já iniciei o processor de analisar quais dados irei persistir, alterar e disponibilzar
