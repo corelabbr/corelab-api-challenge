@@ -12,7 +12,7 @@ services:
 
   db:
     build:
-      context: .
+      context: ./database
       dockerfile: Dockerfile.db
     ports:
       - "3312:3306"

@@ -9,3 +9,7 @@ acredito que seja uma boa metodologia para se manter a cobertura de uma aplicaç
 com outras metodologias.
 
 Seguindo a folha de testes, já iniciei o processor de analisar quais dados irei persistir, alterar e disponibilzar
+
+04 abril 2024 13:11 - Improviso - Me deparando com as versões recebidas da aplicação me deparo que o projeto não
+possue a função de criação nativa de migrations, seeders e models, então, decido trazer uma abordagem um pouco
+"rústica".
