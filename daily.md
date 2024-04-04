@@ -13,3 +13,5 @@ Seguindo a folha de testes, já iniciei o processor de analisar quais dados irei
 04 abril 2024 13:11 - Improviso - Me deparando com as versões recebidas da aplicação me deparo que o projeto não
 possue a função de criação nativa de migrations, seeders e models, então, decido trazer uma abordagem um pouco
 "rústica".
+
+Com esta mesma abordagem, criei arquivos para conexão com o banco de dados e também criei os models de forma manual

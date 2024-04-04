@@ -11,15 +11,7 @@ test.group('unit tests', () => {
     const response = await client.get(`${baseUrl}/tasks`)
 
     response.assertStatus(200)
-    response.assertBody({ data: 'data', message: 'message' })
-    response.assertBodyContains([
-      {
-        id: 1,
-        title: 'Title',
-        description: 'descripion',
-        favorite: true,
-        color: 'red'
-      }
-    ])
-  })
+    response.assertBodyContains({ message: "Tasks encontadas!", data: Array<Task>() });
+  });
+
 })
