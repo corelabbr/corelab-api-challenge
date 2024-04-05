@@ -14,4 +14,7 @@ Seguindo a folha de testes, já iniciei o processor de analisar quais dados irei
 possue a função de criação nativa de migrations, seeders e models, então, decido trazer uma abordagem um pouco
 "rústica".
 
-Com esta mesma abordagem, criei arquivos para conexão com o banco de dados e também criei os models de forma manual
+Com esta mesma abordagem, criei arquivos para conexão com o banco de dados e também criei os models de forma manual.
+
+04 abril 2024 22:41 - CRUD - Então foi aqui que com a estrutura montada terminei todos os método que compõem a seleção,
+criação, edição e exclusão de uma tarefa.
