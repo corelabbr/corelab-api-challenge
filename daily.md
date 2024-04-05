@@ -18,3 +18,6 @@ Com esta mesma abordagem, criei arquivos para conexão com o banco de dados e ta
 
 04 abril 2024 22:41 - CRUD - Então foi aqui que com a estrutura montada terminei todos os método que compõem a seleção,
 criação, edição e exclusão de uma tarefa.
+
+23:21 - Proatividade - tomei algumas liberdades como, criar um rota para pesquisa de cards por título e descrição, assim
+como a segregação das funções do model e dos testes.

@@ -25,14 +25,7 @@ test.group('unit tests', () => {
   });
 
   test('create a task', async ({ assert }) => {
-    const taskData = {
-      title: 'Nova Tarefa',
-      description: 'Descrição da nova tarefa',
-      favorite: false,
-      color: 'green'
-    };
-
-    const task = await Task.create(taskData);
+    const task = await taskFactory();
     assert.isString(task);
   })
 
@@ -40,22 +33,56 @@ test.group('unit tests', () => {
     const tasks = await Task.all();
     const taskId = tasks[0].id;
 
-    const taskData = {
-      title: 'Nova Tarefa updt',
-      description: 'Descrição da nova tarefa updt',
-      favorite: true,
-      color: 'blue'
-    };
+    const taskData = getTaskData();
 
     const task = await Task.update(taskId, taskData);
     assert.isNumber(task);
   })
 
-  test('delete a task', async ({ assert }) => {
+  test('delete a task', async ({ client }) => {
     const tasks = await Task.all();
     const taskId = tasks[0].id;
 
-    const task = await Task.delete(taskId);
-    assert.isNumber(task);
+    const response = await client.delete(`${baseUrl}/tasks/` + taskId)
+
+    response.assertStatus(200)
+    response.assertBodyContains({ message: "Tarefa excluída com sucesso!", id: Number });
   })
+
+  test('find tasks by title or description', async ({ assert }) => {
+    taskFactory();
+    taskFactory();
+
+    const searchTerm = 'Exemplo';
+    const foundTasks = await Task.findByTitleOrDescription(searchTerm);
+
+    assert.equal(foundTasks[0].title, 'Tarefa Exemplo 1');
+    assert.equal(foundTasks[0].description, 'Descrição da Tarefa Exemplo 1');
+    assert.equal(foundTasks[0].favorite, false);
+    assert.equal(foundTasks[0].color, 'green');
+
+    assert.equal(foundTasks[1].title, 'Tarefa Exemplo 2');
+    assert.equal(foundTasks[1].description, 'Descrição da Tarefa Exemplo 2');
+    assert.equal(foundTasks[1].favorite, true);
+    assert.equal(foundTasks[1].color, 'red');
+
+  });
 });
+
+function taskFactory() {
+  const taskData = getTaskData();
+  const task = Task.create(taskData);
+
+  return task;
+}
+
+function getTaskData() {
+  const taskData = {
+    title: 'Nova Tarefa Exemplo',
+    description: 'Descrição da nova tarefa exemplo',
+    favorite: false,
+    color: 'green'
+  };
+
+  return taskData;
+}

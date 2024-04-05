@@ -7,15 +7,7 @@ class Task {
             const database = await connection
             const [rows] = await database.execute('SELECT * FROM tasks');
 
-            const tasks = rows.map(row => ({
-                id: row.id,
-                title: row.title,
-                description: row.description,
-                favorite: row.favorite,
-                color: row.color,
-                created_at: row.created_at,
-                updated_at: row.updated_at
-            }));
+            const tasks = getFormatedTasksObjetc(rows);
 
             return tasks;
         } catch (error) {
@@ -32,16 +24,8 @@ class Task {
             if (rows.length == 0)
                 return 'Tarefa não encontrada.';
 
-            const task = rows[0];
-            return {
-                id: task.id,
-                title: task.title,
-                description: task.description,
-                favorite: task.favorite,
-                color: task.color,
-                created_at: task.created_at,
-                updated_at: task.updated_at
-            };
+            const task = getFormatedTasksObjetc(rows);
+            return task;
         } catch (error) {
             console.error('Error ao buscar todas as tarefas:', error.message);
             throw error;
@@ -97,6 +81,37 @@ class Task {
             throw error;
         }
     }
+
+    static async findByTitleOrDescription(searchTerm: string) {
+        try {
+            const database = await connection
+            const [rows] = await database.execute(
+                'SELECT * FROM tasks WHERE title LIKE ? OR description LIKE ?',
+                [`%${searchTerm}%`, `%${searchTerm}%`]
+            );
+
+            const tasks = getFormatedTasksObjetc(rows);
+
+            return tasks;
+        } catch (error) {
+            console.error('Erro ao pesquisar cards por título ou descrição:', error.message);
+            throw error;
+        }
+    }
+}
+
+function getFormatedTasksObjetc(rows: any) {
+    const tasks = rows.map(row => ({
+        id: row.id,
+        title: row.title,
+        description: row.description,
+        favorite: row.favorite,
+        color: row.color,
+        created_at: row.created_at,
+        updated_at: row.updated_at
+    }));
+
+    return tasks;
 }
 
 module.exports = Task;

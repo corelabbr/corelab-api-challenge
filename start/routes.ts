@@ -26,3 +26,5 @@ Route.get('/', async () => {
 
 Route.get('/vehicles', 'VehiclesController.index');
 Route.resource('/tasks', 'TasksController');
+Route.get('/tasks/search/:identifier', 'TasksController.findByTitleOrDescription');
+

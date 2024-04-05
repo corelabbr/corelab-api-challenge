@@ -51,4 +51,14 @@ export default class TasksController {
         }
         return response.status(200).json({ message: "Tarefa excluída com sucesso!", id: parseInt(task) });
     }
+
+    public async findByTitleOrDescription({ response, params }: HttpContextContract) {
+        const searchTerm = params.identifier;
+        const tasks = await Task.findByTitleOrDescription(searchTerm);
+
+        if (tasks.length == 0) {
+            return response.status(400).json({ message: "Nenhuma tarefa pôde ser encontrada." });
+        }
+        return response.status(200).json({ message: "Tarefas encontradas!", data: tasks });
+    }
 }
