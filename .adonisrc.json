@@ -24,6 +24,10 @@
         "name": "functional",
         "files": ["tests/functional/**/*.spec(.ts|.js)"],
         "timeout": 60000
+      },
+      {
+        "name": "unit",
+        "files": ["tests/unit/**/*.spec.(js|ts)"]
       }
     ]
   },

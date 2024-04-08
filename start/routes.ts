@@ -20,4 +20,11 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
+Route.get('/', async () => {
+    return { message: 'Welcome!' }
+})
+
 Route.get('/vehicles', 'VehiclesController.index');
+Route.resource('/tasks', 'TasksController');
+Route.get('/tasks/search/:identifier', 'TasksController.findByTitleOrDescription');
+
