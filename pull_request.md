@@ -20,7 +20,7 @@ FrontEnd application built with PHP/Laravel. Allows users to create, edit, favor
 
 - Composer
 - PHP 7.4 or higher
-- MySQL or any other supported database
+- MySQL
 
 ### Installation
 
