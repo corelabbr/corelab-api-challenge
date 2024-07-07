@@ -3,6 +3,7 @@ import { celebrate, Segments } from 'celebrate'
 
 import {
   createNote,
+  createFavoriteNote,
   editNote,
   editFavoriteNote,
   deleteNote,
@@ -29,6 +30,20 @@ router
       res.status(500).send(err.message)
     }
   })
+  .post(
+    '/createFavoriteNote',
+    celebrate({ [Segments.BODY]: createNoteSchema }),
+    async (req, res) => {
+      try {
+        const newNote = await createFavoriteNote(req.body)
+        if (newNote) return res.status(201).send(newNote)
+
+        return res.status(400).json({ message: 'Erro ao criar tarefa' })
+      } catch (err) {
+        res.status(500).send(err.message)
+      }
+    }
+  )
   .get('/getNotes', async (req, res) => {
     try {
       const notes = await getNotes()

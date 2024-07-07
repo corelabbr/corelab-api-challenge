@@ -9,6 +9,15 @@ export const createNote = async body => {
     createdDate: new Date()
   })
 }
+export const createFavoriteNote = async body => {
+  return await Note.create({
+    title: body.title,
+    text: body.text,
+    isFavorite: true,
+    color: body.color,
+    createdDate: new Date()
+  })
+}
 export const getNotes = async () => {
   try {
     const note = await Note.findOne({
