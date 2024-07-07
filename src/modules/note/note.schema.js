@@ -18,3 +18,6 @@ export const editFavoriteNoteSchema = Joi.object({
   id: Joi.objectId().required(),
   isFavorite: Joi.boolean().required()
 })
+export const deleteNoteSchema = Joi.object({
+  id: Joi.objectId().required()
+})

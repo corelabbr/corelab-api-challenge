@@ -37,3 +37,8 @@ export const editFavoriteNote = async body => {
     }
   )
 }
+export const deleteNote = async id => {
+  return await Note.findOneAndDelete({
+    _id: id
+  })
+}
