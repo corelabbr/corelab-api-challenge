@@ -6,7 +6,7 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 dotenv.config()
 
-import CreateNote from './controllers/note/index.js'
+import RoutesNote from './controllers/note/index.js'
 
 const MONGO_URI = process.env.MONGODB_URI
 
@@ -36,6 +36,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 
-app.use(CreateNote)
+app.use(RoutesNote)
 
 app.listen(port, () => console.log(`App rodando em http://localhost:${port}`))
