@@ -1,7 +1,7 @@
-const path = require('path');
-const NodemonPlugin = require('nodemon-webpack-plugin');
-const nodeExternals = require('webpack-node-externals');
-const ESLintPlugin = require('eslint-webpack-plugin');
+const path = require('path')
+const NodemonPlugin = require('nodemon-webpack-plugin')
+const nodeExternals = require('webpack-node-externals')
+const ESLintPlugin = require('eslint-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
@@ -9,16 +9,16 @@ module.exports = {
   mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index.js',
+    filename: 'index.js'
   },
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js']
   },
   plugins: [
     new NodemonPlugin(),
     new ESLintPlugin({
-      extensions: ['js', 'ts'],
-    }),
+      extensions: ['js', 'ts']
+    })
   ],
-  externals: [nodeExternals()],
-};
+  externals: [nodeExternals()]
+}
