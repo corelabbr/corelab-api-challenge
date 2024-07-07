@@ -9,6 +9,48 @@ export const createNote = async body => {
     createdDate: new Date()
   })
 }
+export const getNotes = async () => {
+  try {
+    const note = await Note.findOne({
+      isFavorite: false
+    })
+
+    if (!note) {
+      throw new Error('Tarefas nâo encontradas')
+    }
+
+    const notes = await Note.find({
+      isFavorite: false
+    })
+    if (!notes) {
+      throw new Error('Tarefas nâo encontradas')
+    }
+    return notes
+  } catch (err) {
+    throw err
+  }
+}
+export const getFavoritesNotes = async () => {
+  try {
+    const note = await Note.findOne({
+      isFavorite: true
+    })
+
+    if (!note) {
+      throw new Error('Tarefas favoritas nâo encontradas')
+    }
+
+    const notes = await Note.find({
+      isFavorite: true
+    })
+    if (!notes) {
+      throw new Error('Tarefas favoritas nâo encontradas')
+    }
+    return notes
+  } catch (err) {
+    throw err
+  }
+}
 export const editNote = async body => {
   return await Note.findOneAndUpdate(
     {

@@ -1,7 +1,14 @@
 import express from 'express'
 import { celebrate, Segments } from 'celebrate'
 
-import { createNote, editNote, editFavoriteNote, deleteNote } from '../../modules/note/note.service'
+import {
+  createNote,
+  editNote,
+  editFavoriteNote,
+  deleteNote,
+  getFavoritesNotes,
+  getNotes
+} from '../../modules/note/note.service'
 import {
   createNoteSchema,
   editNoteSchema,
@@ -20,7 +27,26 @@ router
       return res.status(400).json({ message: 'Erro ao criar tarefa' })
     } catch (err) {
       res.status(500).send(err.message)
-      next(err)
+    }
+  })
+  .get('/getNotes', async (req, res) => {
+    try {
+      const notes = await getNotes()
+      if (notes) return res.status(200).send(notes)
+
+      return res.status(400).json({ message: 'Tarefa não encontrada' })
+    } catch (err) {
+      res.status(500).send(err.message)
+    }
+  })
+  .get('/getFavoritesNotes', async (req, res) => {
+    try {
+      const notes = await getFavoritesNotes()
+      if (notes) return res.status(200).send(notes)
+
+      return res.status(400).json({ message: 'Tarefa não encontrada' })
+    } catch (err) {
+      res.status(500).send(err.message)
     }
   })
   .patch('/editNote', celebrate({ [Segments.BODY]: editNoteSchema }), async (req, res) => {
@@ -31,7 +57,6 @@ router
       return res.status(400).json({ message: 'Erro ao editar tarefa' })
     } catch (err) {
       res.status(500).send(err.message)
-      next(err)
     }
   })
   .patch(
@@ -45,7 +70,6 @@ router
         return res.status(400).json({ message: 'Erro ao editar tarefa' })
       } catch (err) {
         res.status(500).send(err.message)
-        next(err)
       }
     }
   )
@@ -57,7 +81,6 @@ router
       return res.status(400).json({ message: 'Erro ao deletar tarefa' })
     } catch (err) {
       res.status(500).send(err.message)
-      next(err)
     }
   })
 export default router
