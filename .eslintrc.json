@@ -1,29 +1,21 @@
 {
-    "env": {
-      "node": true,
-      "es2021": true
-    },
-    "extends": [
-      "eslint:recommended",
-      "plugin:node/recommended",
-      "plugin:prettier/recommended"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 12,
-      "sourceType": "module"
-    },
-    "plugins": [
-      "prettier"
-    ],
-    "rules": {
-      "prettier/prettier": "error",
-      "no-console": "warn",
-      "node/no-unsupported-features/es-syntax": [
-        "error",
-        {
-          "ignores": ["modules"]
-        }
-      ]
-    }
+  "env": {
+    "node": true,
+    "es2021": true
+  },
+  "extends": ["eslint:recommended", "plugin:node/recommended", "prettier"],
+  "plugins": ["prettier"],
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "no-console": "off",
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "node/no-unsupported-features/es-syntax": [
+      "error",
+      { "ignores": ["modules"] }
+    ]
   }
-  
+}

@@ -6,13 +6,16 @@
     "build": "node ace build --production",
     "start": "node src/index.js",
     "dev": "webpack --config webpack.config.js --watch",
-    "lint": "eslint . --ext .js,.ts",
+    "lint": "eslint .",
     "format": "prettier --write .",
     "test": "node ace test",
     "test:watch": "npm test --watch"
   },
   "devDependencies": {
-    "eslint": "^9.6.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
     "eslint-webpack-plugin": "^4.2.0",
     "nodemon": "^3.1.4",
     "nodemon-webpack-plugin": "^4.8.2",
@@ -24,6 +27,7 @@
   "dependencies": {
     "body-parser": "^1.20.2",
     "celebrate": "^15.0.3",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
