@@ -5,7 +5,7 @@ export const createNote = async body => {
     title: body.title,
     text: body.text,
     isFavorite: false,
-    color: '',
+    color: 'white',
     createdDate: new Date()
   })
 }
@@ -14,7 +14,7 @@ export const createFavoriteNote = async body => {
     title: body.title,
     text: body.text,
     isFavorite: true,
-    color: '',
+    color: 'white',
     createdDate: new Date()
   })
 }
