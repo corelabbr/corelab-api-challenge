@@ -20,17 +20,13 @@ export const createFavoriteNote = async body => {
 }
 export const getNotes = async () => {
   try {
-    const note = await Note.findOne({
-      isFavorite: false
-    })
+    const note = await Note.findOne({ isFavorite: false })
 
     if (!note) {
       throw new Error('Tarefas nâo encontradas')
     }
 
-    const notes = await Note.find({
-      isFavorite: false
-    })
+    const notes = await Note.find({ isFavorite: false }).sort({ createdDate: -1 })
     if (!notes) {
       throw new Error('Tarefas nâo encontradas')
     }
@@ -41,17 +37,14 @@ export const getNotes = async () => {
 }
 export const getFavoritesNotes = async () => {
   try {
-    const note = await Note.findOne({
-      isFavorite: true
-    })
+    const note = await Note.findOne({ isFavorite: true })
 
     if (!note) {
       throw new Error('Tarefas favoritas nâo encontradas')
     }
 
-    const notes = await Note.find({
-      isFavorite: true
-    })
+    const notes = await Note.find({ isFavorite: true }).sort({ createdDate: -1 })
+
     if (!notes) {
       throw new Error('Tarefas favoritas nâo encontradas')
     }
