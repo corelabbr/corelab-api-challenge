@@ -60,6 +60,11 @@ export const getFavoritesNotes = async () => {
     throw err
   }
 }
+export const getOneNote = async id => {
+  return await Note.findOne({
+    _id: id
+  })
+}
 export const editNote = async body => {
   return await Note.findOneAndUpdate(
     {

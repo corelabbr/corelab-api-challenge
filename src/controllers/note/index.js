@@ -8,7 +8,8 @@ import {
   editFavoriteNote,
   deleteNote,
   getFavoritesNotes,
-  getNotes
+  getNotes,
+  getOneNote
 } from '../../modules/note/note.service'
 import {
   createNoteSchema,
@@ -58,6 +59,16 @@ router
     try {
       const notes = await getFavoritesNotes()
       if (notes) return res.status(200).send(notes)
+
+      return res.status(400).json({ message: 'Tarefa não encontrada' })
+    } catch (err) {
+      res.status(500).send(err.message)
+    }
+  })
+  .get('/getOneNote', async (req, res) => {
+    try {
+      const note = await getOneNote(req.query.id)
+      if (note) return res.status(200).send(note)
 
       return res.status(400).json({ message: 'Tarefa não encontrada' })
     } catch (err) {
