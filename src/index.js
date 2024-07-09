@@ -1,26 +1,14 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
+import databaseMiddleware from '../lib/middlewares/mongoose.js'
 import cors from 'cors'
-import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 dotenv.config()
+databaseMiddleware()
 
 import RoutesNote from './controllers/note/index.js'
-
-const MONGO_URI = process.env.MONGODB_URI
-
-mongoose
-  .connect(MONGO_URI, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true
-  })
-  .then(() => {
-    console.log('Connected to Database')
-  })
-  .catch(error => {
-    console.error('Error connecting to database:', error)
-  })
+import RouteFileUpload from './controllers/fileupload/index.js'
 
 const app = express()
 const port = process.env.PORT || 4444
@@ -37,5 +25,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 app.use(RoutesNote)
+app.use('/files', RouteFileUpload)
 
 app.listen(port, () => console.log(`App rodando em http://localhost:${port}`))
