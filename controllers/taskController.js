@@ -1,12 +1,14 @@
+const { Sequelize, Op } = require('sequelize');
 const Task = require('../models/task');
 
 const createTask = async (req, res) => {
-  const {title, description} = req.body;
+  const {title, description, favorite} = req.body;
 
   try {
     const newTask = await Task.create({
       title,
       description,
+      favorite
     });
 
     if(!newTask){
@@ -23,7 +25,7 @@ const createTask = async (req, res) => {
   }
 };
 
-const getTasks = async (req, res) => {
+const getTasks1 = async (req, res) => {
   try {
     const tasks = await Task.findAll();
 
@@ -56,6 +58,36 @@ const getTasks = async (req, res) => {
       res.status(422).json({
         errors : [error]
       });
+    }
+  };
+
+  const getTasks = async (req, res) => {
+    try {
+      const query = req.query.q;
+  
+      let tasks;
+  
+      if (!query || query.trim() === '') {
+        tasks = await Task.findAll();
+      } else {
+        tasks = await Task.findAll({
+          where: {
+            title: {
+              [Op.like]: `%${query}%`
+            }
+          }
+        });
+      }
+  
+      if (!tasks || tasks.length === 0) {
+        return res.status(200).json([]);
+      }
+      
+      // if(tasks)
+      res.status(200).json(tasks);
+    } catch (error) {
+      console.error('Erro ao buscar tarefas:', error);
+      res.status(500).send('Erro ao buscar tarefas');
     }
   };
 
