@@ -50,7 +50,7 @@ router
       const notes = await getNotes()
       if (notes) return res.status(200).send(notes)
 
-      return res.status(400).json({ message: 'Tarefa não encontrada' })
+      return res.status(404).json({ message: 'Tarefa não encontrada' })
     } catch (err) {
       res.status(500).send(err.message)
     }
@@ -60,7 +60,7 @@ router
       const notes = await getFavoritesNotes()
       if (notes) return res.status(200).send(notes)
 
-      return res.status(400).json({ message: 'Tarefa não encontrada' })
+      return res.status(404).json({ message: 'Tarefa não encontrada' })
     } catch (err) {
       res.status(500).send(err.message)
     }
@@ -70,7 +70,7 @@ router
       const note = await getOneNote(req.query.id)
       if (note) return res.status(200).send(note)
 
-      return res.status(400).json({ message: 'Tarefa não encontrada' })
+      return res.status(404).json({ message: 'Tarefa não encontrada' })
     } catch (err) {
       res.status(500).send(err.message)
     }
