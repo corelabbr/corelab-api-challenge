@@ -5,6 +5,8 @@ const NoteSchema = new mongoose.Schema({
   isFavorite: { type: Boolean, default: false },
   text: { type: String, required: true },
   color: { type: String, default: '' },
+  nameFile: { type: String, default: '' },
+  src: { type: String, default: '' },
   createdDate: { type: Date, required: true }
 })
 

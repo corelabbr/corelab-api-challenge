@@ -6,6 +6,8 @@ export const createNote = async body => {
     text: body.text,
     isFavorite: false,
     color: 'white',
+    nameFile: '',
+    src: '',
     createdDate: new Date()
   })
 }
@@ -15,6 +17,8 @@ export const createFavoriteNote = async body => {
     text: body.text,
     isFavorite: true,
     color: 'white',
+    nameFile: '',
+    src: '',
     createdDate: new Date()
   })
 }
@@ -80,6 +84,34 @@ export const editFavoriteNote = async body => {
     },
     {
       isFavorite: body.isFavorite
+    },
+    {
+      new: true
+    }
+  )
+}
+export const editFile = async (body, file) => {
+  return await Note.findOneAndUpdate(
+    {
+      _id: body.id
+    },
+    {
+      nameFile: body.nameFile,
+      src: file
+    },
+    {
+      new: true
+    }
+  )
+}
+export const editFileToDelete = async body => {
+  return await Note.findOneAndUpdate(
+    {
+      _id: body.id
+    },
+    {
+      nameFile: body.nameFile,
+      src: body.src
     },
     {
       new: true
