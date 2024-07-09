@@ -1,5 +1,8 @@
 import express from 'express'
 import { celebrate, Segments } from 'celebrate'
+import multer from 'multer'
+import fs from 'fs'
+import { storage } from '../../../multer.config'
 
 import {
   createNote,
@@ -9,7 +12,9 @@ import {
   deleteNote,
   getFavoritesNotes,
   getNotes,
-  getOneNote
+  getOneNote,
+  editFile,
+  editFileToDelete
 } from '../../modules/note/note.service'
 import {
   createNoteSchema,
@@ -19,6 +24,7 @@ import {
 } from '../../modules/note/note.schema'
 
 const router = express.Router()
+const upload = multer({ storage: storage })
 
 router
   .post('/createNote', celebrate({ [Segments.BODY]: createNoteSchema }), async (req, res) => {
@@ -31,6 +37,7 @@ router
       res.status(500).send(err.message)
     }
   })
+
   .post(
     '/createFavoriteNote',
     celebrate({ [Segments.BODY]: createNoteSchema }),
@@ -45,6 +52,7 @@ router
       }
     }
   )
+
   .get('/getNotes', async (req, res) => {
     try {
       const notes = await getNotes()
@@ -55,6 +63,7 @@ router
       res.status(500).send(err.message)
     }
   })
+
   .get('/getFavoritesNotes', async (req, res) => {
     try {
       const notes = await getFavoritesNotes()
@@ -65,6 +74,7 @@ router
       res.status(500).send(err.message)
     }
   })
+
   .get('/getOneNote', async (req, res) => {
     try {
       const note = await getOneNote(req.query.id)
@@ -75,6 +85,7 @@ router
       res.status(500).send(err.message)
     }
   })
+
   .patch('/editNote', celebrate({ [Segments.BODY]: editNoteSchema }), async (req, res) => {
     try {
       const newNote = await editNote(req.body)
@@ -85,6 +96,7 @@ router
       res.status(500).send(err.message)
     }
   })
+
   .patch(
     '/editFavoriteNote',
     celebrate({ [Segments.BODY]: editFavoriteNoteSchema }),
@@ -99,6 +111,7 @@ router
       }
     }
   )
+
   .delete('/deleteNote', celebrate({ [Segments.BODY]: deleteNoteSchema }), async (req, res) => {
     try {
       const note = await deleteNote(req.body.id)
@@ -107,6 +120,31 @@ router
       return res.status(400).json({ message: 'Erro ao deletar tarefa' })
     } catch (err) {
       res.status(500).send(err.message)
+    }
+  })
+
+  .patch('/files/editFile', upload.single('file'), async (req, res) => {
+    try {
+      const newFile = await editFile(req.body, req.file.path)
+      if (newFile) return res.status(200).json(newFile)
+
+      return res.status(400).json({ message: 'Erro ao criar arquivo' })
+    } catch (err) {
+      res.status(500).json(err.message)
+    }
+  })
+
+  .patch('/files/editFileToDelete', async (req, res) => {
+    try {
+      const findSrc = await getOneNote(req.body.id)
+      fs.unlinkSync(findSrc.src)
+      const file = await editFileToDelete(req.body)
+
+      if (!file) res.status(404).json({ message: 'Arquivo não encontrado' })
+
+      return res.status(200).json({ message: 'Arquivo deletado com suceesso' })
+    } catch (err) {
+      res.status(500).json(err.message)
     }
   })
 export default router

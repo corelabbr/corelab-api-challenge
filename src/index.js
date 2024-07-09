@@ -8,7 +8,6 @@ dotenv.config()
 databaseMiddleware()
 
 import RoutesNote from './controllers/note/index.js'
-import RouteFileUpload from './controllers/fileupload/index.js'
 
 const app = express()
 const port = process.env.PORT || 4444
@@ -25,6 +24,5 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 app.use(RoutesNote)
-app.use('/files', RouteFileUpload)
 
 app.listen(port, () => console.log(`App rodando em http://localhost:${port}`))
