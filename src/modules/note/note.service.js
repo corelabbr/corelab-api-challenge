@@ -96,7 +96,6 @@ export const editFile = async (body, file) => {
       _id: body.id
     },
     {
-      nameFile: body.nameFile,
       src: file
     },
     {
@@ -110,7 +109,6 @@ export const editFileToDelete = async body => {
       _id: body.id
     },
     {
-      nameFile: body.nameFile,
       src: body.src
     },
     {
