@@ -115,6 +115,9 @@ router
   .delete('/deleteNote', celebrate({ [Segments.BODY]: deleteNoteSchema }), async (req, res) => {
     try {
       const note = await deleteNote(req.body.id)
+      if (note.src !== '') {
+        fs.unlinkSync(note.src)
+      }
       if (note) return res.status(200).json({ message: 'Tarefa deletada com sucesso' })
 
       return res.status(400).json({ message: 'Erro ao deletar tarefa' })

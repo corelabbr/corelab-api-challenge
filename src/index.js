@@ -24,5 +24,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 app.use(RoutesNote)
+app.use('/seeFile', express.static('uploads'))
 
 app.listen(port, () => console.log(`App rodando em http://localhost:${port}`))
