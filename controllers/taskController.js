@@ -121,22 +121,24 @@ const getTasks1 = async (req, res) => {
 
   const editColorTask = async (req, res) => {
     const id = req.params;
-    const {color} = req.body;
+    const {colorP} = req.body;
+    // console.log(req.body)
 
     try {
       const task = await Task.update(
         {
-          color
+          color: colorP
         },
         {
           where : id
         }
       );
+      // console.log(task)
 
       if(!task){
         throw new Error('Error at chaging color task');
       }
-
+      
       res.status(200).json(task);
       
     } catch (error) {
@@ -186,7 +188,7 @@ const getTasks1 = async (req, res) => {
       if(!task){
         throw new Error('Error at deleting task');
       }
-
+      
       res.status(200).json(task);
       
     } catch (error) {
@@ -195,5 +197,21 @@ const getTasks1 = async (req, res) => {
       });
     }
   }
+
+  const deleteAllTasks = async (req, res) => {
+    try {
+      const task = await Task.destroy({truncate: true});
+      console.log(task)
+      if(!task){
+        throw new Error('Error at deleting tasks');
+      }
+      res.status(200).json(task);
+      
+    } catch (error) {
+      res.status(422).json({error
+      });
+    }
+
+  }
   
-module.exports = {getTasks, getTaskById, createTask, editTask, editColorTask, favoriteTask, deleteTask }
+module.exports = {getTasks, getTaskById, createTask, editTask, editColorTask, favoriteTask, deleteTask, deleteAllTasks }

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express();
 
 // controllers
-const {getTasks, getTaskById, createTask, editTask, editColorTask, favoriteTask, deleteTask} = require('../controllers/taskController');
+const {getTasks, getTaskById, createTask, editTask, editColorTask, favoriteTask, deleteTask, deleteAllTasks} = require('../controllers/taskController');
 
 // routers
 router.get('/tasks', getTasks);
@@ -15,6 +15,7 @@ router.patch('/task/color/:id', editColorTask);
 router.patch('/task/favorite/:id', favoriteTask);
 
 router.delete('/task/:id', deleteTask);
+router.delete('/tasks', deleteAllTasks);
 
 router.get('/', (req, res) => {
   res.send('API ONLINE');
