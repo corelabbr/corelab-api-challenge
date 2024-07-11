@@ -1,0 +1,7 @@
+node_modules
+npm-debug.log
+.eslintrc.json
+.babelrc
+.prettierrc
+.prettierignore
+
