@@ -17,3 +17,5 @@ import { Ignitor } from '@adonisjs/core/build/standalone'
 sourceMapSupport.install({ handleUncaughtExceptions: false })
 
 new Ignitor(__dirname).httpServer().start()
+
+//O arquivo precisa esta em ts - typescript precisa ser feito em node, para rodar com o node ou nodemon
