@@ -2,7 +2,7 @@ import express from 'express'
 import { celebrate, Segments } from 'celebrate'
 import multer from 'multer'
 import fs from 'fs'
-import { storage } from '../../../multer.config'
+import { storage } from '../../../multer.config.js'
 
 import {
   createNote,
@@ -15,13 +15,13 @@ import {
   getOneNote,
   editFile,
   editFileToDelete
-} from '../../modules/note/note.service'
+} from '../../modules/note/note.service.js'
 import {
   createNoteSchema,
   editNoteSchema,
   editFavoriteNoteSchema,
   deleteNoteSchema
-} from '../../modules/note/note.schema'
+} from '../../modules/note/note.schema.js'
 
 const router = express.Router()
 const upload = multer({ storage: storage })

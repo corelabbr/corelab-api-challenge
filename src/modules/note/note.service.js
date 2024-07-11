@@ -1,4 +1,4 @@
-import Note from './note.model'
+import Note from './note.model.js'
 
 export const createNote = async body => {
   return await Note.create({

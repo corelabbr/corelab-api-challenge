@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "webpack --mode production",
-    "start": "node src/index.js",
+    "start": "node dist/index.js",
     "dev": "webpack --config webpack.config.js --watch",
     "lint": "eslint .",
     "format": "prettier --write .",
