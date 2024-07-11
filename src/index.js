@@ -10,7 +10,7 @@ databaseMiddleware()
 import RoutesNote from './controllers/note/index.js'
 
 const app = express()
-const port = process.env.PORT || 4444
+const port = process.env.PORT
 const corsConfig = {
   origin: '*',
   credentials: true,
