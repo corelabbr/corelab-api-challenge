@@ -63,18 +63,16 @@ export class UserService {
       password: await this.hashProvider.hash(credentials.password),
     });
 
-    const token = this.jwtProvider.generate({
-      payload: {
-        id: user.id_user,
-      },
-    });
-
     return {
       user: {
         id: user.id_user,
         username: user.username,
       },
-      token: token,
+      token: this.jwtProvider.generate({
+        payload: {
+          id: user.id_user,
+        },
+      })
     };
   }
 
