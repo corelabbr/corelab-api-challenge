@@ -1,4 +1,4 @@
-import { Note } from "./note.entity";
+import { Note } from './note.entity';
 
 describe('Note Entity Test Suites', () => {
   beforeEach(() => {

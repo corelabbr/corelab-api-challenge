@@ -1,4 +1,4 @@
-import { Favorite } from "./favorite.entity";
+import { Favorite } from './favorite.entity';
 
 describe('Favorite Note Entity Test Suites', () => {
   beforeEach(() => {

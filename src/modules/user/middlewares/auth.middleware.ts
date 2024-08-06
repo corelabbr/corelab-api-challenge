@@ -20,11 +20,10 @@ export class AuthenticationMiddleware implements NestMiddleware {
           secret: String(process.env.JWT_KEY),
         });
 
-        const { id, role } = decoded as JwtPayload;
+        const { id } = decoded as JwtPayload;
 
         req.user = {
           id,
-          role,
         };
 
         next();

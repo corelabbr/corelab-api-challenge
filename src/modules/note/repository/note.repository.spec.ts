@@ -6,13 +6,7 @@ import { Note } from '../entity/note.entity';
 describe('Note Repository Test Suites', () => {
   let noteRepository: NoteRepository;
 
-  const note = new Note(
-    1,
-    'title',
-    'note_text',
-    1,
-    'lightblue',
-  )
+  const note = new Note(1, 'title', 'note_text', 1, 'lightblue');
 
   const dataSource = {
     createEntityManager: jest.fn(),
@@ -111,7 +105,10 @@ describe('Note Repository Test Suites', () => {
       .spyOn(noteRepository, 'find')
       .mockResolvedValue([note]);
 
-    const foundNotes = await noteRepository.findUserNotesByColor(1, 'lightblue');
+    const foundNotes = await noteRepository.findUserNotesByColor(
+      1,
+      'lightblue',
+    );
 
     expect(foundNotes).toEqual([note]);
   });
@@ -149,9 +146,7 @@ describe('Note Repository Test Suites', () => {
       .spyOn(noteRepository, 'findOne')
       .mockResolvedValue(note);
 
-    const saveSpy = jest
-      .spyOn(noteRepository, 'save')
-      .mockResolvedValue(note);
+    const saveSpy = jest.spyOn(noteRepository, 'save').mockResolvedValue(note);
 
     const editedNote = await noteRepository.editNote(
       1,

@@ -14,7 +14,10 @@ export class FavoriteRepository extends Repository<Favorite> {
   }
 
   /* This method shall bring a single note by its note_id and user_id */
-  async findFavoriteNote(user_id: number, note_id: number): Promise<Favorite | null> {
+  async findFavoriteNote(
+    user_id: number,
+    note_id: number,
+  ): Promise<Favorite | null> {
     return this.findOne({ where: { user_id, note_id } });
   }
 }

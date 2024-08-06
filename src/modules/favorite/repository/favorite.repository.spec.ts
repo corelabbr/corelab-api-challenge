@@ -6,10 +6,7 @@ import { Favorite } from '../entity/favorite.entity';
 describe('Note Repository Test Suites', () => {
   let favoriteNoteRepository: FavoriteRepository;
 
-  const note = new Favorite(
-    1,
-    1
-  )
+  const note = new Favorite(1, 1);
 
   const dataSource = {
     createEntityManager: jest.fn(),
@@ -57,7 +54,7 @@ describe('Note Repository Test Suites', () => {
     expect(foundNote).toBe(note);
   });
 
-  it('should not find all the favorite notes passing an invalid user_id', async ()  =>  {
+  it('should not find all the favorite notes passing an invalid user_id', async () => {
     const findSpy = jest
       .spyOn(favoriteNoteRepository, 'find')
       .mockResolvedValue([]);
@@ -65,7 +62,7 @@ describe('Note Repository Test Suites', () => {
     const foundNotes = await favoriteNoteRepository.findUserFavoriteNotes(0);
 
     expect(foundNotes).toEqual([]);
-  })
+  });
 
   it('should find all the fav notes that belong to the user', async () => {
     const findSpy = jest
@@ -76,6 +73,4 @@ describe('Note Repository Test Suites', () => {
 
     expect(foundNotes).toEqual([note]);
   });
-
-  
 });

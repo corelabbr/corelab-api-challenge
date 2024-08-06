@@ -1,7 +1,7 @@
-import { AuthMiddleware } from './auth.middleware';
+import { AuthenticationMiddleware } from './auth.middleware';
 
-describe('AuthMiddleware', () => {
+describe('AuthenticationMiddleware', () => {
   it('should be defined', () => {
-    expect(new AuthMiddleware()).toBeDefined();
+    expect(new AuthenticationMiddleware()).toBeDefined();
   });
 });

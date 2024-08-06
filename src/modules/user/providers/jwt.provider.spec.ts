@@ -16,7 +16,6 @@ describe('JWT Provider Test Suites', () => {
     const token = jwtProvider.generate({
       payload: {
         id: 1,
-        role: 'admin',
       },
     });
 
@@ -29,7 +28,6 @@ describe('JWT Provider Test Suites', () => {
     const token = jwtProvider.generate({
       payload: {
         id: 1,
-        role: 'admin',
       },
     });
 
@@ -41,7 +39,6 @@ describe('JWT Provider Test Suites', () => {
     expect(decoded).toEqual(
       expect.objectContaining({
         id: 1,
-        role: 'admin',
       }),
     );
   });

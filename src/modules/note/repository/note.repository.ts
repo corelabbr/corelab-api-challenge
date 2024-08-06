@@ -17,7 +17,7 @@ export class NoteRepository extends Repository<Note> {
   async findByTitle(user_id: number, title: string): Promise<Note | null> {
     return this.findOne({ where: { user_id, title } });
   }
-  
+
   /* This method shall find all the notes belonging to a single user */
   async findUserNotes(user_id: number): Promise<Note[]> {
     return this.find({ where: { user_id } });
@@ -27,7 +27,7 @@ export class NoteRepository extends Repository<Note> {
   async findUserNotesByColor(user_id: number, color: string): Promise<Note[]> {
     return this.find({ where: { user_id, color } });
   }
-  
+
   /* This method shall find a single note by its title and user_id */
   async findNoteByTitle(user_id: number, title: string): Promise<Note | null> {
     return this.findOne({ where: { user_id, title } });
