@@ -8,8 +8,8 @@ type noteProps<T = string> = {
   isFavorite: boolean
   createdAt: Date
   updatedAt: Date
-  fileUrl?: string
-  color?: string
+  fileUrl: string | null
+  color: string | null
 }
 
 export class Note<T> {
@@ -35,6 +35,8 @@ export class Note<T> {
       content: props.content,
       title: props.title,
       isFavorite: props.isFavorite,
+      fileUrl: props.fileUrl || null,
+      color: props.color || null,
     })
 
     return note
@@ -70,6 +72,20 @@ export class Note<T> {
   }
   set isFavorite(isFavorite: boolean) {
     this.props.isFavorite = isFavorite
+  }
+
+  get fileUrl(): string | null {
+    return this.props.fileUrl
+  }
+  set fileUrl(fileUrl: string) {
+    this.props.fileUrl = fileUrl
+  }
+
+  get color(): string | null {
+    return this.props.color
+  }
+  set color(color: string) {
+    this.props.color = color
   }
 
   get createdAt() {
