@@ -50,6 +50,13 @@ import { User } from '../../user/entity/user.entity';
       nullable: false,
     })
     user_id: number;
+
+    @Column({
+      name: 'color',
+      type: 'enum',
+      enum: [Color.LIGHT_BLUE, Color.TURQUOISE, Color.YELLOW, Color.SALMON, Color.RED, Color.BLUE, Color.VIOLET, Color.LIME, Color.ORANGE, Color.GRAY, Color.DARK_GRAY, Color.BROWN], 
+    })
+    color: string
   
     @DeleteDateColumn({
       nullable: true,
