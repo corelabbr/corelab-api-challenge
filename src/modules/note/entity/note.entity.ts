@@ -3,10 +3,13 @@ import {
     CreateDateColumn,
     DeleteDateColumn,
     Entity,
+    JoinColumn,
     ManyToMany,
+    ManyToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
   } from 'typeorm';
+import { User } from '../../user/entity/user.entity';
   
   export enum Color {
     LIGHT_BLUE = 'lightblue',
@@ -38,6 +41,15 @@ import {
         type: process.env.DB_ENGINE === 'mysql' ? 'longtext' : 'text',
       })
     note_text: string;
+
+    @ManyToOne(() => User, (user) => user.id_user, {
+      nullable: false,
+    })
+    @JoinColumn({ name: 'user_id' })
+    @Column({
+      nullable: false,
+    })
+    user_id: number;
   
     @DeleteDateColumn({
       nullable: true,
