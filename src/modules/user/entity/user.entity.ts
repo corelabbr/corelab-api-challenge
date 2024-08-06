@@ -10,6 +10,22 @@ import {
 
 @Entity()
 class Users {
+    /* Constructor for unit tests */
+    constructor(
+      id_user: number,
+      username: string,
+      email: string,
+      password: string,
+    ) {
+      this.id_user = id_user;
+      this.username = username;
+      this.email = email;
+      this.password = password;
+      this.created_at = new Date();
+      this.updated_at = new Date();
+      this.deleted_at = null;
+    }
+
   @PrimaryGeneratedColumn()
   id_user: number;
 

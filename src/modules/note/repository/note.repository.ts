@@ -3,7 +3,7 @@ import { DataSource, FindOptionsOrder, In, Repository } from 'typeorm';
 import { Note } from '../entity/note.entity';
 
 @Injectable()
-export class UserRepository extends Repository<Note> {
+export class NoteRepository extends Repository<Note> {
   constructor(private dataSource: DataSource) {
     super(Note, dataSource.createEntityManager());
   }
