@@ -12,6 +12,15 @@ import { Note } from '../../note/entity/note.entity';
 
 @Entity()
 class Favorites {
+  /* Constructor for unit tests */
+  constructor(user_id: number, note_id: number) {
+    this.user_id = user_id;
+    this.note_id = note_id;
+    this.created_at = new Date();
+    this.updated_at = new Date();
+    this.deleted_at = null;
+  }
+
   @PrimaryColumn()
   user_id: number;
 
