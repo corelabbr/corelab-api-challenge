@@ -27,6 +27,19 @@ export class Note<T> {
     this.props.updatedAt = new Date()
   }
 
+  toJSON() {
+    return {
+      id: this.id,
+      title: this.title,
+      content: this.content,
+      isFavorite: this.isFavorite,
+      fileUrl: this.fileUrl,
+      color: this.color,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+    }
+  }
+
   static create(props: createNoteDTO): Note<null> {
     const note = new Note({
       id: null,

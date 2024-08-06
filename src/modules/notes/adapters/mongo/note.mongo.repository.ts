@@ -21,10 +21,9 @@ export class NoteMongoRepository implements NoteRepository {
 
   async update(note: Note<string>): Promise<Note<string>> {
     const persistenceNote = NoteMongoMapper.toPersistence(note)
-    const noteModel = await NoteModel.findByIdAndUpdate(
-      note.id,
-      persistenceNote,
-    )
+    await NoteModel.updateOne({ _id: note.id }, persistenceNote)
+
+    const noteModel = await NoteModel.findById(note.id)
 
     if (!noteModel) {
       throw new Error('Note not found')

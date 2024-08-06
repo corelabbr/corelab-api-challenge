@@ -2,7 +2,6 @@ import dotenv from 'dotenv'
 import { z } from 'zod'
 
 const environment = process.env.NODE_ENV || 'prod'
-console.log('Environment:', environment)
 
 let MONGODB_URI = z.string().default('mongodb://localhost:27017/corelab')
 if (environment === 'test') {

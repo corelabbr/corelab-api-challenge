@@ -1,3 +1,4 @@
+import { AppError } from '../../../errors/AppError'
 import { createNoteDTO } from './dtos/createNoteDTO'
 import { updateNoteDTO } from './dtos/updateNoteDTO'
 import { Note } from './note.entity'
@@ -14,7 +15,7 @@ export class NoteServices {
   async updateNote(updateNoteDTO: updateNoteDTO & { id: string }) {
     const note = await this.noteRepository.findById(updateNoteDTO.id)
     if (!note) {
-      throw new Error('Note not found')
+      throw AppError.notFound('Note not found')
     }
 
     note.update(updateNoteDTO)
@@ -27,7 +28,12 @@ export class NoteServices {
   }
 
   async getNoteById(id: string) {
-    return this.noteRepository.findById(id)
+    const note = await this.noteRepository.findById(id)
+    if (!note) {
+      throw AppError.notFound('Note not found')
+    }
+
+    return note
   }
 
   async getAllNotes() {
