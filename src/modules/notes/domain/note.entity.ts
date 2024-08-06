@@ -1,4 +1,5 @@
 import { createNoteDTO } from './dtos/createNoteDTO'
+import { updateNoteDTO } from './dtos/updateNoteDTO'
 
 type noteProps<T = string> = {
   id: T
@@ -15,6 +16,15 @@ export class Note<T> {
   private readonly props: noteProps<T>
   constructor(props: noteProps<T>) {
     this.props = props
+  }
+
+  update(props: updateNoteDTO) {
+    this.props.title = props.title || this.props.title
+    this.props.content = props.content || this.props.content
+    this.props.isFavorite = props.isFavorite || this.props.isFavorite
+    this.props.fileUrl = props.fileUrl || this.props.fileUrl
+    this.props.color = props.color || this.props.color
+    this.props.updatedAt = new Date()
   }
 
   static create(props: createNoteDTO): Note<null> {
