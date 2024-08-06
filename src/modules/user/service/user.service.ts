@@ -17,6 +17,7 @@ import {
 } from '../domain/requests/LoginUser.request.dto';
 import { InvalidCredentialsException } from '../domain/errors/InvalidCredentials.exception';
 import { UserNotFoundException } from '../domain/errors/UserNotFound.exception';
+import { HomeDataResponseDTO } from '../domain/requests/HomeData.request.dto';
 
 @Injectable()
 export class UserService {
@@ -113,5 +114,21 @@ export class UserService {
         token: token,
       };
     }
+  }
+
+  /* Validating the user's existance. This will be used as an auxiliary endpoint for user data and session in the front-end. */
+  async homeData(
+    user_id: number,
+  ): Promise<HomeDataResponseDTO | UserNotFoundException> {
+    const user = await this.userRepository.findById(user_id);
+
+    if (!user) throw new UserNotFoundException();
+
+    return {
+      user: {
+        id: user.id_user,
+        username: user.username,
+      },
+    };
   }
 }

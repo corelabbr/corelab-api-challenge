@@ -1,22 +1,11 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { DatabaseModule } from '../database/database.module';
 import { UserModule } from '../modules/user/user.module';
-import { UserScoreModule } from '../modules/user-score/user-score.module';
-import { CourseModule } from '../modules/course/course.module';
-import { UserActivitiesAnsweredModule } from '../modules/user-activities-answered/user-activities-answered.module';
-import { UserCoursesConcludedModule } from '../modules/user-courses-concluded/user-courses-concluded.module';
-import { ActivityModule } from '../modules/activity/activity.module';
+import { NoteModule } from '../modules/note/note.module';
+import { FavoriteModule } from '../modules/favorite/favorite.module';
 
 @Module({
-  imports: [
-    DatabaseModule,
-    UserModule,
-    UserScoreModule,
-    CourseModule,
-    UserActivitiesAnsweredModule,
-    UserCoursesConcludedModule,
-    ActivityModule,
-  ],
+  imports: [DatabaseModule, UserModule, NoteModule, FavoriteModule],
   controllers: [],
   providers: [],
 })

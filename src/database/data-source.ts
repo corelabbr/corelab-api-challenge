@@ -1,7 +1,6 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { SeederOptions } from 'typeorm-extension';
 import { appConfigurations } from '../shared/config/app.config';
-import { MainSeeder } from '../modules/Main.seeder';
 
 const options: DataSourceOptions & SeederOptions = {
   type: appConfigurations.DB_ENGINE as any,
@@ -15,7 +14,7 @@ const options: DataSourceOptions & SeederOptions = {
   synchronize: appConfigurations.DB_SYNCHRONIZE,
   ssl: appConfigurations.SSL,
 
-  seeds: [MainSeeder],
+  seeds: [],
 };
 
 export const AppDataSource = new DataSource(options);
