@@ -1,12 +1,13 @@
 import mongoose from 'mongoose'
+import { env } from './configs/env'
 import server from './configs/server'
 
 mongoose
-  .connect('mongodb://localhost:27017/corelab')
+  .connect(env.MONGODB_URI)
   .then(() => {
     console.log('Connected to MongoDB')
-    server.listen(8080, () => {
-      console.log('Server is running at: http://localhost:8080')
+    server.listen(env.PORT, () => {
+      console.log(`Server is running at: http://localhost:${env.PORT}`)
     })
   })
   .catch((error) => {
