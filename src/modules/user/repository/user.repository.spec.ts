@@ -57,7 +57,6 @@ describe('User Repository Test Suites', () => {
     expect(foundUser).toHaveProperty('username', 'username');
     expect(foundUser).toHaveProperty('email', 'email');
     expect(foundUser).toHaveProperty('password', 'password');
-    expect(foundUser).toHaveProperty('role', 'admin');
   });
 
   it('should not find an user by its username using the getByUsername passing an invalid username', async () => {

@@ -33,6 +33,22 @@ export class NoteRepository extends Repository<Note> {
     return this.findOne({ where: { user_id, title } });
   }
 
+  /* This method shall edit a note's data */
+  async editNote(
+    id: number,
+    title: string,
+    note_text: string,
+    color: string, // Type this thing later
+  ): Promise<Note> {
+    const note = await this.findOne({ where: { id_note: id } });
+
+    note.title = title;
+    note.note_text = note_text;
+    note.color = color;
+
+    return this.save(note);
+  }
+
   /* This method will make a soft delete on the note of the given id */
   async softDeleteById(id: number): Promise<true> {
     await this.softDelete(id);
