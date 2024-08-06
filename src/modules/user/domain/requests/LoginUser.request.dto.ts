@@ -2,7 +2,7 @@ import { createZodDto } from 'nestjs-zod';
 import { z } from 'nestjs-zod/z';
 
 export const LoginUserBodySchema = z.object({
-  username: z.string().min(5).max(35).describe('E-mail do usuário'),
+  email: z.string().min(5).max(35).describe('E-mail do usuário'),
   inserted_password: z.string().min(8).max(250).describe('Senha do usuário'),
 });
 

@@ -11,6 +11,12 @@ import { passwordValidate } from '../../../shared/utils/password.validator';
 import { UsernameAlreadyRegisteredException } from '../domain/errors/UsernameAlreadyRegistered.exception';
 import { HashProvider } from '../providers/hash.provider';
 import { JWTProvider } from '../providers/jwt.provider';
+import {
+  LoginUserBodyDTO,
+  LoginUserResponseDTO,
+} from '../domain/requests/LoginUser.request.dto';
+import { InvalidCredentialsException } from '../domain/errors/InvalidCredentials.exception';
+import { UserNotFoundException } from '../domain/errors/UserNotFound.exception';
 
 @Injectable()
 export class UserService {
@@ -69,5 +75,43 @@ export class UserService {
       },
       token: token,
     };
+  }
+
+  /* This will compare the credentials with the ones in the database and give the auth token it the password is correct */
+  async login(
+    credentials: LoginUserBodyDTO,
+  ): Promise<
+    LoginUserResponseDTO | UserNotFoundException | InvalidCredentialsException
+  > {
+    if (!credentials.email || !credentials.inserted_password)
+      throw new InvalidCredentialsException();
+
+    const user = await this.userRepository.findByEmail(credentials.email);
+
+    if (!user) throw new UserNotFoundException();
+
+    const isPasswordValid: boolean = await this.hashProvider.compare(
+      credentials.inserted_password,
+      user.password,
+    );
+
+    if (!isPasswordValid) {
+      throw new InvalidCredentialsException();
+    } else {
+      const token = this.jwtProvider.generate({
+        payload: {
+          id: user.id_user,
+        },
+        expiresIn: '7d',
+      });
+
+      return {
+        user: {
+          id: user.id_user,
+          name: user.username,
+        },
+        token: token,
+      };
+    }
   }
 }
