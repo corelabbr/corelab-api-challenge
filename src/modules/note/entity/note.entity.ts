@@ -28,6 +28,24 @@ import { User } from '../../user/entity/user.entity';
 
   @Entity()
   class Notes {
+        /* Constructor for unit tests */
+        constructor(
+          id_note: number,
+          title: string,
+          note_text: string,
+          user_id: number,
+          color: 'lightblue' | 'turquoise' | 'yellow' | 'salmon' | 'red' | 'blue' | 'violet' | 'lime' | 'orange' | 'gray' | 'darkgray' | 'brown',
+        ) {
+          this.id_note = id_note;
+          this.title = title;
+          this.note_text = note_text;
+          this.user_id = user_id;
+          this.color = color;
+          this.created_at = new Date();
+          this.updated_at = new Date();
+          this.deleted_at = null;
+        }
+
     @PrimaryGeneratedColumn()
     id_note: number;
   
