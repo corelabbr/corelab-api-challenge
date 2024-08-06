@@ -1,5 +1,7 @@
-type noteProps = {
-  id: string
+import { createNoteDTO } from './dtos/createNoteDTO'
+
+type noteProps<T = string> = {
+  id: T
   title: string
   content: string
   isFavorite: boolean
@@ -9,13 +11,33 @@ type noteProps = {
   color?: string
 }
 
-export class Note {
-  constructor(private readonly props: noteProps) {}
+export class Note<T> {
+  private readonly props: noteProps<T>
+  constructor(props: noteProps<T>) {
+    this.props = props
+  }
+
+  static create(props: createNoteDTO): Note<null> {
+    const note = new Note({
+      id: null,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      content: props.content,
+      title: props.title,
+      isFavorite: props.isFavorite,
+    })
+
+    return note
+  }
+
+  static buildFromProps(props: noteProps<string>): Note<string> {
+    return new Note(props)
+  }
 
   get id() {
     return this.props.id
   }
-  set id(id: string) {
+  set id(id: T) {
     this.props.id = id
   }
 

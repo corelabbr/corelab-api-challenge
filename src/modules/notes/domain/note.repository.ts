@@ -1,8 +1,9 @@
 import { Note } from './note.entity'
 
 export interface NoteRepository {
-  save(note: Note): Promise<Note>
+  create(note: Note<null>): Promise<Note<string>>
+  update(note: Note<string>): Promise<Note<string>>
   delete(id: string): Promise<void>
-  findById(id: string): Promise<Note | null>
-  findAll(): Promise<Note[]>
+  findById(id: string): Promise<Note<string> | null>
+  findAll(): Promise<Note<string>[]>
 }
