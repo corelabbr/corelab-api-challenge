@@ -27,6 +27,22 @@ app.post("/criar", async (req, res) => {
   res.sendStatus(200)
 })
 
+app.put("/editar", async (req, res) => {
+  let notaId = parseInt(req.query["notaId"])
+  let nota = req.body
+
+  await prisma.notas.update({
+    where: {
+      id: notaId
+    }, 
+    data: {
+      titulo: nota["titulo"],
+      conteudo: nota["conteudo"]
+    }
+  })
+  res.sendStatus(200)
+})
+
 app.delete("/apagar", async (req, res) => {
   let notaId = parseInt(req.query["notaId"])
   await prisma.notas.delete({
