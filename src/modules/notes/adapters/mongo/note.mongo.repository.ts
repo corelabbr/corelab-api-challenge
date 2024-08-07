@@ -51,4 +51,10 @@ export class NoteMongoRepository implements NoteRepository {
 
     return noteModels.map((noteModel) => NoteMongoMapper.toEntity(noteModel))
   }
+
+  async findFavorites(): Promise<Note<string>[]> {
+    const noteModels = await NoteModel.find({ favorite: true })
+
+    return noteModels.map((noteModel) => NoteMongoMapper.toEntity(noteModel))
+  }
 }

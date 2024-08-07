@@ -41,4 +41,10 @@ export const noteController = {
 
     return res.status(200).json(notes)
   },
+
+  async findFavorites(req: Request, res: Response) {
+    const notes = await noteServices.getFavoritesNotes()
+
+    return res.status(200).json(notes)
+  },
 }

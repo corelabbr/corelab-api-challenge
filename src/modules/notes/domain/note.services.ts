@@ -39,4 +39,8 @@ export class NoteServices {
   async getAllNotes() {
     return this.noteRepository.findAll()
   }
+
+  async getFavoritesNotes() {
+    return this.noteRepository.findFavorites()
+  }
 }
