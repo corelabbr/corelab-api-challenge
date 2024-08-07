@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   Param,
@@ -89,7 +90,7 @@ export class NoteController {
     }
   }
 
-  @Get(':id')
+  @Get('find/:id')
   @ApiBearerAuth('user-token')
   @ApiResponse({
     status: 200,
@@ -253,4 +254,56 @@ export class NoteController {
       return res.status(201).json(result);
     }
   }
+
+  @Delete('delete/:id')
+    @ApiBearerAuth('user-token')
+    @ApiResponse({
+      status: 204,
+      description: 'Nota Deletada com Sucesso',
+    })
+    @ApiResponse({
+      status: new NoteNotFoundException().getStatus(),
+      description: new NoteNotFoundException().message,
+      type: AllExceptionsFilterDTO,
+    })
+    @ApiResponse({
+      status: new NotAuthenticatedException().getStatus(),
+      description: new NotAuthenticatedException().message,
+      type: AllExceptionsFilterDTO,
+    })
+    @ApiResponse({
+      status: new BadTokenEception().getStatus(),
+      description: new BadTokenEception().message,
+      type: AllExceptionsFilterDTO,
+    })
+    @ApiResponse({
+      status: new CommonException().getStatus(),
+      description: new CommonException().message,
+      type: AllExceptionsFilterDTO,
+    })
+    async deleteNote(
+        @Req() req: Request,
+        @Res() res: Response,
+        @Param('id') noteId: number,
+    ): Promise<void | AllExceptionsFilterDTO>    {
+        const user = req.user;
+
+        if (!user) {
+            return res.status(new NotAuthenticatedException().getStatus()).json({
+              message: new NotAuthenticatedException().message,
+              status: new NotAuthenticatedException().getStatus(),
+            });
+        }
+
+        const result = await this.noteService.deleteNote(user.id, noteId);
+
+        if (result instanceof HttpException) {
+            return res.status(result.getStatus()).json({
+              message: result.message,
+              status: result.getStatus(),
+            });
+        } else {
+            return res.status(204).json();
+        }
+    }
 }

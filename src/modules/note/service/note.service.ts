@@ -23,14 +23,14 @@ export class NoteService {
     private readonly userRepository: UserRepository,
   ) {}
 
-  /* This method shall bring 20 of the user's notes per use */
+  /* This method shall bring 30 of the user's notes per use */
   async getNotes(
     user_id: number,
     skip: number,
   ): Promise<FindNoteResponseDTO[]> {
     const notes = await this.noteRepository.find({
       order: { created_at: 'DESC' },
-      take: 20,
+      take: 30,
       skip,
       where: { user_id },
     });
