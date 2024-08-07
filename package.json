@@ -3,14 +3,25 @@
   "version": "0.0.1",
   "description": "To-Do list api project",
   "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsup src",
+    "start": "npm run build && node dist/shared/infra/http/server.js",
+    "dev": "cross-env NODE_ENV=dev tsx watch src/shared/infra/http/server.ts",
+    "lint": "eslint . --ext .ts",
+    "lint-fix": "eslint . --ext .ts --fix",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
+    "test": "cross-env NODE_ENV=dev jest --passWithNoTests --runInBand"
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
     "@types/eslint__js": "^8.42.3",
     "@types/express": "^4.17.21",
+    "@types/mongodb": "^4.0.7",
     "@types/node": "^22.1.0",
     "eslint": "^9.8.0",
     "jest": "^29.7.0",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.2.4",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.0.1"
   },
