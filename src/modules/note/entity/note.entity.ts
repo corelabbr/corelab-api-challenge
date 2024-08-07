@@ -4,7 +4,6 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
-  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -12,6 +11,7 @@ import {
 import { User } from '../../user/entity/user.entity';
 
 export enum Color {
+  NONE = 'none',
   LIGHT_BLUE = 'lightblue',
   TURQUOISE = 'turquoise',
   YELLOW = 'yellow',
@@ -35,6 +35,7 @@ class Notes {
     note_text: string,
     user_id: number,
     color:
+      | 'none'
       | 'lightblue'
       | 'turquoise'
       | 'yellow'
@@ -85,6 +86,7 @@ class Notes {
     name: 'color',
     type: 'enum',
     enum: [
+      Color.NONE,
       Color.LIGHT_BLUE,
       Color.TURQUOISE,
       Color.YELLOW,
