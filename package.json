@@ -10,6 +10,7 @@
   "description": "",
   "dependencies": {
     "express": "^4.19.2",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "prisma": "^5.18.0"
   }
 }
