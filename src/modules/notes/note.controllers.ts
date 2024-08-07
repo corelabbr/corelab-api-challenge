@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import { NoteMongoRepository } from './adapters/mongo/note.mongo.repository'
 import { NoteServices } from './domain/note.services'
 import { createNoteBodySchema, updateNoteBodySchema } from './zod.schemas'
+import { AppError } from '../../errors/AppError'
 
 const noteRepository = new NoteMongoRepository()
 const noteServices = new NoteServices(noteRepository)
@@ -45,5 +46,17 @@ export const noteController = {
     const notes = await noteServices.getFavoritesNotes()
 
     return res.status(200).json(notes)
+  },
+
+  async addFile(req: Request, res: Response) {
+    if (!req.file) {
+      throw AppError.badRequest('File is required')
+    }
+    const id = req.params.id
+
+    const fileUrl = `http://localhost:8080/static/${req.file.filename}`
+    const response = await noteServices.updateNote({ id, fileUrl })
+
+    return res.status(200).json(response)
   },
 }
