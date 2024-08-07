@@ -1,7 +1,7 @@
 import { createZodDto } from 'nestjs-zod';
 import { z } from 'nestjs-zod/z';
 
-export const FindNotesResponseSchema = z.object({
+export const FindNoteResponseSchema = z.object({
   id: z.number().int().positive().describe('ID do item'),
   title: z.string().max(50).describe('Título do item'),
     note_text: z.string().max(500).describe('Texto da nota'),
@@ -11,4 +11,6 @@ export const FindNotesResponseSchema = z.object({
     updated_at: z.date().describe('Data de atualização'),
 });
 
-export class FindNotesResponseDTO extends createZodDto(FindNotesResponseSchema) {}
+export class FindNoteResponseDTO extends createZodDto(FindNoteResponseSchema) {}
+
+export class FindNotesResponseDTO extends createZodDto(z.array(FindNoteResponseSchema)) {}

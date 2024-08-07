@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { NoteRepository } from '../repository/note.repository';
-import { FindNotesResponseDTO } from '../domain/requests/FindNotes.request.dto';
+import { FindNoteResponseDTO } from '../domain/requests/FindNotes.request.dto';
 import { FavoriteRepository } from '../../favorite/repository/favorite.repository';
 import { CreateNoteRequestDTO, CreateNoteResponseDTO } from '../domain/requests/CreateNote.request.dto';
 import { UserNotFoundException } from '../../user/domain/errors/UserNotFound.exception';
@@ -18,7 +18,7 @@ export class NoteService {
       ) {}
     
     /* This method shall bring 20 of the user's notes per use */
-    async getNotes(user_id: number, skip: number): Promise<FindNotesResponseDTO[]> {
+    async getNotes(user_id: number, skip: number): Promise<FindNoteResponseDTO[]> {
       const notes = await this.noteRepository.find({
         order: { created_at: 'DESC' },
         take: 20,
@@ -34,6 +34,26 @@ export class NoteService {
             ...note,
             is_favorite: favoriteNoteIds.includes(note.id_note),
         }));
+    }
+
+    /* This method shall bring a single note by its id */
+    async getNoteById(user_id: number, note_id: number): Promise<FindNoteResponseDTO | NoteNotFoundException | UserNotFoundException> {
+        await this.userRepository.findById(user_id).then((user) => {
+            if (!user) throw new UserNotFoundException();
+        });
+
+        const note = await this.noteRepository.findById(note_id);
+
+        if (!note) throw new NoteNotFoundException();
+
+        const favorite = await this.favoriteRepository.find({
+            where: { user_id, note_id },
+        });
+
+        return {
+            ...note,
+            favorite: favorite.length > 0,
+        };
     }
 
     /* This method shall create a new note given the valid data */
