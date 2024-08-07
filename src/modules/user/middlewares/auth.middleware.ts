@@ -9,10 +9,8 @@ import { BadTokenEception } from '../../../shared/domain/errors/BadToken.excepti
 export class AuthenticationMiddleware implements NestMiddleware {
   constructor(private jwtProvider: JWTProvider) {}
   async use(req: Request, _res: Response, next: NextFunction) {
-    const authHeaders = req.headers.authorization;
-
-    if (authHeaders) {
-      const token = authHeaders.replace(/Bearer /, '');
+    if (req.headers.authorization) {
+      const token = req.headers.authorization.replace(/Bearer /, '');
 
       try {
         const decoded = this.jwtProvider.validate({
