@@ -1,7 +1,19 @@
-import { Body, Controller, Get, HttpException, Post, Req, Res, UnauthorizedException } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpException,
+  Post,
+  Req,
+  Res,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserService } from '../service/user.service';
-import { CreateUserRequestDTO, CreateUserResponseDTO } from '../domain/requests/CreateUser.request.dto';
+import {
+  CreateUserRequestDTO,
+  CreateUserResponseDTO,
+} from '../domain/requests/CreateUser.request.dto';
 import { EmailAlreadyRegisteredException } from '../domain/errors/EmailAlreadyRegistered.exception';
 import { AllExceptionsFilterDTO } from '../../../shared/domain/dtos/errors/AllException.filter.dto';
 import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
@@ -10,7 +22,10 @@ import { UsernameAlreadyRegisteredException } from '../domain/errors/UsernameAlr
 import { Request, Response } from 'express';
 import { UserNotFoundException } from '../domain/errors/UserNotFound.exception';
 import { InvalidCredentialsException } from '../domain/errors/InvalidCredentials.exception';
-import { LoginUserBodyDTO, LoginUserResponseDTO } from '../domain/requests/LoginUser.request.dto';
+import {
+  LoginUserBodyDTO,
+  LoginUserResponseDTO,
+} from '../domain/requests/LoginUser.request.dto';
 import { NotAuthenticatedException } from '../../../shared/domain/errors/NotAuthenticated.exception';
 import { HomeDataResponseDTO } from '../domain/requests/HomeData.request.dto';
 

@@ -72,7 +72,7 @@ export class UserService {
         payload: {
           id: user.id_user,
         },
-      })
+      }),
     };
   }
 

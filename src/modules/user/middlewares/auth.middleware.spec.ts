@@ -1,6 +1,5 @@
 import { AuthenticationMiddleware } from './auth.middleware';
 
 describe('AuthenticationMiddleware', () => {
-  it('should be defined', () => {
-  });
+  it('should be defined', () => {});
 });
