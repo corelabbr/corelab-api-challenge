@@ -5,7 +5,7 @@ const app = express()
 const port = 3000
 const prisma = new PrismaClient()
 
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 
 app.get("/", (req, res) => {
   res.send("hello world")
@@ -34,7 +34,7 @@ app.put("/editar", async (req, res) => {
   await prisma.notas.update({
     where: {
       id: notaId
-    }, 
+    },
     data: {
       titulo: nota["titulo"],
       conteudo: nota["conteudo"]
@@ -45,7 +45,7 @@ app.put("/editar", async (req, res) => {
 
 app.patch("/favoritar", async (req, res) => {
   let notaId = parseInt(req.query["notaId"])
-  let statusFavorito = !!parseInt(req.body["favorito"]) 
+  let statusFavorito = !!parseInt(req.body["favorito"])
   // O Prisma não aceita 0 ou 1 como boolean, apenas true ou false, então a exclamação dupla (!!) é utilizada para transformar o Int em um Boolean.
   // 0 é utilizado para falso (nota não favoritada), >=1 é utilizado para true (nota favoritada)
 
@@ -55,6 +55,21 @@ app.patch("/favoritar", async (req, res) => {
     },
     data: {
       favorito: statusFavorito
+    }
+  })
+  res.sendStatus(200)
+})
+
+app.patch("/trocar-cor", async (req, res) => {
+  let notaId = parseInt(req.query["notaId"])
+  let novaCor = req.body["novaCor"]
+
+  await prisma.notas.update({
+    where: {
+      id: notaId
+    },
+    data: {
+      cor: novaCor
     }
   })
   res.sendStatus(200)
