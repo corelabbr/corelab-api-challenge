@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { NoteService } from './service/note.service';
 import { NoteController } from './controller/note.controller';
 import { NoteRepository } from './repository/note.repository';
@@ -8,7 +13,13 @@ import { AuthenticationMiddleware } from '../user/middlewares/auth.middleware';
 import { JWTProvider } from '../user/providers/jwt.provider';
 
 @Module({
-  providers: [NoteService, NoteRepository, FavoriteRepository, UserRepository, JWTProvider],
+  providers: [
+    NoteService,
+    NoteRepository,
+    FavoriteRepository,
+    UserRepository,
+    JWTProvider,
+  ],
   controllers: [NoteController],
 })
 export class NoteModule implements NestModule {
