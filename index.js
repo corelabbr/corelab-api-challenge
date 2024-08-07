@@ -27,6 +27,16 @@ app.post("/criar", async (req, res) => {
   res.sendStatus(200)
 })
 
+app.delete("/apagar", async (req, res) => {
+  let notaId = parseInt(req.query["notaId"])
+  await prisma.notas.delete({
+    where: {
+      id: notaId
+    }
+  })
+  res.sendStatus(200)
+})
+
 app.listen(port, () => {
   console.log("Servidor rodando na porta " + port)
 })
