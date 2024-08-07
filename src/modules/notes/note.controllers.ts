@@ -38,7 +38,6 @@ export const noteController = {
 
   async findAll(req: Request, res: Response) {
     const notes = await noteServices.getAllNotes()
-
     return res.status(200).json(notes)
   },
 

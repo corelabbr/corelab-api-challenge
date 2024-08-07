@@ -19,11 +19,16 @@ export class Note<T> {
   }
 
   update(props: updateNoteDTO) {
-    this.props.title = props.title || this.props.title
-    this.props.content = props.content || this.props.content
-    this.props.isFavorite = props.isFavorite || this.props.isFavorite
-    this.props.fileUrl = props.fileUrl || this.props.fileUrl
-    this.props.color = props.color || this.props.color
+    this.props.title =
+      props.title !== undefined ? props.title : this.props.title
+    this.props.content =
+      props.content !== undefined ? props.content : this.props.content
+    this.props.isFavorite =
+      props.isFavorite !== undefined ? props.isFavorite : this.props.isFavorite
+    this.props.fileUrl =
+      props.fileUrl !== undefined ? props.fileUrl : this.props.fileUrl
+    this.props.color =
+      props.color !== undefined ? props.color : this.props.color
     this.props.updatedAt = new Date()
   }
 

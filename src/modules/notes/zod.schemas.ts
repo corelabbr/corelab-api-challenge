@@ -4,14 +4,8 @@ export const createNoteBodySchema = z.object({
   title: z.string().min(1).max(255),
   content: z.string().min(1).max(255),
   isFavorite: z.boolean(),
-  fileUrl: z.string().optional(),
-  color: z.string().optional(),
+  fileUrl: z.union([z.string(), z.null()]),
+  color: z.union([z.string(), z.null()]),
 })
 
-export const updateNoteBodySchema = z.object({
-  title: z.string().min(1).max(255).optional(),
-  content: z.string().min(1).max(255).optional(),
-  isFavorite: z.boolean().optional(),
-  fileUrl: z.string().optional(),
-  color: z.string().optional(),
-})
+export const updateNoteBodySchema = createNoteBodySchema.partial()
