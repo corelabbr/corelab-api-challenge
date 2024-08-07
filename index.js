@@ -43,6 +43,23 @@ app.put("/editar", async (req, res) => {
   res.sendStatus(200)
 })
 
+app.patch("/favoritar", async (req, res) => {
+  let notaId = parseInt(req.query["notaId"])
+  let statusFavorito = !!parseInt(req.body["favorito"]) 
+  // O Prisma não aceita 0 ou 1 como boolean, apenas true ou false, então a exclamação dupla (!!) é utilizada para transformar o Int em um Boolean.
+  // 0 é utilizado para falso (nota não favoritada), >=1 é utilizado para true (nota favoritada)
+
+  await prisma.notas.update({
+    where: {
+      id: notaId
+    },
+    data: {
+      favorito: statusFavorito
+    }
+  })
+  res.sendStatus(200)
+})
+
 app.delete("/apagar", async (req, res) => {
   let notaId = parseInt(req.query["notaId"])
   await prisma.notas.delete({
