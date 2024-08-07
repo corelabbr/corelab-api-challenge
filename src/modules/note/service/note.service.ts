@@ -5,6 +5,9 @@ import { FavoriteRepository } from '../../favorite/repository/favorite.repositor
 import { CreateNoteRequestDTO, CreateNoteResponseDTO } from '../domain/requests/CreateNote.request.dto';
 import { UserNotFoundException } from '../../user/domain/errors/UserNotFound.exception';
 import { UserRepository } from '../../user/repository/user.repository';
+import { EditNoteRequestDTO, EditNoteResponseDTO } from '../domain/requests/EditNote.request.dto';
+import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
+import { NoteNotFoundException } from '../domain/errors/NoteNotFound.exception';
 
 @Injectable()
 export class NoteService {
@@ -34,7 +37,7 @@ export class NoteService {
     }
 
     /* This method shall create a new note given the valid data */
-    async createNote(user_id: number, data: CreateNoteRequestDTO): Promise<CreateNoteResponseDTO | UserNotFoundException>    {
+    async createNote(user_id: number, data: CreateNoteRequestDTO): Promise<CreateNoteResponseDTO | UnprocessableDataException | UserNotFoundException>    {
         await this.userRepository.findById(user_id).then((user) => {
             if (!user) throw new UserNotFoundException();
         });
@@ -52,5 +55,46 @@ export class NoteService {
             created_at: note.created_at,
             updated_at: note.updated_at,
         };
+    }
+
+    /* This method shall edit a note's data */
+    async editNote(user_id: number, note_id: number, data: EditNoteRequestDTO): Promise<EditNoteResponseDTO | NoteNotFoundException | UnprocessableDataException | UserNotFoundException> {
+        await this.userRepository.findById(user_id).then((user) => {
+            if (!user) throw new UserNotFoundException();
+        });
+
+        const note = await this.noteRepository.findById(note_id);
+
+        if (!note) throw new NoteNotFoundException()
+
+        note.title = data.title;
+        note.note_text = data.note_text;
+        note.color = data.color;
+
+        await this.noteRepository.save(note);
+
+        return {
+            id: note.id_note,
+            title: note.title,
+            note_text: note.note_text,
+            color: note.color,
+            created_at: note.created_at,
+            updated_at: note.updated_at,
+        };
+    }
+
+    /* This method shall soft delete a note */
+    async deleteNote(user_id: number, note_id: number): Promise<true | NoteNotFoundException | UserNotFoundException> {
+        await this.userRepository.findById(user_id).then((user) => {
+            if (!user) throw new UserNotFoundException();
+        });
+
+        const note = await this.noteRepository.findById(note_id);
+
+        if (!note) throw new NoteNotFoundException();
+
+        await this.noteRepository.softDeleteById(note_id);
+
+        return true;
     }
 }
