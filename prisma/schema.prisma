@@ -13,3 +13,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Notas {
+    id Int @id @default(autoincrement())
+    titulo String
+    conteudo String
+    cor String @default("ffffff")
+    favorito Boolean @default(false)
+    criadaEm DateTime @default(now())
+}
