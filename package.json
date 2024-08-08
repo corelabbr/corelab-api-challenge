@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:unit": "jest --testMatch='**/*.spec.ts'",
     "lint": "eslint --ext .js,.ts --fix .",
     "format": "prettier --write .",
     "prepare": "husky",

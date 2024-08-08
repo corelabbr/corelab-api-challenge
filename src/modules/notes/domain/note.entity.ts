@@ -60,6 +60,13 @@ export class Note<T> {
     return note
   }
 
+  cloneWith(props: Partial<noteProps<T>>): Note<T> {
+    return new Note({
+      ...this.props,
+      ...props,
+    })
+  }
+
   static buildFromProps(props: noteProps<string>): Note<string> {
     return new Note(props)
   }
