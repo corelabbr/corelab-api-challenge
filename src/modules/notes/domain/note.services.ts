@@ -9,10 +9,11 @@ export class NoteServices {
 
   async createNote(createNoteDTO: createNoteDTO) {
     const createdNote = Note.create(createNoteDTO)
+    console.log(typeof createdNote.updatedAt)
     return this.noteRepository.create(createdNote)
   }
 
-  async updateNote(updateNoteDTO: updateNoteDTO & { id: string }) {
+  async updateNote(updateNoteDTO: updateNoteDTO) {
     const note = await this.noteRepository.findById(updateNoteDTO.id)
     if (!note) {
       throw AppError.notFound('Note not found')
