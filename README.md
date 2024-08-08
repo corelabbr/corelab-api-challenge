@@ -14,6 +14,7 @@ To get started with the backend, follow these steps:
     
     ```
     git clone https://github.com/kefflen/corelab-api-challenge.git
+    cd corelab-api-challenge
     ```
     
 2. **Install dependencies:**
