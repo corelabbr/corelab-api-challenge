@@ -1,7 +1,7 @@
 import { createNoteDTO } from './dtos/createNoteDTO'
 import { updateNoteDTO } from './dtos/updateNoteDTO'
 
-type noteProps<T = string> = {
+export type noteProps<T = string> = {
   id: T
   title: string
   content: string
@@ -13,23 +13,23 @@ type noteProps<T = string> = {
 }
 
 export class Note<T> {
-  private readonly props: noteProps<T>
+  readonly #props: noteProps<T>
   constructor(props: noteProps<T>) {
-    this.props = props
+    this.#props = props
   }
 
-  update(props: updateNoteDTO) {
-    this.props.title =
-      props.title !== undefined ? props.title : this.props.title
-    this.props.content =
-      props.content !== undefined ? props.content : this.props.content
-    this.props.isFavorite =
-      props.isFavorite !== undefined ? props.isFavorite : this.props.isFavorite
-    this.props.fileUrl =
-      props.fileUrl !== undefined ? props.fileUrl : this.props.fileUrl
-    this.props.color =
-      props.color !== undefined ? props.color : this.props.color
-    this.props.updatedAt = new Date()
+  update(props: Omit<updateNoteDTO, 'id'>) {
+    this.#props.title =
+      props.title !== undefined ? props.title : this.#props.title
+    this.#props.content =
+      props.content !== undefined ? props.content : this.#props.content
+    this.#props.isFavorite =
+      props.isFavorite !== undefined ? props.isFavorite : this.#props.isFavorite
+    this.#props.fileUrl =
+      props.fileUrl !== undefined ? props.fileUrl : this.#props.fileUrl
+    this.#props.color =
+      props.color !== undefined ? props.color : this.#props.color
+    this.#props.updatedAt = new Date()
   }
 
   toJSON() {
@@ -62,68 +62,76 @@ export class Note<T> {
 
   cloneWith(props: Partial<noteProps<T>>): Note<T> {
     return new Note({
-      ...this.props,
+      ...this.#props,
       ...props,
     })
   }
 
   static buildFromProps(props: noteProps<string>): Note<string> {
+    if (!props.id) {
+      throw new Error('Id is required')
+    }
+
     return new Note(props)
   }
 
+  get props() {
+    return this.#props
+  }
+
   get id() {
-    return this.props.id
+    return this.#props.id
   }
   set id(id: T) {
-    this.props.id = id
+    this.#props.id = id
   }
 
   get title() {
-    return this.props.title
+    return this.#props.title
   }
   set title(title: string) {
-    this.props.title = title
+    this.#props.title = title
   }
 
   get content() {
-    return this.props.content
+    return this.#props.content
   }
   set content(content: string) {
-    this.props.content = content
+    this.#props.content = content
   }
 
   get isFavorite() {
-    return this.props.isFavorite
+    return this.#props.isFavorite
   }
   set isFavorite(isFavorite: boolean) {
-    this.props.isFavorite = isFavorite
+    this.#props.isFavorite = isFavorite
   }
 
   get fileUrl(): string | null {
-    return this.props.fileUrl
+    return this.#props.fileUrl
   }
   set fileUrl(fileUrl: string) {
-    this.props.fileUrl = fileUrl
+    this.#props.fileUrl = fileUrl
   }
 
   get color(): string | null {
-    return this.props.color
+    return this.#props.color
   }
   set color(color: string) {
-    this.props.color = color
+    this.#props.color = color
   }
 
   get createdAt() {
-    return this.props.createdAt
+    return this.#props.createdAt
   }
   set createdAt(createdAt: Date) {
-    this.props.createdAt = createdAt
+    this.#props.createdAt = createdAt
   }
 
   get updatedAt() {
-    return this.props.updatedAt
+    return this.#props.updatedAt
   }
   set updatedAt(updatedAt: Date) {
-    this.props.updatedAt = updatedAt
+    this.#props.updatedAt = updatedAt
   }
 }
