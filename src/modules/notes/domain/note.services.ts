@@ -9,7 +9,6 @@ export class NoteServices {
 
   async createNote(createNoteDTO: createNoteDTO) {
     const createdNote = Note.create(createNoteDTO)
-    console.log(typeof createdNote.updatedAt)
     return this.noteRepository.create(createdNote)
   }
 
