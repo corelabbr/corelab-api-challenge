@@ -15,10 +15,9 @@ class CreateTaskService{
   ){}
 
   async execute(data: ICreateTaskDto):Promise<ResponseTaskDto>{
-    const {title, taskContent} = data;
-    const taskAlreadyExists = await this.taskRepository.findByTitle(title);
-    if(taskAlreadyExists) throw new AppError('Task already exist!', 409)
-    const task = await this.taskRepository.save({title, taskContent})
+ 
+    const task = await this.taskRepository.save(data)
+  
     return new ResponseTaskDto(task);
   }
 
