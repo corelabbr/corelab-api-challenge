@@ -59,7 +59,15 @@ To format code with Prettier:
 ```
 npm run format
 ```
-
+## Implementations
+- Integration with mongodb using mongoose.
+- CI/CD by using github action to execute test before pull request and push to main.
+- Docker and docker-compose to build mongo image on github action enviroment and also locally if needed.
+- Unit tests on the domain of my application.
+- E2E test to tests the routes.
+- Conventional commits.
+- Clean achitecture.
+  
 ## Technologies
 
 - **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine.
@@ -164,3 +172,40 @@ This configuration ensures that:
 3. **Jest**: Runs the tests.
 
 By automating these steps, Husky helps maintain a high standard of code quality and consistency, allowing developers to focus on writing features and fixing bugs rather than formatting and error-checking.
+
+## Continuous Integration and Deployment (CI/CD)
+
+The backend is equipped with a CI/CD pipeline using GitHub Actions to ensure code quality and facilitate automated testing. This setup ensures that every change made to the codebase is thoroughly tested before being merged or deployed.
+
+### GitHub Actions Workflow
+
+The CI/CD pipeline is configured to run automatically on every push or pull request to the repository. The GitHub Actions workflow is defined in a `.github/workflows/node.js.yml` file, which includes the following key steps:
+
+1. **Setting up the Node.js Environment**:
+The workflow initializes a Node.js environment to run tests and other scripts. It installs the required dependencies and prepares the environment for testing.
+2. **Running Tests**:
+The action runs all unit tests using Jest to ensure that the code changes do not break existing functionality. This includes linting with ESLint, formatting with Prettier, and executing Jest tests.
+3. **Docker Compose for End-to-End Testing**:
+To facilitate end-to-end (E2E) tests, the workflow uses Docker Compose to create a MongoDB instance in the GitHub Actions environment. This ensures that the tests have access to a database instance, mimicking the production environment.
+    - **Docker Compose Setup**:
+    The workflow spins up a MongoDB container using a `docker-compose.yml` file included in the repository. This file defines the services required for testing, ensuring that the application interacts with a real database during E2E tests.
+4. **Running E2E Tests**:
+With the MongoDB container running, the action then executes the E2E tests to validate the entire flow of the application, from the API endpoints to the database interactions.
+
+### Docker Compose for Local Testing
+
+The same `docker-compose.yml` file used in the CI/CD pipeline can also be utilized locally to set up the necessary environment for E2E testing. This ensures consistency between local development and the CI/CD pipeline.
+
+To run the Docker Compose setup locally, use the following command:
+
+```sh
+docker-compose up --build
+```
+
+This command will build the Docker images and start the necessary services, allowing developers to run the full suite of tests in a local environment that closely mirrors the CI/CD setup.
+
+### Benefits
+
+- **Automated Testing**: Every code change is automatically tested, reducing the risk of introducing bugs into the codebase.
+- **Consistent Environment**: By using Docker Compose, the testing environment is consistent across local development and the CI/CD pipeline, minimizing environment-related issues.
+- **Early Detection of Issues**: Running E2E tests in the CI/CD pipeline ensures that any integration issues are detected early, before the code is merged or deployed.
