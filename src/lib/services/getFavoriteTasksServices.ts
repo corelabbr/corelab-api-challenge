@@ -1,7 +1,8 @@
+import { Task } from '@/entities/task'
 import { TaskRepository } from '@/repositories/taskRepository'
 
 interface getFavoriteTasksServicesResponse {
-    tasks: object | null
+    tasks: Task[] | null
 }
 
 export class GetFavoriteTasksServices {
