@@ -1,3 +1,4 @@
+import path from 'path'
 import { Types } from 'mongoose'
 import supertest from 'supertest'
 import server from '../src/configs/server'
@@ -6,6 +7,7 @@ import { NoteModel } from '../src/modules/notes/adapters/mongo/note.model'
 describe('PUT /notes/:noteId/add-file', () => {
   let noteId: string
   const filename = 'image-mock.jpg'
+  const absolutePath = path.resolve(__dirname, 'mocks', filename)
 
   beforeEach(async () => {
     const note = await NoteModel.create({
@@ -26,8 +28,6 @@ describe('PUT /notes/:noteId/add-file', () => {
   })
 
   it('should return status 200 and add a file to a note when pass correct body', async () => {
-    const absolutePath = `${__dirname}/mocks/${filename}`
-
     await supertest(server)
       .put(`/notes/${noteId}/add-file`)
       .attach('file', absolutePath)
@@ -39,8 +39,6 @@ describe('PUT /notes/:noteId/add-file', () => {
   })
 
   it('should return status 400 when pass an invalid noteId', async () => {
-    const absolutePath = `${__dirname}/mocks/${filename}`
-
     await supertest(server)
       .put(`/notes/invalid-note-id/add-file`)
       .attach('file', absolutePath)
@@ -48,8 +46,6 @@ describe('PUT /notes/:noteId/add-file', () => {
   })
 
   it('should return status 404 when pass a noteId that not exists', async () => {
-    const absolutePath = `${__dirname}/mocks/${filename}`
-
     await supertest(server)
       .put(`/notes/${new Types.ObjectId()}/add-file`)
       .attach('file', absolutePath)
