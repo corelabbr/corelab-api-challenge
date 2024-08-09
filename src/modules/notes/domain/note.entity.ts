@@ -1,3 +1,5 @@
+import fs from 'fs'
+import path from 'path'
 import { createNoteDTO } from './dtos/createNoteDTO'
 import { updateNoteDTO } from './dtos/updateNoteDTO'
 
@@ -19,17 +21,15 @@ export class Note<T> {
   }
 
   update(props: Omit<updateNoteDTO, 'id'>) {
-    this.#props.title =
-      props.title !== undefined ? props.title : this.#props.title
-    this.#props.content =
+    this.title = props.title !== undefined ? props.title : this.#props.title
+    this.content =
       props.content !== undefined ? props.content : this.#props.content
-    this.#props.isFavorite =
+    this.isFavorite =
       props.isFavorite !== undefined ? props.isFavorite : this.#props.isFavorite
-    this.#props.fileUrl =
+    this.fileUrl =
       props.fileUrl !== undefined ? props.fileUrl : this.#props.fileUrl
-    this.#props.color =
-      props.color !== undefined ? props.color : this.#props.color
-    this.#props.updatedAt = new Date()
+    this.color = props.color !== undefined ? props.color : this.#props.color
+    this.updatedAt = new Date()
   }
 
   toJSON() {
@@ -110,20 +110,29 @@ export class Note<T> {
   get fileUrl(): string | null {
     return this.#props.fileUrl
   }
-  set fileUrl(fileUrl: string) {
+
+  set fileUrl(fileUrl: string | null) {
+    if (this.#props.fileUrl && fileUrl !== this.#props.fileUrl) {
+      const filename = this.#props.fileUrl.split('/').pop() || ''
+      const fileExists = fs.existsSync(path.resolve('uploads', filename))
+      if (fileExists && filename) {
+        fs.unlinkSync(`./uploads/${filename}`)
+      }
+    }
     this.#props.fileUrl = fileUrl
   }
 
   get color(): string | null {
     return this.#props.color
   }
-  set color(color: string) {
+  set color(color: string | null) {
     this.#props.color = color
   }
 
   get createdAt() {
     return this.#props.createdAt
   }
+
   set createdAt(createdAt: Date) {
     this.#props.createdAt = createdAt
   }
@@ -131,6 +140,7 @@ export class Note<T> {
   get updatedAt() {
     return this.#props.updatedAt
   }
+
   set updatedAt(updatedAt: Date) {
     this.#props.updatedAt = updatedAt
   }
