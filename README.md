@@ -38,6 +38,7 @@ Centraliza a montagem dos casos de uso em `src/lib/factories`, se em algum momen
 ### GET
 - `/task` Retorna todas as tarefas que não foram marcadas como favoritas
 - `/task/favorite` Retorna todas as tarefas marcadas como favoritas
+- `/file/{file_name}` Retorna um arquivo
 
 ### PUT
 - `/task/edit` Edita uma tarefa
