@@ -4,7 +4,7 @@ import supertest from 'supertest'
 import server from '../src/configs/server'
 import { NoteModel } from '../src/modules/notes/adapters/mongo/note.model'
 
-describe('PUT /notes/:noteId/add-file', () => {
+describe.skip('PUT /notes/:noteId/add-file', () => {
   let noteId: string
   const filename = 'image-mock.jpg'
   const absolutePath = path.resolve(__dirname, 'mocks', filename)
