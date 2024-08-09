@@ -1,7 +1,8 @@
 interface ICreateTaskDto {
-  title: string;
 
+  title: string;
   taskContent: string;
+  isFavorite: boolean;
 
 }
 

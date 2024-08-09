@@ -1,5 +1,3 @@
-//todo
-
 import { ObjectId } from "mongodb"
 import { Task } from "../entities/Task.entity"
 
@@ -11,7 +9,7 @@ class ResponseTaskDto {
   taskContent: string;
 
   isFavorite: boolean;
-
+  
   constructor(task: Task) {
     this._id = task._id
     this.title = task.title
