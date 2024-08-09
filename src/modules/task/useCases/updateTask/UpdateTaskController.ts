@@ -10,8 +10,8 @@ class UpdateTaskController {
 
     const {title, taskContent, isFavorite}: ICreateTaskDto = request.body;
 
-    const getTaskByIdController = container.resolve( UpdateTaskService );
-    const task = await getTaskByIdController.execute(id, {title, taskContent, isFavorite});
+    const updateTaskService = container.resolve( UpdateTaskService );
+    const task = await updateTaskService.execute(id, {title, taskContent, isFavorite});
 
     
     return response.status(200).send(task);
