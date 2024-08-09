@@ -1,3 +1,5 @@
+import fs from 'fs'
+import path from 'path'
 import { AppError } from '../../../errors/AppError'
 import { createNoteDTO } from './dtos/createNoteDTO'
 import { updateNoteDTO } from './dtos/updateNoteDTO'
@@ -9,7 +11,6 @@ export class NoteServices {
 
   async createNote(createNoteDTO: createNoteDTO) {
     const createdNote = Note.create(createNoteDTO)
-    console.log(typeof createdNote.updatedAt)
     return this.noteRepository.create(createdNote)
   }
 
@@ -25,6 +26,16 @@ export class NoteServices {
   }
 
   async deleteNote(id: string) {
+    const note = await this.noteRepository.findById(id)
+
+    if (note?.fileUrl) {
+      const filename = note.fileUrl.split('/').pop() || ''
+      const fileExists = fs.existsSync(path.resolve('uploads', filename))
+      if (fileExists && filename) {
+        fs.unlinkSync(`./uploads/${filename}`)
+      }
+    }
+
     return this.noteRepository.delete(id)
   }
 

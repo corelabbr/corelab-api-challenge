@@ -1,8 +1,13 @@
 import { Request, Response } from 'express'
+import { env } from '../../configs/env'
+import { AppError } from '../../errors/AppError'
 import { NoteMongoRepository } from './adapters/mongo/note.mongo.repository'
 import { NoteServices } from './domain/note.services'
-import { createNoteBodySchema, updateNoteBodySchema } from './zod.schemas'
-import { AppError } from '../../errors/AppError'
+import {
+  createNoteBodySchema,
+  noteIdParamSchema,
+  updateNoteBodySchema,
+} from './zod.schemas'
 
 const noteRepository = new NoteMongoRepository()
 const noteServices = new NoteServices(noteRepository)
@@ -17,22 +22,28 @@ export const noteController = {
 
   async update(req: Request, res: Response) {
     const updateNoteDTO = updateNoteBodySchema.parse(req.body)
+    const id = noteIdParamSchema.parse(req.params.id).toString()
+
     const note = await noteServices.updateNote({
       ...updateNoteDTO,
-      id: req.params.id,
+      id,
     })
 
     return res.status(200).json(note)
   },
 
   async delete(req: Request, res: Response) {
-    await noteServices.deleteNote(req.params.id)
+    const id = noteIdParamSchema.parse(req.params.id).toString()
+
+    await noteServices.deleteNote(id)
 
     return res.status(204).send()
   },
 
   async findById(req: Request, res: Response) {
-    const note = await noteServices.getNoteById(req.params.id)
+    const id = noteIdParamSchema.parse(req.params.id).toString()
+
+    const note = await noteServices.getNoteById(id)
 
     return res.status(200).json(note)
   },
@@ -52,9 +63,10 @@ export const noteController = {
     if (!req.file) {
       throw AppError.badRequest('File is required')
     }
-    const id = req.params.id
 
-    const fileUrl = `http://localhost:8080/static/${req.file.filename}`
+    const id = noteIdParamSchema.parse(req.params.id).toString()
+
+    const fileUrl = `http://localhost:${env.PORT}/static/${req.file.filename}`
     const response = await noteServices.updateNote({ id, fileUrl })
 
     return res.status(200).json(response)
