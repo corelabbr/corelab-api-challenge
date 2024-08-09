@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  corelab-api-challenge-pg:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=corelab-api-challenge-db
