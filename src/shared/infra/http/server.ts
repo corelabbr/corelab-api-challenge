@@ -1,9 +1,22 @@
-import express from 'express';
+import { AppDataSource } from '../../../config/typeorm';
+import 'reflect-metadata'
+import 'shared/container';
+import app from './app';
 
-const app = express();
-const port = 5000;
 
+const PORT = 5000
 
-app.listen(port, () => {
-    console.log(`Rodando na porta ${port}`);
-})
+const initializeDataSources = async () => {
+  await AppDataSource.initialize();
+};
+
+initializeDataSources()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Project running in port ${PORT}`);
+    });
+  })
+  .catch(err => {
+    console.error('Error during Database initialization', err);
+  });
+
