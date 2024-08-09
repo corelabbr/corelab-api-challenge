@@ -1,3 +1,4 @@
+import { Types } from 'mongoose'
 import { z } from 'zod'
 
 export const createNoteBodySchema = z.object({
@@ -9,3 +10,7 @@ export const createNoteBodySchema = z.object({
 })
 
 export const updateNoteBodySchema = createNoteBodySchema.partial()
+
+export const noteIdParamSchema = z.string().refine((value) => {
+  return Types.ObjectId.isValid(value)
+})

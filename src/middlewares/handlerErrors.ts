@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import { ZodError } from 'zod'
 import { AppError } from '../errors/AppError'
+import { MulterError } from 'multer'
 
 export const errorHandler = (
   error: unknown,
@@ -15,6 +16,12 @@ export const errorHandler = (
     return response.status(error.statusCode).json({ error: error.message })
   }
 
-  console.log(error)
+  if (error instanceof MulterError) {
+    if (error.code === 'LIMIT_FILE_SIZE') {
+      return response.status(400).json({ error: 'File size too large' })
+    }
+  }
+
+  console.error(error)
   return response.status(500).json({ error: 'Internal server error' })
 }
