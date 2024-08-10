@@ -17,7 +17,7 @@ model Notas {
     id Int @id @default(autoincrement())
     titulo String
     conteudo String
-    cor String @default("ffffff")
+    cor String @default("FFFFFF")
     favorito Boolean @default(false)
     criadaEm DateTime @default(now())
 }
