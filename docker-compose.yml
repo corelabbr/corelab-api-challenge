@@ -1,0 +1,9 @@
+services:
+  api:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_DATABASE=corelabapi
+      - POSTGRESQL_USERNAME=root
+      - POSTGRESQL_PASSWORD=docker
