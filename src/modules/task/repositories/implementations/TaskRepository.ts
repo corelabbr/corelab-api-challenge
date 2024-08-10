@@ -18,12 +18,14 @@ class TaskRepository implements ITaskRepository {
     return await this.repository.save(task);
   }
   
-  async update(data: Task): Promise<Task> {
-    await this.repository.updateOne(
+  async update(data: Task): Promise<Task |null | undefined> {
+    const updatedTask = await this.repository.findOneAndUpdate(
       {_id: data._id},
-      {$set: data}
+      {$set: data},
+      { returnDocument:  "after" }
     )
-    return data;
+
+    return updatedTask.value;
   }
 
   async findById(id: string): Promise<Task | null | undefined> {
