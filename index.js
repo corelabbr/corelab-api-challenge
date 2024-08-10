@@ -21,9 +21,14 @@ app.get("/", (req, res) => {
 
 app.get("/todas", async (req, res) => {
   let todasNotas = await prisma.notas.findMany({
-    orderBy: {
-      "criadaEm": "desc"
-    }
+    orderBy: [
+      {
+        cor: "asc"
+      },
+      {
+        criadaEm: "desc"
+      }
+    ]
   })
   res.send(todasNotas)
 })
