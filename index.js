@@ -12,6 +12,7 @@ const corsOptions = {
 }
 
 app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 app.use(cors(corsOptions))
 
 app.get("/", (req, res) => {
