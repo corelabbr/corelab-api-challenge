@@ -20,7 +20,7 @@ describe('UploadFileServices', () => {
             id: 'dacb857b-146a-42e8-9d09-a2bdd0844b7c',
             title: 'title',
             content: 'content',
-            color: '#D9D9D9'
+            color: '#FFFFFF'
         })
 
         const { file } = await sut.execute({
@@ -36,7 +36,7 @@ describe('UploadFileServices', () => {
             id: 'dacb857b-146a-42e8-9d09-a2bdd0844b7c',
             title: 'title',
             content: 'content',
-            color: '#D9D9D9'
+            color: '#FFFFFF'
         })
 
         await fileRepository.upload({

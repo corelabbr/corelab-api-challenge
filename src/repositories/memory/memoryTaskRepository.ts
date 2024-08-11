@@ -19,7 +19,7 @@ export class MemoryTaskRepository {
         return task
     }
 
-    async editTask(id: string, title: string, content: string, color: string | '#D9D9D9' | '#BAE2FF' | '#B9FFDD' | '#FFE8AC' | '#FFCAB9' | '#F99494' | '#9DD6FF' | '#ECA1FF' | '#DAFF8B' | '#FFA285' | '#CDCDCD' | '#979797' | '#A99A7C'): Promise<Task> {
+    async editTask(id: string, title: string, content: string, color: string | '#FFFFFF' | '#BAE2FF' | '#B9FFDD' | '#FFE8AC' | '#FFCAB9' | '#F99494' | '#9DD6FF' | '#ECA1FF' | '#DAFF8B' | '#FFA285' | '#CDCDCD' | '#979797' | '#A99A7C'): Promise<Task> {
         const taskIndex = this.items.findIndex((Task) => Task.id === id)
         
         this.items[taskIndex].title = title,

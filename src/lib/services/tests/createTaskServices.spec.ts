@@ -15,7 +15,7 @@ describe('CreateTaskServices', () => {
         const { task } = await sut.execute({
             title: 'test',
             content: 'content',
-            color: '#D9D9D9'
+            color: '#FFFFFF'
         })
 
         expect(task.id).toEqual(expect.any(String))

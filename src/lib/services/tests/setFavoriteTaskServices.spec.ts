@@ -17,7 +17,7 @@ describe('SetFavoriteTaskServices', () => {
             id: 'a9acb560-968c-4232-826e-d64fe0bdb552',
             title: 'test',
             content: 'content',
-            color: '#D9D9D9'
+            color: '#FFFFFF'
         })
 
         const { task } = await sut.execute({
@@ -34,7 +34,7 @@ describe('SetFavoriteTaskServices', () => {
             id: 'a9acb560-968c-4232-826e-d64fe0bdb552',
             title: 'test',
             content: 'content',
-            color: '#D9D9D9'
+            color: '#FFFFFF'
         })
 
         await sut.execute({

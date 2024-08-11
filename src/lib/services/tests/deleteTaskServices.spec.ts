@@ -17,14 +17,14 @@ describe('DeleteTaskServices', () => {
             id: 'a9acb560-968c-4232-826e-d64fe0bdb552',
             title: 'test',
             content: 'content',
-            color: '#D9D9D9'
+            color: '#FFFFFF'
         })
 
         await taskRepository.create({
             id: '12149071-e525-42e9-b80e-65ad9c316141',
             title: 'test',
             content: 'content',
-            color: '#D9D9D9',
+            color: '#FFFFFF',
             favorite: true
         })
 
