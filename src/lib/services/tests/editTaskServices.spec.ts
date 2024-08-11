@@ -19,20 +19,20 @@ describe('EditTaskServices', () => {
             id: 'a9acb560-968c-4232-826e-d64fe0bdb552',
             title: 'test',
             content: 'content',
-            color: 'white'
+            color: '#D9D9D9'
         })
 
         const { task } = await sut.execute({
             id: "a9acb560-968c-4232-826e-d64fe0bdb552",
             title: 'edited title',
             content: 'edited content',
-            color: 'blue'
+            color: '#BAE2FF'
         })
 
         expect(task.id).toEqual('a9acb560-968c-4232-826e-d64fe0bdb552')
         expect(task.title).toEqual('edited title')
         expect(task.content).toEqual('edited content')
-        expect(task.color).toEqual('blue')
+        expect(task.color).toEqual('#BAE2FF')
     })
 
     it('Must return an Error due to Invalid Color', async () => {
@@ -40,7 +40,7 @@ describe('EditTaskServices', () => {
             id: 'a9acb560-968c-4232-826e-d64fe0bdb552',
             title: 'test',
             content: 'content',
-            color: 'white'
+            color: '#D9D9D9'
         })
 
         await expect(() => 
@@ -58,7 +58,7 @@ describe('EditTaskServices', () => {
             id: 'a9acb560-968c-4232-826e-d64fe0bdb552',
             title: 'test',
             content: 'content',
-            color: 'white'
+            color: '#D9D9D9'
         })
 
         await expect(() => 
@@ -77,7 +77,7 @@ describe('EditTaskServices', () => {
                 id: 'a9acb560-968c-4232-826e-d64fe0bdb552',
                 title: 'edited title',
                 content: 'edited content',
-                color: 'blue'
+                color: '#BAE2FF'
             })
         ).rejects.toBeInstanceOf(TaskDoesNotExistError)
     })
