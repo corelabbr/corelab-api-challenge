@@ -1,0 +1,11 @@
+GET http://localhost:3333/todos HTTP/1.1
+content-type: application/json
+
+{
+    "skip": 40
+}
+
+###
+
+GET http://localhost:3333/search?title=Ola HTTP/1.1
+content-type: application/json
