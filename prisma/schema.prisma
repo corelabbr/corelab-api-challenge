@@ -17,7 +17,7 @@ model Task {
   id         String   @id @default(uuid())
   title      String
   content    String
-  color      String   @default("white")
+  color      String   @default("#D9D9D9")
   favorite   Boolean  @default(false)
   created_at DateTime @default(now())
 

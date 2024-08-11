@@ -6,7 +6,7 @@ export async function createTaskController(req: Request, res: Response) {
     const bodySchema = z.object({
         title: z.string(),
         content: z.string(),
-        color: z.string().default('white')
+        color: z.string().default('#D9D9D9')
     })
 
     const { title, content, color } = bodySchema.parse(req.body)
