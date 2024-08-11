@@ -8,7 +8,7 @@ interface editTaskServicesParams {
     id: string
     title: string
     content: string
-    color: string | '#D9D9D9' | '#BAE2FF' | '#B9FFDD' | '#FFE8AC' | '#FFCAB9' | '#F99494' | '#9DD6FF' | '#ECA1FF' | '#DAFF8B' | '#FFA285' | '#CDCDCD' | '#979797' | '#A99A7C'
+    color: string | '#FFFFFF' | '#BAE2FF' | '#B9FFDD' | '#FFE8AC' | '#FFCAB9' | '#F99494' | '#9DD6FF' | '#ECA1FF' | '#DAFF8B' | '#FFA285' | '#CDCDCD' | '#979797' | '#A99A7C'
 }
 
 interface editTaskServicesReponse {
@@ -22,7 +22,7 @@ export class EditTaskServices {
 
     async execute({ id, title, content, color }: editTaskServicesParams): Promise<editTaskServicesReponse> {
         const doesTaskExist = await this.taskRepository.findTask(id)
-        const validColors = ['#D9D9D9', '#BAE2FF', '#B9FFDD', '#FFE8AC', '#FFCAB9', '#F99494', '#9DD6FF', '#ECA1FF', '#DAFF8B', '#FFA285', '#CDCDCD', '#979797', '#A99A7C']
+        const validColors = ['#FFFFFF', '#BAE2FF', '#B9FFDD', '#FFE8AC', '#FFCAB9', '#F99494', '#9DD6FF', '#ECA1FF', '#DAFF8B', '#FFA285', '#CDCDCD', '#979797', '#A99A7C']
         let isValid = false
 
         if (!doesTaskExist) {
