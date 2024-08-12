@@ -1,6 +1,6 @@
 # CoreNotes - API
 
-Esse projeto foi desenvolvido com Node.js, Express, Vitest, Multer, Zod, Docker, PostgreSQL e Prisma. O projeto possui o CRUD para lidar com o gerenciamento de tarefas, também é possível anexar aquivos e marcar como favorito.
+Esse projeto foi desenvolvido com Node.js, TypeScript, Express, Vitest, Multer, Zod, Docker, PostgreSQL e Prisma. O projeto possui o CRUD para lidar com o gerenciamento de tarefas, também é possível anexar aquivos e marcar como favorito.
 
 ## Repositórios
 
