@@ -1,17 +1,54 @@
 {
-  "extends": "./node_modules/adonis-preset-ts/tsconfig",
-  "include": ["**/*"],
-  "exclude": ["node_modules", "build"],
   "compilerOptions": {
-    "outDir": "build",
-    "rootDir": "./",
+    "incremental": true,
+    "outDir": "dist",
+    "rootDirs": [
+      "src",
+      "test"
+    ],
+    "target": "ES2019",
     "sourceMap": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "baseUrl": "src",
     "paths": {
-      "App/*": ["./app/*"],
-      "Config/*": ["./config/*"],
-      "Contracts/*": ["./contracts/*"],
-      "Database/*": ["./database/*"]
+      "@/*": [
+        "*"
+      ],
+      "@/tests/*": [
+        "../tests/*"
+      ]
     },
-    "types": ["@adonisjs/core", "@adonisjs/repl", "@japa/preset-adonis/build/adonis-typings"]
-  }
+    "typeRoots": [
+      "./src/@types",
+      "./node_modules/@types",
+      "@types/",
+      "@types/jest"
+    ],
+    "strict": true,
+    "noImplicitOverride": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "include": [
+    "src",
+    "test",
+    "tests/application/usecases/notes/create/create-note.spec.ts",
+    "tests/domain/entity/user.test.ts",
+    "tests/application/usecases/notes/delete/delete-note.spec.ts",
+    "tests/application/usecases/notes/delete/delete-note.spec.ts",
+    "tests/application/usecases/notes/update/update-note.spec.ts",
+    "tests/application/usecases/notes/retrieve/get/get-note.spec.ts",
+    "tests/application/usecases/notes/retrieve/list/list-notes.spec.ts",
+    "tests/application/usecases/notes/retrieve/search/search-note.spec.ts",
+    "tests/application/usecases/users/create-user.spec.ts",
+    "tests/infra/controllers/controller.test.ts",
+    "tests/infra/controllers/create-note-controller.spec.ts",
+    "tests/infra/controllers/get-note-controller.spec.ts",
+    "tests/infra/database/connection.spec.ts"
+  ]
 }
