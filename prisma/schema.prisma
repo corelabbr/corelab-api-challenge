@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db_N {
+  provider = "postgresql"
+  url      = "postgresql://pguser:pgpassword@localhost:5432/testeColab?schema=public"
+}
+
+model Post {
+  id        Int    @id @default(autoincrement())
+  text      String
+  favorite  Boolean
+  title     String
+  color     String 
+  media     String[]
+}
+
+
