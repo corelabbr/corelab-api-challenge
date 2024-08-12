@@ -12,7 +12,7 @@ class Task {
     @Column({type: 'text'})
     taskContent!: string;
 
-    @Column({type: 'boolean', default: false})
+    @Column({type: 'boolean'})
     isFavorite!: boolean;
     
     @Column({type: 'timestamp'})

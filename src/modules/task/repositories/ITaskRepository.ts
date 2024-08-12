@@ -8,6 +8,6 @@ interface ITaskRepository {
   findByTitle(title: string): Promise<Task|null|undefined>
   findAll(filter?: IFilterSearchDto): Promise<Task[]|null|undefined>
   delete(task: Task): Promise<void>
-  update(data: Task):Promise<Task>
+  update(data: Task):Promise<Task | null | undefined>
 }
 export { ITaskRepository };
