@@ -5,6 +5,7 @@ Esse projeto foi desenvolvido com NodeJs, Express, Vitest, Multer, Zod, Docker, 
 ## Repositórios
 
 - Repositório back-end: https://github.com/xmateusxsx/corelab-api-challenge
+- Repositório front-end: https://github.com/xmateusxsx/corelab-web-challenge
 
 ## Arquitetura
 
