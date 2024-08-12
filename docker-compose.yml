@@ -1,0 +1,46 @@
+services:
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: development
+    env_file:
+      - ./src/common/envs/development.env
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+    networks:
+      - docker-nest-postgres
+    command: npm run start:dev
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_HOST: ${DATABASE_HOST}
+      POSTGRES_DB: ${DATABASE_NAME} # Not forget of create the database
+      POSTGRES_USER: ${DATBASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_HOST_AUTH_METHOD: 'trust' # Allow all connections without a password.
+      # For change this:
+      # docker run --name postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - docker-nest-postgres:/var/lib/postgresql/data
+    networks:
+      - docker-nest-postgres
+
+volumes:
+  docker-nest-postgres:
+    driver: local
+
+networks:
+  docker-nest-postgres:
+  api:
+    driver: bridge
