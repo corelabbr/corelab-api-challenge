@@ -12,3 +12,5 @@ dist
 uploads/*
 !uploads/.gitkeep
 mongodb_data/
+docker-compose.yml
+!docker-compose.example.yml

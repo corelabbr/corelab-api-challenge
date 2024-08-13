@@ -1,10 +1,9 @@
 import { AppDataSource } from '../../../config/typeorm';
-import 'reflect-metadata'
+import 'reflect-metadata';
 import 'shared/container';
 import app from './app';
 
-
-const PORT = 5000
+const PORT = process.env.PORT || 5000;
 
 const initializeDataSources = async () => {
   await AppDataSource.initialize();
@@ -16,7 +15,6 @@ initializeDataSources()
       console.log(`Project running in port ${PORT}`);
     });
   })
-  .catch(err => {
+  .catch((err) => {
     console.error('Error during Database initialization', err);
   });
-

@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "To-Do list api project",
   "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsup src",
+    "start": "node dist/shared/infra/http/server.js",
     "dev": "tsx watch src/shared/infra/http/server.ts",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
