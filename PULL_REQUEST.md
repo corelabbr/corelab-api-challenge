@@ -1,4 +1,5 @@
-Corelab Api Challenge.
+<h1>Corelab Api Challenge</h1>
+</hr>
 
 Para esta api meu foco foi em utilizar tencnologias que já tive experiência. No começo, achei que teria tempo o suficiente para fazer uma api robusta, com cobertura de testes e inúmeras validações. Infelizmente, com o andamento, entendi que se eu quisesse entregar o projeto no prazo e com uma qualidade aceitável, teria de abrir mão de algumas funcionalidades.
 
