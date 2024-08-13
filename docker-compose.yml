@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres
+    hostname: postgres
+    ports:
+      - 5432:5432
+    restart: always
+    environment:
+      POSTGRES_DB: corelab
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - corelab_database:/var/lib/postgresql/data
+
+  app: 
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    depends_on:
+       - db
+    volumes:
+      - .:/app
+    ports:
+      - 3001:3001
+    restart: always
+
+volumes:
+  corelab_database:
+  app:
+    external: true

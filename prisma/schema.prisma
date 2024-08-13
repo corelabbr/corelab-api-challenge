@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Todos {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  color       Colors   @default(COLOR_DEFAULT)
+  favorite    Boolean  @default(false)
+  deleted     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+enum Colors {
+  COLOR_DEFAULT
+  COLOR_OPTION_1   // #BAE2FF
+  COLOR_OPTION_2   // #B9FFDD
+  COLOR_OPTION_3   // #FFE8AC
+  COLOR_OPTION_4   // #FFCAB9
+  COLOR_OPTION_5   // #F99494
+  COLOR_OPTION_6   // #9DD6FF
+  COLOR_OPTION_7   // #ECA1FF
+  COLOR_OPTION_8   // #DAFF8B
+  COLOR_OPTION_9   // #FFA285
+  COLOR_OPTION_10  // #CDCDCD
+  COLOR_OPTION_11  // #979797
+  COLOR_OPTION_12  // #A99A7C
+}
