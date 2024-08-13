@@ -1,26 +1,25 @@
-import dotenv from 'dotenv'
-import dotenvExpand from 'dotenv-expand'
-
+import dotenv from 'dotenv';
+import dotenvExpand from 'dotenv-expand';
 
 export function loadEnv(): void {
   let path: string;
 
-  switch(process.env.NODE_ENV) {
+  switch (process.env.NODE_ENV) {
     case 'test':
       path = '.env.test';
-      break
+      break;
 
     case 'dev':
       path = '.env.dev';
-      break
-      
+      break;
+
     default:
-        path = '.env'
+      return;
   }
 
-  const currentEvents = dotenv.config({path});
+  const currentEvents = dotenv.config({ path });
 
-  if(currentEvents.error) throw new Error(`failed to load env from ${path}: ${currentEvents.error}`);
+  if (currentEvents.error) throw new Error(`failed to load env from ${path}: ${currentEvents.error}`);
 
   dotenvExpand.expand(currentEvents);
 }
