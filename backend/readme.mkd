@@ -1,0 +1,19 @@
+# Backend:
+
+## Tecnologias
+
+    - Node.js
+    - Fastify (Framework base)
+    - Drizzle (escolha para praticar scripts SQL)
+    - Postgresql
+    - Docker
+    - GitHub Actions (pypeline simples para rodar testes de integração)
+
+## Arquitetura escolhida
+
+    DDD - Procurei separar bem os subdominios, priorizar os testes (tanto os de integração, quanto os end 2 end), além de acoplhar conceitos SOLID (principalmente a injeção de dependências)
+
+## Ferramentas
+
+    Além de utilizar o Docker (rodar o build da aplicação) e Docker-Compose (Rodar Postgresql localmente, utilizando Networks e Volumes para persistência de dados), também adotei linters (eslint, prettier e editorconfig) para manter a qualidade de formatação dos códigos.
+
