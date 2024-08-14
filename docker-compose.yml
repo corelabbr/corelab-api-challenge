@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  postgres:
+    image: bitnami/postgresql:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=core_notes
+    volumes:
+      - postgres_data:/bitnami/postgresql
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    environment:
+      - DB_URL=postgres://docker:docker@postgres:5432/core_notes
+    volumes:
+      - .:/app
+
+volumes:
+  postgres_data:
