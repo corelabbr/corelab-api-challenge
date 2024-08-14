@@ -104,9 +104,9 @@ Task deleted.
 O que poderia ser feito futuramente?
 
 
-Mais validações. Coloquei algumas validações com o zod mas acredito que não seja o suficiente.<br>
+Mais validações. Fiz validações mais básicas com o que aprendi durante o desenvolvimento, consegui cobrir as validações necessárias para a api porém deve ser possível adicionar ainda mais.<br>
 
-REFATORAÇÃO. Infelizmente não tive muito tempo de refatorar a api. Refatorei o que deu e acredito que foi tudo que pude,  há espaço para melhorias.<br>
+REFATORAÇÃO. Infelizmente não tive muito tempo de refatorar a api. Refatorei o que deu e acredito que foi tudo que pude, há espaço para melhorias.<br>
 
 Testes unitários, integração, e2e e testes automatizados. Não preciso comentar muito, a aplicação não conta com testes.<br>
 
