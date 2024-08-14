@@ -120,9 +120,44 @@ Mongo community server e NodeJS v20.16.0
 
 Instalação docker:
 
-Entre em uma pasta de escolha e rode o seguinte comando: 
+Entre em uma pasta de sua escolha e rode o seguinte comando  <code>git clone https://github.com/rodi38/corelab-api-challenge.git</code>
+
+Após clonar o projeto, mais uma vez entre no terminal, desta vez dentro da pasta do projeto e rode o seguinte comando: <code>npm install</code>
+
+Em seguida, na raiz do projeto, crie um arquivo chamado <code>.env</code> e coloque os seguintes valores dentro: 
+
+```.env
+MONGO_URL = "mongodb://admin:123456@localhost:27017"
+MONGO_DATABASE=SEU_BANCO
+MONGO_USER=admin
+```
+
+Vá também no diretório <code> src/config/typeorm.ts</code> e substitua todo o conteúdo com a seguinte configuração:
+
+```typescript
+import 'reflect-metadata';
+import { DataSource } from 'typeorm';
+import { loadEnv } from './env.config';
+import { Task } from 'modules/task/entities/Task.entity';
+
+loadEnv();
+export const AppDataSource = new DataSource({
+  type: 'mongodb',
+  url: process.env.MONGO_URL,
+  database: process.env.MONGO_DATABASE,
+  authSource: process.env.MONGO_USER,
+  entities: [Task],
+  logging: false,
+  directConnection: true,
+});
+```
+Na raiz do projeto, renomeie <code>docker-compose.example.yml</code> para <code>docker-compose.yml</code>
+
+Em seguida basta rodar, respectivamente, os seguintes comandos no terminal: <code>docker-compose build --no-cache</code> e <code> docker-compose up -d</code>
+
+Pronto. Seu backend estará rodando no endereço <code>http://localhost:5000/tasks</code>
+
+Agora caso queira rodar sem o docker, basta seguir os primeiros passos, só terá de mudar a porta do mongo_url. terás de colocar a porta equivalente do seu banco local.
 
 
-
-
-<
+Aqui está o link para configurar o frontend: <code>https://github.com/rodi38/corelab-web-challenge/blob/main/PULL_REQUEST.md</code>
