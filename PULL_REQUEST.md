@@ -7,7 +7,6 @@ Para estrutura da api utilizei algo que já tinha praticado antes, seguindo o SO
 
 Demorei cerca de 3 dias para completar todos os endpoints básicos da api, conseguindo testar e efetuar todas operações de CRUD. Como percebi que o front iria ser mais complicado, entendi que para priorizar a entrega escolhi encerrar meu backend neste ponto. Abaixo deixarei as rotas dos endpoints bem como o que poderia ser feito em uma atualização futura.
 
-Deixarei um manual de instalação local em um arquivo chamado MANUAL_INSTALAÇÃO.md
 
 <hr></hr>
 
@@ -104,14 +103,26 @@ Task deleted.
 
 O que poderia ser feito futuramente?
 
-Nesta api comecei implementando docker e cheguei a utilizar boa parte do desenvolvimento front-end com ela já pronta, porém, acredito que isso possa ser melhorado.<br>
 
 Mais validações. Coloquei algumas validações com o zod mas acredito que não seja o suficiente.<br>
 
-REFATORAÇÃO. Infelizmente não tive muito tempo de refatorar a api. Refatorei o que deu e acredito que foi tudo que pude, porém, há espaço para melhorias.<br>
+REFATORAÇÃO. Infelizmente não tive muito tempo de refatorar a api. Refatorei o que deu e acredito que foi tudo que pude,  há espaço para melhorias.<br>
 
-Testes unitários, integração, e2e e testes automatizados. Não preciso comentar muito, a aplicação não conta com testes. Não houve tempo.<br>
+Testes unitários, integração, e2e e testes automatizados. Não preciso comentar muito, a aplicação não conta com testes.<br>
+
+<hr>
+
+<h2>Manual de Instalação local</h2>
+
+Para rodar o projeto localmente terá de ter instado <code>docker compose</code> para rodar a aplicação via docker ou ter em sua máquina as seguintes tecnologias:
+
+Mongo community server e NodeJS v20.16.0 
+
+Instalação docker:
+
+Entre em uma pasta de escolha e rode o seguinte comando: 
 
 
 
 
+<
