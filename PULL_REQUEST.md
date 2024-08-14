@@ -4,7 +4,7 @@ Este projeto é sobre um gerenciador de tarefas desenvolvido para auxilar quem u
 
 ### Repositórios do projeto
 - [Frontend](https://github.com/Nizoszz/corelab-web-challenge-impl)
-= [Backend](https://github.com/Nizoszz/corelab-api-challenge-impl)
+- [Backend](https://github.com/Nizoszz/corelab-api-challenge-impl)
 
 ## Sumário
 
