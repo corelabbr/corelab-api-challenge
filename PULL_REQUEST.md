@@ -5,7 +5,7 @@ Aplicação criada para o gerenciamento de TODO's
 #### Funcionalidades
 - Criação, edição, listagem e deleção de TODO's
 - Filtros para a listagem de TODO's
-- Paginanação para a listagem de TODO's
+- Paginação para a listagem de TODO's
 
 #### Principais tecnologias utilizadas
 
@@ -51,10 +51,10 @@ Logo após, a aplicação front-end pode ser executado, basta abrir o repositór
 
 #### Algumas informações que podem ser imporantes quando tomei algumas decisões
 
-- **Escolhe do banco de dados**: Como é uma aplicação bem simples, que não tem uma quantidade muito grande de dados, que não tem vários "registros" que se relacionam e que tem uma complexidade relativamente baixa, decidi utilizar o Mongodb, um NoSQL já resolveria o problema.
+- **Escolha do banco de dados**: Como é uma aplicação bem simples, que não tem uma quantidade muito grande de dados, que não tem vários "registros" que se relacionam e que tem uma complexidade relativamente baixa, decidi utilizar o Mongodb, um NoSQL já resolveria o problema.
 
 - **Escolha do framwork backend**: Utilizei o NestJS por estar mais familiarizado com o framework.
 
-- **Escolhe na inicialização da aplicação React**: Vi que o projeto base foi construido utilizando o CRA, como ele foi descontinuado e não terá suporte para futuras versões, utilizei o boilerplate do RsBuild, que além de ainda ser mantido, também utiliza Rust para a criação do bundler da aplicação, que é mais performatico que o webpack, utilizado no CRA.
+- **Escolha na inicialização da aplicação React**: Vi que o projeto base foi construido utilizando o CRA, como ele foi descontinuado e não terá suporte para futuras versões, utilizei o boilerplate do RsBuild, que além de ainda ser mantido, também utiliza Rust para a criação do bundler da aplicação, que é mais performatico que o webpack, utilizado no CRA.
 
 - **A listagem está paginada**
