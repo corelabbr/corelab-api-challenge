@@ -1,18 +1,19 @@
-# To-Do List Frontend
+# CoreNotes Backend
 
-This is the frontend part of the To-Do List application, built with React. It provides a responsive and visually appealing interface for users to create, manage, and organize their to-do lists.
+This is the backend for the CoreNotes application, built with AdonisJS using TypeScript. It provides an API for managing to-do lists, with features like CRUD operations, color coding, and favoriting items.
 
 ## Getting Started
 
 > [!IMPORTANT]  
-> Make sure you have Node.js and npm installed on your machine before proceeding.
+> Make sure you have Node.js, npm, and PostgreSQL installed on your machine before proceeding.
 
 To run the project locally, follow these steps:
 
 ### Prerequisites
 
-- **Node.js**: version 18+ or 20+. 
+- **Node.js**: >= 20.6
 - **npm**: ^8.5.5
+- **PostgreSQL**: Ensure you have a PostgreSQL database set up.
 
 > [!TIP]
 > You can check if Node.js and npm are installed by running `node -v` and `npm -v` in your terminal.
@@ -22,55 +23,92 @@ To run the project locally, follow these steps:
 1. **Clone the repository:**
 
   ```
-  
-  git clone -b core-notes https://github.com/izJoey/corelab-web-challenge.git
-  
+  git clone -b core-notes https://github.com/izJoey/corelab-api-challenge.git
   ```
+
 2. **Navigate to the project directory:**
-  ```
-
-  cd corelab-web-challenge
 
   ```
+  cd corelab-api-challenge
+  ```
+
 3. **Install the dependencies:**
-  ```
 
+  ```
   npm install
-
   ```
+
 > [!NOTE]
 > The npm install command will install all necessary dependencies listed in the package.json file.
 
+4. **Configuration:**
 
+Update the database configuration in the .env file:
 
-### Running the Application
+    DB_HOST=127.0.0.1
+    DB_PORT=5432
+    DB_USER=your_database_user
+    DB_PASSWORD=your_database_password
+    DB_DATABASE=your_database_name
 
+> [!IMPORTANT]
+> Make sure the PostgreSQL database is running, and the credentials in the .env file match your database setup.
+
+5. **Running the Application:**
+
+Run database migrations:
+  ```
+  node ace migration:run
   ```
 
+Start the development server:
+  ```
   npm run dev
-
   ```
 
-Open your browser and navigate to:
+API will be available at:
 
-  ```
-
-  http://localhost:5173/
-
-  ```
+    http://localhost:3333
 
 > [!CAUTION]
-> Avoid running the application on ports already in use. If port 5173 is occupied, you might need to specify a different port.
+> Ensure that port 3333 is free on your machine, as AdonisJS will use it by default.
 
-#### Configuration:
+#### API Routes
 
-> [!NOTE]
-> There are no additional configurations needed for running the frontend locally. The application connects to the backend API at a predefined URL. Ensure the backend is running before interacting with the app.
+Here are the available API routes for testing:
+
+    GET /
+    Returns a welcome message.
+
+    GET /notes
+    Fetch all notes.
+
+    POST /notes
+    Create a new note.
+
+    PUT /notes/:id/title
+    Update the title of a note.
+
+    PUT /notes/:id/content
+    Update the content of a note.
+
+    PUT /notes/:id/color
+    Update the color of a note.
+
+    PUT /notes/:id/favorite
+    Toggle the favorite status of a note.
+
+    DELETE /notes/:id
+    Delete a note.
+
+> [!TIP]
+> You can use tools like Postman or Insomnia to test these routes.
 
 
-#### Features:
 
-- CRUD Operations: Add, edit, delete, and view to-do items.
-- Favorites: Mark to-do items as favorites to display them at the top.
-- Color Coding: Assign colors to items for better organization.
-- Responsive Design: Works well on both desktop and mobile devices.
+
+#### Troubleshooting
+
+> [!WARNING]
+> If you encounter errors during installation or while running the application, ensure that your Node.js, npm, and PostgreSQL versions match the prerequisites. Double-check the .env file for correct database configurations.
+
