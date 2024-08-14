@@ -39,6 +39,7 @@ app.post("/criar", async (req, res) => {
     data: {
       titulo: nota["titulo"],
       conteudo: nota["conteudo"],
+      favorito: !!parseInt(nota["favorito"])
     }
   })
   res.sendStatus(200)
