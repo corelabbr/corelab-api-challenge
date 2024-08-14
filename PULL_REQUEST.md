@@ -64,16 +64,71 @@ A estrutura do projeto é organizada em camadas para garantir a separação de r
 
 ## API Endpoints
 
-A API contem os seguintes endpoints:
+### GET /tasks
 
-```markdown
-GET /tasks - Recupera uma lista com todas as tasks.
+Recupera uma lista com todas as tasks.
 
-POST /tasks - Registra uma nova task.
+**Response:**
 
-PATCH /tasks/:id - Atualiza o dado de uma task específica.
+```json
+[
+  {
+    "task_id": "uuid",
+    "title": "string",
+    "content": "string",
+    "color": "string",
+    "is_favorite": boolean,
+    "created_at": "date"
+  }
+]
+```
 
-DELETE /tasks/:id - Deleta uma task especifica específica.
+### POST /tasks - Registra uma nova task.
+
+**Request:**
+
+```json
+{
+  "title": "string",
+  "content": "string"
+}
+```
+
+**Response:**
+
+```json
+{
+  "task_id": "uuid"
+}
+```
+
+### PATCH /tasks/:id - Atualiza o dado de uma task específica com dados opcionais.
+
+**Request:**
+
+```json
+{
+  "title": "string",
+  "content": "string",
+  "color": "string",
+  "is_favorite": boolean
+}
+```
+
+**Response:**
+
+```json
+{
+  "task_id": "uuid"
+}
+```
+
+### DELETE /tasks/:id - Deleta uma task especifica específica.
+
+**Response**
+
+```
+No content
 ```
 
 ## Instalação
