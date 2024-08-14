@@ -17,3 +17,5 @@
 
     Além de utilizar o Docker (rodar o build da aplicação) e Docker-Compose (Rodar Postgresql localmente, utilizando Networks e Volumes para persistência de dados), também adotei linters (eslint, prettier e editorconfig) para manter a qualidade de formatação dos códigos.
 
+
+Link: https://github.com/LuisHBarros/corelab-challenge
