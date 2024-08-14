@@ -3,7 +3,7 @@
 
 Para esta api meu foco foi em utilizar tencnologias que já tive experiência. No começo, achei que teria tempo o suficiente para fazer uma api robusta, com cobertura de testes e inúmeras validações. Infelizmente, com o andamento, entendi que se eu quisesse entregar o projeto no prazo e com uma qualidade aceitável, teria de abrir mão de algumas funcionalidades.
 
-Para estrutura da api utilizei algo que já tinha praticado antes, seguind o SOLID aplicado a uma Arquitetura em camadas (Clean Architecture). Tecnologias utilizadas foram: Typescript, Node, mongodb, typeorm, tsyringe, lint, docker e prettier. Eu ia documentar com swagger mas não tive tempo.
+Para estrutura da api utilizei algo que já tinha praticado antes, seguindo o SOLID aplicado a uma Arquitetura em camadas (Clean Architecture). As tecnologias utilizadas foram: Typescript, Node, mongodb, typeorm, tsyringe, lint, docker e prettier. Eu ia documentar com swagger mas não tive tempo.
 
 Demorei cerca de 3 dias para completar todos os endpoints básicos da api, conseguindo testar e efetuar todas operações de CRUD. Como percebi que o front iria ser mais complicado, entendi que para priorizar a entrega escolhi encerrar meu backend neste ponto. Abaixo deixarei as rotas dos endpoints bem como o que poderia ser feito em uma atualização futura.
 
