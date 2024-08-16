@@ -4,18 +4,8 @@ corelab-api-challenge é uma aplicação que permite criar e gerência lista de 
 
 Este projecto esta viculado a dois repositorio, backend e frontend, foi desenvolvido uma api no Node js e React no frontend
 
-## Versão Desktop
 
-![criarNotaDeskTOp](https://github.com/user-attachments/assets/71e7dc09-c699-490d-b54f-8b3533beb1b7)
-
-## Versão Mobile
-
-![CriarNotaPhone](https://github.com/user-attachments/assets/de5febff-c95d-4a6a-b7e7-884bfd5e3296)
-
-
-Repositórios
-
-[O repositório Frontend](https://github.com/AntonioJacinto11672/corelab-web-challenge_my) 
+Repositório
 
 
 [O repositório Backend](https://github.com/AntonioJacinto11672/corelab-api-challenge-my)
@@ -35,11 +25,6 @@ Fastify
 prisma
 
 typescript
-
-## Front-end
-React + Vite
-SCSS
-JavaScript
 
 ## Banco de dados
 MongoDB
@@ -113,44 +98,4 @@ A api vai rodar na porta 8000, certifica-se que a porta não estar a ser utiliza
 ```
 npm run dev
 ```
-
-
-# Front end
-
-## Como usar o front-End
-
-Primeiro tens de clonar o arquivo
-
-```
-git clone git@github.com:AntonioJacinto11672/corelab-web-challenge_my.git
-```
-
-Antes de iniciar a aplicação, precisamos instalar o 'node_modules' e para isso, basta abrir um terminal na pasta "corelab-web-challenge_my" (é aconselhável utilizar o terminal do editor/IDE).
-
-### Comando para baixar o 'node_modules'
-
-
-```
-npm install
-```
-
-
-Para iniciar o projecto
-
-```
-npm run dev
-```
-
-
-Nota: O projecto utilizou o React  + Vite para inicialização, o projecto vai inicializar na porta 5173 se essa porta estiver em uso, vai passar para 5174 sucessivamente
-
-
-Vídeo explicado como utilizar
-
-  
-
-
-https://github.com/user-attachments/assets/d974f6fb-bcde-4b5e-893a-070bb788e7d5
-
-
 
