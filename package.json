@@ -1,67 +1,49 @@
 {
   "name": "corelab-api-challenge",
   "version": "1.0.0",
-  "private": true,
+  "description": "",
+  "main": "dist/src/app.js",
   "scripts": {
-    "dev": "node ace serve --watch",
-    "build": "node ace build --production",
-    "start": "node server.js",
-    "lint": "eslint . --ext=.ts",
-    "format": "prettier --write .",
-    "test": "node ace test",
-    "test:watch": "npm test --watch"
+    "build": "tsc",
+    "start": "ts-node src/app.ts",
+    "dev": "nodemon src/app.ts",
+    "sequelize:db": "sequelize db:create",
+    "sequelize:migrate": "sequelize db:migrate",
+    "test:unit": "jest --verbose ./tests/units --coverage",
+    "test:integration": "jest --verbose --runInBand --detectOpenHandles ./tests/integrations/ --coverage"
   },
-  "eslintConfig": {
-    "extends": [
-      "plugin:adonis/typescriptApp",
-      "prettier"
-    ],
-    "plugins": [
-      "prettier"
-    ],
-    "rules": {
-      "prettier/prettier": [
-        "error"
-      ]
-    }
-  },
-  "eslintIgnore": [
-    "build"
-  ],
-  "prettier": {
-    "trailingComma": "es5",
-    "semi": false,
-    "singleQuote": true,
-    "useTabs": false,
-    "quoteProps": "consistent",
-    "bracketSpacing": true,
-    "arrowParens": "always",
-    "printWidth": 100
+  "author": "Rudson-Santana",
+  "dependencies": {
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "http-status-codes": "^2.3.0",
+    "joi": "^17.13.3",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.11.0",
+    "sequelize": "^6.37.3",
+    "sequelize-cli": "^6.6.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^10.0.0",
+    "winston": "^3.14.1"
   },
   "devDependencies": {
-    "@adonisjs/assembler": "^5.6.2",
-    "@japa/preset-adonis": "^1.0.15",
-    "@japa/runner": "^2.0.7",
-    "adonis-preset-ts": "^2.1.0",
-    "eslint": "^8.15.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-adonis": "^2.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "pino-pretty": "^7.6.1",
-    "prettier": "^2.6.2",
-    "typescript": "~4.6",
-    "youch": "^3.2.0",
-    "youch-terminal": "^2.1.3"
-  },
-  "dependencies": {
-    "@adonisjs/core": "^5.7.6",
-    "@adonisjs/repl": "^3.1.10",
-    "proxy-addr": "^2.0.7",
-    "reflect-metadata": "^0.1.13",
-    "source-map-support": "^0.5.21"
-  },
-  "engines": {
-    "node": "^16.15.0",
-    "npm": "^8.5.5"
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/helmet": "^4.0.0",
+    "@types/jest": "^29.5.12",
+    "@types/morgan": "^1.9.9",
+    "@types/supertest": "^6.0.2",
+    "@types/uuid": "^10.0.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.4",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
   }
 }
