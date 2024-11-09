@@ -1,85 +1,62 @@
-## Corelab Challenge:
+# Corelab Api Challenge
 
-You are tasked with building a web application that allows users to create and manage their to-do lists. The application should consist of a responsive webpage built in React, and an API built in Node.js to store and manage the to-do lists.
+## Sobre o projeto
+- Projeto para o desafio da Corelab: API para um site de gestão de notas.
 
+## Instrução de uso
+1. Faça um clone desse repositório usando o comando: `https://github.com/RudsonSantana/corelab-api-challenge.git` no seu terminal e dentro da pasta que deseja clonar o repositório. Pode utilizar o terminal  [Git](https://git-scm.com/downloads);
 
-### The repositories
-The [frontend repository](https://github.com/corelabbr/corelab-web-challenge)
+2. Entre no diretório do projeto usando `cd corelab-api-challenge`;
 
-If you feel more comfortable, you can pick another React framework and show us your skills.
+3. Abra o projeto no seu editor de código preferido. Se for utilizar o [VS Code](https://code.visualstudio.com/download) e estiver usando Git use o código `code .`;
 
-The [backend repository](https://github.com/corelabbr/corelab-api-challenge)
+4. Abra o terminal do seu editor e use o comando `npm i` para instalar todos os pacotes;
 
-If you feel more comfortable, you can pick another Node JS framework and show us your skills.
+5. Ainda utilizando o terminal do seu editor:
 
-### The Layout
-Open the [layout mockup](https://www.figma.com/file/sQrUVHTlyogq3qGdkqGTXN/mockup?node-id=7%3A2&t=ANTOTiqjqGWYuoUr-0) in desktop and mobile version and follow this design as much as possible.
+   5.1. Crie o banco de dados com o comando `npm run sequelize:db`;
 
+   5.2. Rode as migrations para criar as tabelas com o comando `npm run sequelize:migrate`;
 
-### The application should have the following functionality:
+   5.3. Para rodar os testes:
 
-1. Users should be able to create, read, update, and delete to-do items using the API.
-2. Users should be able to mark an item as a favorite.
-3. Users should be able to set a color for each to-do item.
-4. The React frontend should display the user's to-do list in a responsive and visually appealing manner, with the ability to filter by favorite items and color.
-5. The favorited items should be displayed at the top of the list.
+     - Unitários: `npm run test:unit`;
 
-### Technical Requirements:
-1. The backend API should be built in Node.js framework and use a database of your choice (e.g., MongoDB, PostgreSQL, etc.).
-2. The frontend should be built in React and use modern web development tools and best practices.
-3. The application should be responsive and visually appealing.
+     - De integração `npm run test:integration`.
 
-### Deliverables:
-1. A link to a GitHub repository containing the complete source code for the project.
-2. A written description of how to set up and run the application locally.
+    5.4. Build o projeto usando `npm run build`;
 
+6. Abra o MySQL do seu computador, coloque o seu login e senha e verifique se o banco de dados foi criado;
 
-### Evaluation Criteria:
-1. Code Quality
-2. Code Format
-3. Code Perfomance
-4. Frontend Design
-5. If your code is Easily Readable
-6. Mobile First approach
-7. Code Responsability
-8. Features Work
-9. Responsiveness
-10. Does the application meet the functionality requirements listed above?
-11. Is the code well-organized, easy to read, and well-documented?
-12. Are modern web development tools and best practices used?
-13. Is the application visually appealing and responsive?
+7. Se o banco de dados estiver criado inicialize o projeto usando `npm run start`, caso contrário refaça os passos anteriores;
 
-### Backend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: Adonis TS or any other node framework you know.
-4. Database: Choose your own, you can even save in memory.
+   - Para ambiente de desenvolvimento utilize `npm run dev`.
 
-### Frontend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: React TS
-4. Sass or other preprocessor
+8. No seu navegador acesse o link `http://localhost:porta` substitua a palavra `porta` pelo número da porta que você está usando;
 
-### Want to impress us even more?
-If you feel comfortable and want to impress us even more, you can do the following:
+9. Agora teste as rotas na documentação. 
 
-1. Work on correct types and interfaces
-2. Work on eslint rules
-3. Work prettier config
-4. Work on docker containers
-5. Work on tests
-6. Work on CI/CD
+## Tecnologias Utilizadas
+- [Node.js](https://nodejs.org/en/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Sequelize](https://sequelize.org/docs/v6/)
+- [Express](https://expressjs.com/pt-br/4x/api.html)
+- [Jest](https://jestjs.io/pt-BR/)
+- [Swagger](https://swagger.io/docs/)
+- [MySQL](https://dev.mysql.com/doc/)
 
-### What to do when you finish?
+## Autor
 
-Create a file PULL_REQUEST.md where you will describe what you did and how in as much detail as possible. Feel free to add videos for better explanation.
+<table>
+<td>
+  <div align="center">
+    <img align="center" alt="Rudson Santana" height="150" src="https://avatars.githubusercontent.com/u/116411313?v=4"> 
+  </div>
+  <h3 align="center"><a href="https://github.com/RudsonSantana">Rudson Santana</a></h3>
+  <div>
+  <a href = "mailto:rudsonsanttana@gmail.com" target="_blank"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"></a>
+  <a href="https://www.linkedin.com/in/rudson-santana/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a>
+  </div>
+</td>
+</table>
 
-Create a new pull request using the same branch name for Backend and Frontend
-
-Send us the pull requests and that's all!
-
-
-#### Good luck! The sky is the limit 🚀
