@@ -17,19 +17,6 @@ Abstrai requisições para o banco de dados em arquivos separados. Esses reposit
 ### Factory Pattern
 Centraliza a montagem dos casos de uso em `src/lib/factories`, se em algum momento for necessário adicionar mais dependências ao caso de uso, adicionamos a esse factory, que irá refletir em toda a aplicação onde o caso de uso é utilizado.
 
-### Folders
-- `prisma` Armazena migrations e o schema necessário para criar tabelas no banco de dados
-- `public/file` Armazena arquivos
-- `src/entities` Armazena entidades
-- `src/interfaces` Armazena interfaces
-- `src/repositories` Armazena repositórios
-- `src/routes` Armazena as rotas
-- `src/lib/services` Armazena casos de uso
-- `src/lib/factories` Armazena factories
-- `src/lib/controllers` Armazena controladores
-- `src/lib/services/tests` Armazena testes
-- `src/lib/services/erros` Armazena erros
-
 ## End-Points
 
 ### POST
