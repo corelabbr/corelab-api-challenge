@@ -18,7 +18,7 @@ O código foi organizado em uma estrutura de pastas intuitiva para facilitar a e
 ### Gerenciamento de Banco de Dados
 O uso do **Sequelize** possibilita uma comunicação eficaz com o banco de dados relacional, enquanto o uso de **migrations** assegura que o esquema do banco de dados possa ser facilmente replicado e atualizado por qualquer membro da equipe. As migrations permitem o versionamento do banco de dados e possibilitam que mudanças sejam aplicadas ou revertidas de forma segura.  
 
-### 📖 Documentação
+### Documentação
 A documentação do projeto foi detalhada no arquivo `README.md`, descrevendo os passos necessários para:  
 - Instalar as dependências.  
 - Configurar variáveis de ambiente.  
