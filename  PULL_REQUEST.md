@@ -12,6 +12,22 @@ Para o gerenciamento de estado global, utilizei **Zustand**, uma biblioteca leve
 
 Outro destaque do frontend foi a atenção à **tipagem rigorosa com TypeScript**. Todas as interfaces e tipos foram definidos com clareza, o que contribuiu diretamente para a robustez da aplicação e facilitou o desenvolvimento colaborativo e a manutenção futura.
 
+Adicionei no projecto também recursos como tolltips, para melhor descrição das funcionalidades, adicionei um componente que permite filtrar por cor das notas. 
+
+![TollTip](./demostrative/tolltip.png)
+
+
+![FilterColor](./demostrative/filterColor.png)
+
+
+### 🦴 Skeletons de Carregamento
+
+Para melhorar a experiência do usuário durante a carga dos dados, Eu adicionei um **sistema de skeletons (esqueletos de carregamento)** nos cards das tarefas. Isso garante um feedback visual imediato ao usuário enquanto as informações são carregadas da API, evitando a sensação de lentidão ou tela vazia.
+
+![Skeleton](./demostrative/skeleton.png)
+
+Esses skeletons foram desenvolvidos utilizando os componentes do **Shadcn**, com animação sutil e estilização integrada ao tema visual da aplicação. Essa funcionalidade melhora a percepção de performance e dá um ar mais profissional à aplicação.
+
 ## 🔧 Backend
 
 No lado do servidor, optei por utilizar **Node.js** com o framework **AdonisJS (TypeScript)** por oferecer uma estrutura robusta e com forte adoção do padrão MVC. Essa escolha garantiu organização no código, facilidade de manutenção e integração simplificada com banco de dados e serviços auxiliares.
@@ -23,12 +39,11 @@ As rotas da API foram definidas seguindo o padrão RESTful, oferecendo endpoints
 O ambiente de desenvolvimento foi configurado com versões específicas de **Node.js** e **PNPM**, garantindo consistência e reprodutibilidade em diferentes máquinas e etapas do ciclo de vida do projeto. A padronização do backend se manteve em torno do uso exclusivo do **AdonisJS com TypeScript**, mantendo o foco e a coerência técnica.
 
 
-
 ## 🧪 Desafios e Soluções
 
 Durante a implementação, enfrentei alguns desafios técnicos e de UI. Um dos destaques foi a necessidade de customizar  **as Divs** para seleção de cores, algo que exigiu ajustes finos de acessibilidade e estilização.
 
 Outro ponto desafiador foi garantir a ordenação das tarefas, priorizando os **favoritos no topo da lista**, mesmo após operações de atualização ou exclusão. Isso foi resolvido com lógica eficiente tanto no frontend quanto no backend, mantendo a fluidez da interface.
 
-
 ![Interface do Sistema](./Screen.png)
+
