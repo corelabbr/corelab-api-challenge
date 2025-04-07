@@ -9,25 +9,23 @@ export default class TodoListsController {
    */
   async index({ response, request }: HttpContext) {
     try {
-      // Obter a consulta de busca da requisição
-      const { q } = request.qs()
-      // Se houver uma consulta de busca, procurar Tasks de tarefas
-      if (q) {
-        // Procurar Tasks pelo título ou pela cor
-        let lists = await TodoList.query().whereILike('title', `${q}%`)
-        if (lists.length === 0) {
-          lists = await TodoList.query().whereILike('color', `#${q}`)
-        }
-        // Retornar as Tasks de tarefas
-        return response.status(200).send({ lists })
-      }
-      // Se não houver consulta de busca, buscar todas as Tasks de tarefas
-      const todoLists = await TodoList.all()
+      const { title, color } = request.qs()
 
-      // Retornar as Tasks de tarefas
-      return response.status(200).send({ lists: todoLists })
+      const query = TodoList.query()
+
+      // filtra por título e cor
+      if (title) {
+        query.whereILike('title', `${title}%`)
+      }
+      if (color) {
+        query.whereILike('color', `#${color}`)
+      }
+
+      const notes = await query
+
+      return response.status(200).send({ lists: notes })
     } catch (error: unknown) {
-      console.log(error)
+      console.error(error)
       return response.status(500).send({ message: 'Erro no Servidor' })
     }
   }
