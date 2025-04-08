@@ -1,7 +1,7 @@
 import { test } from '@japa/runner'
 
-test('display vehicles', async ({ client }) => {
-  const response = await client.get('/vehicles')
+test('display notes', async ({ client }) => {
+  const response = await client.get('/notes')
 
   response.assertStatus(200)
   response.assertBodyContains([
@@ -13,7 +13,7 @@ test('display vehicles', async ({ client }) => {
       isFavorite: false,
       year: 2018,
       color: '#ff00ff',
-      price: 22000
-    }
+      price: 22000,
+    },
   ])
 })
