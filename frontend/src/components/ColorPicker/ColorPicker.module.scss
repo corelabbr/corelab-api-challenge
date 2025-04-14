@@ -1,0 +1,24 @@
+.colorPicker {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  
+    .colorOption {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+  
+      &:hover {
+        transform: scale(1.1);
+      }
+  
+      &.selected {
+        border-color: #333;
+        transform: scale(1.1);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      }
+    }
+  }

@@ -1,0 +1,39 @@
+.todoList {
+  width: 100%;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 1rem;
+
+  .section {
+    margin-bottom: 2rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .sectionTitle {
+    color: #555;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  .itemsContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .emptyState {
+    text-align: center;
+    padding: 2rem;
+    color: #888;
+    font-size: 1.1rem;
+  }
+}

@@ -1,0 +1,52 @@
+services:
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres-db
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    expose:
+      - ${DB_PORT}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - ./../DB:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - app-network
+  api:
+    container_name: api
+    build: 
+      context: './../backend'
+      dockerfile: Dockerfile
+    env_file: .env
+    depends_on: 
+      - postgres-db
+    expose:
+      - ${PORT_EXPOSE}
+    ports: 
+      - "${PORT_EXPOSE}:${API_PORT}"
+    networks:
+      - app-network
+  frontend:
+    container_name: frontend
+    build:
+      context: ./../frontend
+      dockerfile: Dockerfile
+    expose:
+      - ${FRONTEND_EXPOSE}
+    ports:
+      - "${FRONTEND_EXPOSE}:${FRONTEND_PORT}"
+    environment:
+      - VITE_API_URL=http://localhost:${PORT_EXPOSE}
+    depends_on:
+      - postgres-db
+      - api
+    restart: unless-stopped
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
