@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ../corelab-web-challenge
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../corelab-web-challenge:/app
+      - /app/node_modules
+    environment:
+      - REACT_APP_API_URL=http://localhost:3001
+    depends_on:
+      - backend
+  backend:
+    build: .
+    ports:
+      - "3001:3001"
+    # volumes:
+    #   - .:/app
+    #   - /app/node_modules
+    environment:
+      - CORS_ORIGIN=http://localhost:3000
+      - HOST=0.0.0.0
+      - PORT=3001
+      - NODE_ENV=development
+      - APP_KEY=base64:VHpZekVxVGFuZ0tleUZvckFkb25pc0pTQXBw
+      - DRIVE_DISK=local
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:8.0.9
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
