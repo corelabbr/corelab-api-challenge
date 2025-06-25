@@ -16,7 +16,7 @@
     "main": "server.js",
     "scripts": {
         "dev": "npx prisma generate && npx prisma db seed && nodemon --exec ts-node -r tsconfig-paths/register src/main/server.ts",
-        "start": "npx prisma migrate deploy && node -r tsconfig-paths/register dist/main/server.js",
+        "start": "npx prisma migrate deploy && npm run build && node -r tsconfig-paths/register dist/main/server.js",
         "seed": "ts-node --project tsconfig.seed.json prisma/seed.ts",
         "build": "rimraf dist && tsc && tsc-alias",
         "deploy": "npm run build && docker-compose down && docker-compose up -d --build",

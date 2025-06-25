@@ -1,5 +1,7 @@
 FROM node:22.14.0
 
+ENV TZ=America/Campo_Grande
+
 WORKDIR /api
 
 COPY package*.json prisma ./
