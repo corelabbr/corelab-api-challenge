@@ -142,7 +142,7 @@ export default function Dashboard() {
           ) : (
             filteredTasks
               .slice()
-              .sort((a, b) => Number(a.status) - Number(b.status)) // tarefas não concluídas primeiro
+              .sort((a, b) => Number(b.status) - Number(a.status))
               .map((task) => (
                 <TaskItemCard
                   key={task.id}
