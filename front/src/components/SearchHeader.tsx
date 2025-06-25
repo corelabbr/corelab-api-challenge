@@ -1,5 +1,7 @@
-import { X, Search, LucideNotebook } from "lucide-react";
+import { X, Filter, LucideNotebook } from "lucide-react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FilterCard from "./FilterCard";
 
 type SearchHeaderProps = {
   search: string;
@@ -7,6 +9,9 @@ type SearchHeaderProps = {
 };
 
 export default function SearchHeader({ search, setSearch }: SearchHeaderProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedColor, setSelectedColor] = useState<string | undefined>(undefined);
+  const [selectedPriority, setSelectedPriority] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
 
   async function handleSearch(event: React.FormEvent | any) {
@@ -26,23 +31,27 @@ export default function SearchHeader({ search, setSearch }: SearchHeaderProps) {
     console.log("Saindo da sessão");
   }
 
-  const clearSearch = () => setSearch("");
+  const clearSearch = () => {
+    setSearch("");
+    setSelectedColor(undefined);
+    setSelectedPriority(undefined);
+  };
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-white shadow flex items-center justify-between px-2 py-4">
       <div className="flex items-center gap-2 ml-5 text-gray-700">
-        <LucideNotebook  size={24} className="text-blue-500" />
+        <LucideNotebook size={24} className="text-blue-500" />
         <span className="font-semibold">CoreNotes</span>
       </div>
 
       <div className="flex flex-1 ml-10 mr-10 md:mr-96 relative">
         <button
           type="button"
-          onClick={handleSearch}
-          aria-label="Buscar notas"
+          onClick={() => setIsModalOpen(true)}
+          aria-label="Abrir filtros"
           className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-700 focus:outline-none"
         >
-          <Search size={20} />
+          <Filter size={20} />
         </button>
 
         <input
@@ -60,7 +69,7 @@ export default function SearchHeader({ search, setSearch }: SearchHeaderProps) {
           className="text-gray-500 hover:text-gray-700"
           onClick={clearSearch}
           aria-label="Limpar busca"
-          disabled={!search}
+          disabled={!search && !selectedColor && !selectedPriority}
         >
           <X size={20} />
         </button>
@@ -72,6 +81,16 @@ export default function SearchHeader({ search, setSearch }: SearchHeaderProps) {
           sair
         </button>
       </div>
+
+      {isModalOpen && (
+        <FilterCard
+          selectedColor={selectedColor}
+          selectedPriority={selectedPriority}
+          onColorChange={setSelectedColor}
+          onPriorityChange={setSelectedPriority}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
     </header>
   );
 }
