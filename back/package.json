@@ -1,0 +1,69 @@
+{
+    "name": "nexo-task-api",
+    "version": "1.0.0",
+    "description": "",
+    "homepage": "https://github.com/Ton-Chyod-s/nexo-task-api#readme",
+    "bugs": {
+        "url": "https://github.com/Ton-Chyod-s/nexo-task-api/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Ton-Chyod-s/nexo-task-api.git"
+    },
+    "license": "ISC",
+    "author": "",
+    "type": "commonjs",
+    "main": "server.js",
+    "scripts": {
+        "dev": "npx prisma generate && npx prisma db seed && nodemon --exec ts-node -r tsconfig-paths/register src/main/server.ts",
+        "start": "npx prisma migrate deploy && node -r tsconfig-paths/register dist/main/server.js",
+        "seed": "ts-node --project tsconfig.seed.json prisma/seed.ts",
+        "build": "rimraf dist && tsc && tsc-alias",
+        "deploy": "npm run build && docker-compose down && docker-compose up -d --build",
+        "migrations": "npx prisma migrate dev --name adiciona-cor-na-task --schema=prisma/schema.prisma",
+        "test": "vitest run",
+        "test:coverage": "vitest run --coverage"
+    },
+    "_moduleAliases": {
+        "@infrastructure": "dist/infrastructure",
+        "@interfaces": "dist/interfaces",
+        "@usecases": "dist/usecases",
+        "@domain": "dist/domain",
+        "@utils": "dist/utils",
+        "@main": "dist/main"
+    },
+    "dependencies": {
+        "@faker-js/faker": "^9.7.0",
+        "@prisma/client": "^6.7.0",
+        "bcrypt": "^5.1.1",
+        "bcryptjs": "^3.0.2",
+        "cors": "^2.8.5",
+        "cross-env": "^7.0.3",
+        "dotenv-safe": "^9.1.0",
+        "express": "^5.1.0",
+        "jsonwebtoken": "^9.0.2",
+        "module-alias": "^2.2.3",
+        "nodemailer": "^7.0.3",
+        "nodemon": "^3.1.10",
+        "swagger-jsdoc": "^6.2.8",
+        "swagger-ui-express": "^5.0.1"
+    },
+    "devDependencies": {
+        "@types/bcrypt": "^5.0.2",
+        "@types/bcryptjs": "^2.4.6",
+        "@types/cors": "^2.8.18",
+        "@types/dotenv": "^6.1.1",
+        "@types/express": "^5.0.1",
+        "@types/jsonwebtoken": "^9.0.9",
+        "@types/nodemailer": "^6.4.17",
+        "@types/swagger-jsdoc": "^6.0.4",
+        "@types/swagger-ui-express": "^4.1.8",
+        "prisma": "^6.7.0",
+        "rimraf": "^6.0.1",
+        "ts-node": "^10.9.2",
+        "tsc-alias": "^1.8.16",
+        "tsconfig-paths": "^4.2.0",
+        "typescript": "^5.8.3",
+        "vitest": "^3.2.4"
+    }
+}

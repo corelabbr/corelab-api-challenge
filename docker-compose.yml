@@ -1,0 +1,54 @@
+version: '3.8'
+services:
+  nexo_back:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+
+    env_file:
+      - ./back/.env
+
+    container_name: nexo_back_container
+    ports:
+      - "${PORT_BACK}:${PORT_BACK}"
+    depends_on:
+      - db
+    environment:
+      - PORT=${PORT_BACK}  
+      - DATABASE_URL=${DATABASE_URL_PROD}
+    restart: always
+    command: >
+      /bin/sh -c "wait-for-it db:5432 -- 
+      && npm start"
+
+  db:
+    image: postgres
+    container_name: postgres_container_nexo
+    environment:
+      POSTGRES_USER: nexoTask
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: nexoTaskApi
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+
+  nexo_front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    env_file:
+      - ./front/.env
+
+    container_name: nexo_front_container
+    environment:
+      - PORT=${PORT_FRONT}
+    ports:
+      - "${PORT_FRONT}:${PORT_FRONT}"
+    depends_on:
+      - nexo_back
+      - db
+
+volumes:
+  pgdata:
