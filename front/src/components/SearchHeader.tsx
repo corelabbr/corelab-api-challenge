@@ -1,4 +1,4 @@
-import { X, Filter, LucideNotebook } from "lucide-react";
+import { X, Filter, LucideNotebook, FilterX } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import FilterCard from "./FilterCard";
 import { useState } from "react";
@@ -59,55 +59,68 @@ export default function SearchHeader({
         <span className="font-semibold">CoreNotes</span>
       </div>
 
-      <div className="flex flex-1 ml-10 mr-10 md:mr-96 relative">
-        <button
-          type="button"
-          onClick={() => setIsModalOpen(true)}
-          aria-label="Abrir filtros"
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-700 focus:outline-none"
-        >
-          <Filter size={20} />
-        </button>
+      <div className="flex flex-1 ml-10 mr-10 md:mr-96 items-center relative">
 
+      <div className="relative flex-1">
         <input
           type="text"
           placeholder="Pesquisar notas"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="w-full pl-10 pr-10 py-1 border-2 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+          className="w-full pl-4 pr-10 py-1 border-2 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
         />
-      </div>
-
-      <div className="flex justify-end gap-4">
         <button
-          className="text-gray-500 hover:text-gray-700"
-          onClick={clearSearch}
-          aria-label="Limpar busca"
-          disabled={!search && !filterColor && !filterPriority}
+          type="button"
+          onClick={() => setIsModalOpen(true)}
+          aria-label="Abrir filtros"
+          className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-700 focus:outline-none"
         >
-          <X size={20} />
-        </button>
-
-        <button
-          className="text-gray-500 hover:text-gray-700 mr-4"
-          onClick={sair}
-        >
-          sair
+          <Filter size={20} />
         </button>
       </div>
 
-      {isModalOpen && (
-        <FilterCard
-          selectedColor={filterColor}
-          selectedPriority={filterPriority}
-          selectedDate={filterDate}
-          onColorChange={setFilterColor}
-          onPriorityChange={setFilterPriority}
-          onDateChange={setFilterDate}
-          onClose={() => setIsModalOpen(false)}
-        />
-      )}
+      <button
+        onClick={clearSearch}
+        className="ml-4 text-gray-400 hover:text-red-600 flex items-center gap-1"
+        aria-label="Limpar filtros"
+      >
+        <FilterX size={20} />
+
+      </button>
+    </div>
+      
+      
+    <div className="flex justify-end gap-4">
+      <button
+        className="text-gray-500 hover:text-gray-700"
+        onClick={clearSearch}
+        aria-label="Limpar busca"
+        disabled={!search && !filterColor && !filterPriority}
+      >
+        <X size={20} />
+      </button>
+
+      <button
+        className="text-gray-500 hover:text-gray-700 mr-4"
+        onClick={sair}
+      >
+        sair
+      </button>
+    </div>
+
+    {isModalOpen && (
+      <FilterCard
+        selectedColor={filterColor}
+        selectedPriority={filterPriority}
+        selectedDate={filterDate}
+        onColorChange={setFilterColor}
+        onPriorityChange={setFilterPriority}
+        onDateChange={setFilterDate}
+        onClose={() => setIsModalOpen(false)}
+      />
+    )}
+
     </header>
   );
 }

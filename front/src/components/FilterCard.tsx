@@ -98,17 +98,6 @@ export default function FilterCard({
           />
         </div>
 
-        <button
-          onClick={onClose}
-          disabled={!selectedColor && !selectedPriority}
-          className={`mt-4 w-full py-1 text-sm text-white rounded-md transition ${
-            !selectedColor && !selectedPriority
-              ? "bg-gray-300 cursor-not-allowed"
-              : "bg-blue-500 hover:bg-blue-600"
-          }`}
-        >
-          Aplicar filtros
-        </button>
       </div>
     </div>
   );
