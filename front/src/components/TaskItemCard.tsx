@@ -178,9 +178,9 @@
                   <Flag
                     className="w-5 h-5"
                     color={
-                      priority === "ALTA"
+                      editPriority === "ALTA"
                         ? "red"
-                        : priority === "MEDIA"
+                        : editPriority === "MEDIA"
                         ? "orange"
                         : "green"
                     }
