@@ -67,6 +67,16 @@ export default function FilterCard({
               </label>
             ))}
           </div>
+
+          
+          <div className="mb-4">
+            <p className="text-sm text-gray-600 mb-2">Data:</p>
+            <input
+              type="date"
+              className="border-2 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+            />
+          </div>
+
         </div>
 
         <button
