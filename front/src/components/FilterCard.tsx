@@ -30,8 +30,8 @@ export default function FilterCard({
   onClose,
 }: FilterCardProps) {
   return (
-    <div className="fixed inset-0 z-50 bg-opacity-30 flex items-center justify-center bg-black/20">
-      <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md">
+    <div className="fixed inset-0 z-50 bg-opacity-30 flex items-center justify-center bg-black/20" onClick={onClose}>
+      <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md" onClick={(e) => e.stopPropagation()}>
         <h3 className="text-lg font-semibold mb-4 text-gray-700">Filtros</h3>
 
         <div className="mb-4">
@@ -79,10 +79,15 @@ export default function FilterCard({
 
         <button
           onClick={onClose}
-          className="mt-4 w-full py-1 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
+          disabled={!selectedColor && !selectedPriority}
+          className={`mt-4 w-full py-1 text-sm text-white rounded-md transition ${
+            !selectedColor && !selectedPriority
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-blue-500 hover:bg-blue-600"
+          }`}
         >
           Aplicar filtros
-        </button>
+      </button>
       </div>
     </div>
   );
