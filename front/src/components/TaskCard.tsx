@@ -2,6 +2,12 @@ import { Star, StarOff, Flag, Calendar } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
+function getLocalDateString() {
+  const hoje = new Date();
+  const localDate = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
+  return localDate.toISOString().split("T")[0];
+}
+
 type Prioridade = "ALTA" | "MEDIA" | "BAIXA";
 
 type TaskCardProps = {
@@ -59,7 +65,7 @@ export default function TaskCard({ onTaskCreated }: TaskCardProps) {
       setStarOn(false);
       setStarTouched(false);
       setPrioridade("MEDIA");
-      setDataPrevista(new Date().toISOString().split("T")[0]);
+      setDataPrevista(getLocalDateString());
 
       if (onTaskCreated) onTaskCreated();
     } catch (error) {

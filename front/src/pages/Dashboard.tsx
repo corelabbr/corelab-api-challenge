@@ -20,6 +20,7 @@ export default function Dashboard() {
     });
   }
 
+
   function formatarDataIsoLocal(dataIso: string) {
     const data = new Date(dataIso);
     return data.toLocaleDateString("sv-SE", {

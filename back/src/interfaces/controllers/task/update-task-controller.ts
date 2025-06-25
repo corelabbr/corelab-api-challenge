@@ -38,13 +38,13 @@ export class UpdateTaskController {
 
             if (datePart && datePart.includes("/")) {
                 const [day, month, year] = datePart.split("/").map(Number);
-                const formattedDate = `${year}-${String(month).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
-                taskData.dataPrevista = new Date(formattedDate);
-            } else if (datePart && datePart.includes("-")) {
-                taskData.dataPrevista = new Date(datePart);
-            } else {
-                taskData.dataPrevista = new Date(dataPrevista);
-            }
+                taskData.dataPrevista = new Date(year, month - 1, day); 
+                } else if (datePart && datePart.includes("-")) {
+                    const [year, month, day] = datePart.split("-").map(Number);
+                    taskData.dataPrevista = new Date(year, month - 1, day); 
+                } else {
+                    taskData.dataPrevista = new Date(dataPrevista);
+                }
             }
 
         if (titulo !== undefined) taskData.titulo = titulo;
