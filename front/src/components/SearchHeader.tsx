@@ -16,6 +16,7 @@ type SearchHeaderProps = {
   setFilterDate: (value: string | undefined) => void;
 };
 
+
 export default function SearchHeader({
   search,
   setSearch,
@@ -29,6 +30,7 @@ export default function SearchHeader({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
+  
   async function handleSearch(event: React.FormEvent | any) {
     event.preventDefault?.();
   }
@@ -50,6 +52,7 @@ export default function SearchHeader({
     setSearch("");
     setFilterColor(undefined);
     setFilterPriority(undefined);
+    setFilterDate(undefined);
   };
 
   return (
@@ -93,19 +96,10 @@ export default function SearchHeader({
       
     <div className="flex justify-end gap-4">
       <button
-        className="text-gray-500 hover:text-gray-700"
-        onClick={clearSearch}
-        aria-label="Limpar busca"
-        disabled={!search && !filterColor && !filterPriority}
-      >
-        <X size={20} />
-      </button>
-
-      <button
         className="text-gray-500 hover:text-gray-700 mr-4"
         onClick={sair}
       >
-        sair
+        <X size={20} />
       </button>
     </div>
 
