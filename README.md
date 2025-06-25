@@ -90,7 +90,7 @@ cd back
 
 npm install
 
-npx prisma generate
+npx prisma generate --schema=./prisma/schema.prisma
 ```
 
 Crie um arquivo .env com:
