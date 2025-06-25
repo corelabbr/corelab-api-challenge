@@ -30,7 +30,7 @@ export default function FilterCard({
   onClose,
 }: FilterCardProps) {
   return (
-    <div className="fixed inset-0 z-50 bg-opacity-30 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 bg-opacity-30 flex items-center justify-center bg-black/20">
       <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md">
         <h3 className="text-lg font-semibold mb-4 text-gray-700">Filtros</h3>
 

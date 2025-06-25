@@ -54,7 +54,7 @@ export default function ColorPickerModal({ onClose, onSelect, id }: Props) {
   }, [onClose]);
 
   return ReactDOM.createPortal(
-    <div className="fixed inset-0 flex items-center justify-center z-50" onClick={onClose}>
+    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/20" onClick={onClose} >
       <div
         className="bg-white rounded-xl p-6 shadow-xl flex flex-wrap gap-4 max-w-[90vw] max-h-[70vh] overflow-auto"
         onClick={(e) => e.stopPropagation()}
