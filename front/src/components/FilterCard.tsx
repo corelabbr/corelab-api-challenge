@@ -1,11 +1,14 @@
-import { useState } from "react";
+
+type Prioridade = "ALTA" | "MEDIA" | "BAIXA";
 
 type FilterCardProps = {
   selectedColor?: string;
-  selectedPriority?: string;
+  selectedPriority?: Prioridade;
   onColorChange: (color: string) => void;
-  onPriorityChange: (priority: string) => void;
+  onPriorityChange: (priority: Prioridade) => void;
   onClose: () => void;
+  selectedDate?: string;
+  onDateChange: (date: string | undefined) => void;
 };
 
 const colors = [
@@ -22,7 +25,8 @@ const colors = [
   "bg-gray-300",
   "bg-gray-400",
 ];
-const priorities = ["ALTA", "MEDIA", "BAIXA"];
+
+const priorities: Prioridade[] = ["ALTA", "MEDIA", "BAIXA"];
 
 export default function FilterCard({
   selectedColor,
@@ -30,12 +34,20 @@ export default function FilterCard({
   onColorChange,
   onPriorityChange,
   onClose,
+  onDateChange,
+  selectedDate: selectedDateProp,
 }: FilterCardProps) {
-  const [selectedDate] = useState(new Date().toISOString().split("T")[0]);
   
+
   return (
-    <div className="fixed inset-0 z-50 bg-opacity-30 flex items-center justify-center bg-black/20" onClick={onClose}>
-      <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md" onClick={(e) => e.stopPropagation()}>
+    <div
+      className="fixed inset-0 z-50 bg-opacity-30 flex items-center justify-center bg-black/20"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md"
+        onClick={(e) => e.stopPropagation()}
+      >
         <h3 className="text-lg font-semibold mb-4 text-gray-700">Filtros</h3>
 
         <div className="mb-4">
@@ -45,7 +57,9 @@ export default function FilterCard({
               <button
                 key={color}
                 onClick={() => onColorChange(color)}
-                className={`w-6 h-6 rounded-full ${selectedColor === color ? "ring-1 ring-black" : ""} ${color}`}
+                className={`w-6 h-6 rounded-full ${
+                  selectedColor === color ? "ring-1 ring-black" : ""
+                } ${color}`}
                 style={{ backgroundColor: color }}
                 aria-label={`Selecionar cor ${color}`}
               />
@@ -57,7 +71,10 @@ export default function FilterCard({
           <p className="text-sm text-gray-600 mb-2">Prioridade:</p>
           <div className="flex flex-row gap-2">
             {priorities.map((priority) => (
-              <label key={priority} className="flex items-center gap-2 text-sm">
+              <label
+                key={priority}
+                className="flex items-center gap-2 text-sm"
+              >
                 <input
                   type="radio"
                   name="priority"
@@ -69,17 +86,16 @@ export default function FilterCard({
               </label>
             ))}
           </div>
+        </div>
 
-          
-          <div className="mb-4">
-            <p className="text-sm text-gray-600 mb-2">Data:</p>
-            <input
-              type="date"
-              value={selectedDate}
-              className="border-1 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
-            />
-          </div>
-
+        <div className="mb-4">
+          <p className="text-sm text-gray-600 mb-2">Data:</p>
+          <input
+            type="date"
+            value={selectedDateProp ?? ""}
+            onChange={(e) => onDateChange(e.target.value || undefined)}
+            className="border-1 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+          />
         </div>
 
         <button
@@ -92,7 +108,7 @@ export default function FilterCard({
           }`}
         >
           Aplicar filtros
-      </button>
+        </button>
       </div>
     </div>
   );

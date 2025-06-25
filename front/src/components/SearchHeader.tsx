@@ -1,18 +1,32 @@
 import { X, Filter, LucideNotebook } from "lucide-react";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FilterCard from "./FilterCard";
-import ErrorBoundary from "./ErrorBoundary";
+import { useState } from "react";
+
+type Prioridade = "ALTA" | "MEDIA" | "BAIXA";
 
 type SearchHeaderProps = {
   search: string;
   setSearch: (value: string) => void;
+  filterColor?: string;
+  setFilterColor: (value: string | undefined) => void;
+  filterPriority?: Prioridade | undefined;
+  filterDate?: string | undefined;
+  setFilterPriority: (value: Prioridade | undefined) => void;
+  setFilterDate: (value: string | undefined) => void;
 };
 
-export default function SearchHeader({ search, setSearch }: SearchHeaderProps) {
+export default function SearchHeader({
+  search,
+  setSearch,
+  filterColor,
+  setFilterColor,
+  filterPriority,
+  setFilterPriority,
+  filterDate,
+  setFilterDate,
+}: SearchHeaderProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedColor, setSelectedColor] = useState<string | undefined>(undefined);
-  const [selectedPriority, setSelectedPriority] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
 
   async function handleSearch(event: React.FormEvent | any) {
@@ -26,7 +40,7 @@ export default function SearchHeader({ search, setSearch }: SearchHeaderProps) {
     }
   }
 
-  async function sair() {
+  function sair() {
     sessionStorage.removeItem("token");
     setTimeout(() => navigate("/login", { replace: true }), 250);
     console.log("Saindo da sessão");
@@ -34,8 +48,8 @@ export default function SearchHeader({ search, setSearch }: SearchHeaderProps) {
 
   const clearSearch = () => {
     setSearch("");
-    setSelectedColor(undefined);
-    setSelectedPriority(undefined);
+    setFilterColor(undefined);
+    setFilterPriority(undefined);
   };
 
   return (
@@ -70,7 +84,7 @@ export default function SearchHeader({ search, setSearch }: SearchHeaderProps) {
           className="text-gray-500 hover:text-gray-700"
           onClick={clearSearch}
           aria-label="Limpar busca"
-          disabled={!search && !selectedColor && !selectedPriority}
+          disabled={!search && !filterColor && !filterPriority}
         >
           <X size={20} />
         </button>
@@ -84,15 +98,15 @@ export default function SearchHeader({ search, setSearch }: SearchHeaderProps) {
       </div>
 
       {isModalOpen && (
-        <ErrorBoundary>
-          <FilterCard
-            selectedColor={selectedColor}
-            selectedPriority={selectedPriority}
-            onColorChange={setSelectedColor}
-            onPriorityChange={setSelectedPriority}
-            onClose={() => setIsModalOpen(false)}
-          />
-        </ErrorBoundary>
+        <FilterCard
+          selectedColor={filterColor}
+          selectedPriority={filterPriority}
+          selectedDate={filterDate}
+          onColorChange={setFilterColor}
+          onPriorityChange={setFilterPriority}
+          onDateChange={setFilterDate}
+          onClose={() => setIsModalOpen(false)}
+        />
       )}
     </header>
   );

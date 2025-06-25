@@ -20,6 +20,13 @@ export default function Dashboard() {
     });
   }
 
+  function formatarDataIsoLocal(dataIso: string) {
+    const data = new Date(dataIso);
+    return data.toLocaleDateString("sv-SE", {
+      timeZone: "America/Campo_Grande"
+    });
+  }
+
   interface Task {
     id: number;
     titulo: string;
@@ -32,6 +39,10 @@ export default function Dashboard() {
 
   const [tasks, setTasks] = useState<Task[]>([]);
   const [search, setSearch] = useState("");
+
+  const [filterColor, setFilterColor] = useState<string | undefined>();
+  const [filterPriority, setFilterPriority] = useState<"ALTA" | "MEDIA" | "BAIXA" | undefined>();
+  const [filterDate, setFilterDate] = useState<string | undefined>();
 
   async function fetchPutTaskStatus(id: number, status: boolean) {
     const token = sessionStorage.getItem("token");
@@ -95,13 +106,30 @@ export default function Dashboard() {
     fetchTasks();
   }, [navigate]);
 
-  const filteredTasks = tasks.filter((task) =>
-    task.titulo.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredTasks = tasks.filter((task) => {
+    const matchesSearch = task.titulo.toLowerCase().includes(search.toLowerCase());
+    const matchesColor = !filterColor || task.cor === filterColor;
+    const matchesPriority = !filterPriority || task.prioridade === filterPriority;
+
+    const matchesDate =
+      !filterDate ||
+      (task.dataPrevista && formatarDataIsoLocal(task.dataPrevista) === filterDate);
+
+    return matchesSearch && matchesColor && matchesPriority && matchesDate;
+  });
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
-      <SearchHeader search={search} setSearch={setSearch} />
+      <SearchHeader
+        search={search}
+        setSearch={setSearch}
+        filterColor={filterColor}
+        setFilterColor={setFilterColor}
+        filterPriority={filterPriority}
+        setFilterPriority={setFilterPriority}
+        filterDate={filterDate}
+        setFilterDate={setFilterDate}
+      />
 
       <main className="pt-15 w-full flex flex-col items-center mx-auto">
         <div className="p-4 flex items-center justify-between w-full">
@@ -109,12 +137,12 @@ export default function Dashboard() {
         </div>
 
         <div className="flex flex-wrap justify-center gap-4 w-full p-4">
-          {tasks.length === 0 ? (
-            <p className="text-gray-500">Nenhuma tarefa cadastrada</p>
+          {filteredTasks.length === 0 ? (
+            <p className="text-gray-500">Nenhuma tarefa encontrada</p>
           ) : (
             filteredTasks
               .slice()
-              .sort((a, b) => (b.status === true ? 1 : 0) - (a.status === true ? 1 : 0))
+              .sort((a, b) => Number(a.status) - Number(b.status)) // tarefas não concluídas primeiro
               .map((task) => (
                 <TaskItemCard
                   key={task.id}
@@ -125,8 +153,8 @@ export default function Dashboard() {
                   body={task.descricao}
                   onDelete={fetchTasks}
                   onStatusChange={(newStatus) => fetchPutTaskStatus(task.id, newStatus)}
-                  priority={task.prioridade} 
-                  date={formatarDataBr(task.dataPrevista) || "Sem data"}
+                  priority={task.prioridade}
+                  date={task.dataPrevista ? formatarDataBr(task.dataPrevista) : "Sem data"}
                   onColorChange={(color) => {
                     setTasks(prev =>
                       prev.map(item =>
