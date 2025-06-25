@@ -2,6 +2,7 @@ import { X, Filter, LucideNotebook } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FilterCard from "./FilterCard";
+import ErrorBoundary from "./ErrorBoundary";
 
 type SearchHeaderProps = {
   search: string;
@@ -83,13 +84,15 @@ export default function SearchHeader({ search, setSearch }: SearchHeaderProps) {
       </div>
 
       {isModalOpen && (
-        <FilterCard
-          selectedColor={selectedColor}
-          selectedPriority={selectedPriority}
-          onColorChange={setSelectedColor}
-          onPriorityChange={setSelectedPriority}
-          onClose={() => setIsModalOpen(false)}
-        />
+        <ErrorBoundary>
+          <FilterCard
+            selectedColor={selectedColor}
+            selectedPriority={selectedPriority}
+            onColorChange={setSelectedColor}
+            onPriorityChange={setSelectedPriority}
+            onClose={() => setIsModalOpen(false)}
+          />
+        </ErrorBoundary>
       )}
     </header>
   );
