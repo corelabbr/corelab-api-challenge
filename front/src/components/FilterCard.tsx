@@ -41,9 +41,7 @@ export default function FilterCard({
               <button
                 key={color}
                 onClick={() => onColorChange(color)}
-                className={`w-6 h-6 rounded-full border-2 ${
-                  selectedColor === color ? "ring-2 ring-black" : ""
-                }`}
+                className={`w-6 h-6 rounded-full ${selectedColor === color ? "ring-1 ring-black" : ""} ${color}`}
                 style={{ backgroundColor: color }}
                 aria-label={`Selecionar cor ${color}`}
               />
@@ -73,7 +71,7 @@ export default function FilterCard({
             <p className="text-sm text-gray-600 mb-2">Data:</p>
             <input
               type="date"
-              className="border-2 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+              className="border-1 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
             />
           </div>
 
