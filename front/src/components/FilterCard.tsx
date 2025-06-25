@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 type FilterCardProps = {
   selectedColor?: string;
   selectedPriority?: string;
@@ -29,6 +31,8 @@ export default function FilterCard({
   onPriorityChange,
   onClose,
 }: FilterCardProps) {
+  const [selectedDate] = useState(new Date().toISOString().split("T")[0]);
+  
   return (
     <div className="fixed inset-0 z-50 bg-opacity-30 flex items-center justify-center bg-black/20" onClick={onClose}>
       <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md" onClick={(e) => e.stopPropagation()}>
@@ -71,6 +75,7 @@ export default function FilterCard({
             <p className="text-sm text-gray-600 mb-2">Data:</p>
             <input
               type="date"
+              value={selectedDate}
               className="border-1 border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
             />
           </div>

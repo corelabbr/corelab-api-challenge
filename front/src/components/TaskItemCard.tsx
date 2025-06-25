@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { X, Pencil, Droplet, Star, StarOff, Flag, Calendar } from "lucide-react";
 import ColorPickerModal from "../components/ColorPickerModal";
 import { useNavigate } from "react-router-dom";
+import { formatDateToBR } from "../utils/FormatDate";
 
 type TaskItemCardProps = {
   id: string;
@@ -16,22 +17,6 @@ type TaskItemCardProps = {
   onColorChange?: (color: string) => void;
 };
 
-function formatDateToBR(dateStr: string): string {
-  if (!dateStr) return "";
-
-  if (dateStr.includes("/") && dateStr.includes(",")) {
-    return dateStr.split(",")[0]; 
-  }
-
-  if (dateStr.includes("/")) {
-    return dateStr;
-  }
-
-  const [year, month, day] = dateStr.split("-");
-  if (!year || !month || !day) return "";
-
-  return `${day}/${month}/${year}`;
-}
 
 const fetchDeleteTask = async (id: string, token: string) => {
   const numericId = Number(id);
