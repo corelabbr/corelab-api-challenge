@@ -33,7 +33,7 @@ O **NexoTask** é uma aplicação completa para gerenciamento de tarefas, compos
 
 ## Estrutura do Projeto
 
-```text
+```bash
 nexo-task-api/
 ├── back/                 # Backend (Node.js, Clean Architecture)
 ├── front/                # Frontend (React + Vite)
