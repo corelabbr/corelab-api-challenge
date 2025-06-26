@@ -163,8 +163,13 @@ npm run dev
 
 npm run dev:css
 ```
+2. configure o **Debug Full Stack**
+   
+   - abra executar e depurar (Ctrl + Shift + D)
+  
+   - na opção executar e depurar deixe marcado **Debug Full Stack**
 
-2. No VS Code, com a pasta do projeto aberta, pressione F5 para iniciar o modo debug fullstack.
+3. No VS Code, com a pasta do projeto aberta, pressione F5 para iniciar o modo debug fullstack.
    
 ```text
 O VS Code utilizará o arquivo .vscode/launch.json já configurado para subir o servidor automaticamente com breakpoints habilitados.
