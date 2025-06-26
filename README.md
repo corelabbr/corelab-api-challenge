@@ -1,85 +1,183 @@
-## Corelab Challenge:
+# NexoTask – Sistema de Gerenciamento de Tarefas
 
-You are tasked with building a web application that allows users to create and manage their to-do lists. The application should consist of a responsive webpage built in React, and an API built in Node.js to store and manage the to-do lists.
+O **NexoTask** é uma aplicação completa para gerenciamento de tarefas, composta por uma **API (Back-end)** e uma **interface web (Front-end)**. O objetivo é oferecer uma solução simples, funcional e bem estruturada para cadastro, edição e organização de tarefas, com autenticação, envio de e-mails e arquitetura limpa.
 
+---
 
-### The repositories
-The [frontend repository](https://github.com/corelabbr/corelab-web-challenge)
+### Interface do sistema
 
-If you feel more comfortable, you can pick another React framework and show us your skills.
-
-The [backend repository](https://github.com/corelabbr/corelab-api-challenge)
-
-If you feel more comfortable, you can pick another Node JS framework and show us your skills.
-
-### The Layout
-Open the [layout mockup](https://www.figma.com/file/sQrUVHTlyogq3qGdkqGTXN/mockup?node-id=7%3A2&t=ANTOTiqjqGWYuoUr-0) in desktop and mobile version and follow this design as much as possible.
+[Veja as imagens do frontend aqui](https://github.com/Ton-Chyod-s/nexo-task-api/tree/dev/png)
 
 
-### The application should have the following functionality:
+## Tecnologias Utilizadas
 
-1. Users should be able to create, read, update, and delete to-do items using the API.
-2. Users should be able to mark an item as a favorite.
-3. Users should be able to set a color for each to-do item.
-4. The React frontend should display the user's to-do list in a responsive and visually appealing manner, with the ability to filter by favorite items and color.
-5. The favorited items should be displayed at the top of the list.
-
-### Technical Requirements:
-1. The backend API should be built in Node.js framework and use a database of your choice (e.g., MongoDB, PostgreSQL, etc.).
-2. The frontend should be built in React and use modern web development tools and best practices.
-3. The application should be responsive and visually appealing.
-
-### Deliverables:
-1. A link to a GitHub repository containing the complete source code for the project.
-2. A written description of how to set up and run the application locally.
-
-
-### Evaluation Criteria:
-1. Code Quality
-2. Code Format
-3. Code Perfomance
-4. Frontend Design
-5. If your code is Easily Readable
-6. Mobile First approach
-7. Code Responsability
-8. Features Work
-9. Responsiveness
-10. Does the application meet the functionality requirements listed above?
-11. Is the code well-organized, easy to read, and well-documented?
-12. Are modern web development tools and best practices used?
-13. Is the application visually appealing and responsive?
-
-### Backend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: Adonis TS or any other node framework you know.
-4. Database: Choose your own, you can even save in memory.
+###  Backend
+- **Node.js + TypeScript** – ambiente robusto e escalável
+- **Prisma ORM** – gerenciamento do banco de dados com migrations
+- **JWT** – autenticação stateless
+- **PostgreSQL** – banco de dados relacional
+- **Vitest** – testes leves e rápidos
+- **Docker** – ambiente padronizado
+- **Nodemailer** – envio de e-mails
 
 ### Frontend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: React TS
-4. Sass or other preprocessor
+- **React + TypeScript** – SPA com tipagem forte
+- **Vite** – build rápido e eficiente
+- **Tailwind CSS** – estilização leve e responsiva
+- **React Router** – controle de rotas
+- **fetch** – integração com a API
+- **Lucide React** – ícones modernos
+- **Docker** – ambiente padronizado
 
-### Want to impress us even more?
-If you feel comfortable and want to impress us even more, you can do the following:
+---
 
-1. Work on correct types and interfaces
-2. Work on eslint rules
-3. Work prettier config
-4. Work on docker containers
-5. Work on tests
-6. Work on CI/CD
+## Estrutura do Projeto
 
-### What to do when you finish?
+```bash
+nexo-task-api/
+├── back/                 # Backend (Node.js, Clean Architecture)
+├── front/                # Frontend (React + Vite)
+├── docker-compose.yml    # Orquestra front, back e banco
+├── LICENSE               # Licença MIT
+├── .github/workflows/    # CI/CD (merge automatizado, PR template)
+└── .vscode/              # Configurações de debug
+```
 
-Create a file PULL_REQUEST.md where you will describe what you did and how in as much detail as possible. Feel free to add videos for better explanation.
+## Instalação Local (Docker)
 
-Create a new pull request using the same branch name for Backend and Frontend
+### Requisitos
 
-Send us the pull requests and that's all!
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado na máquina
+- [Node.js](https://nodejs.org/) versão **22 ou superior**
+- Terminal Bash, PowerShell ou o terminal do VS Code
+
+---
+
+### 1. Subir os containers com build
+
+Execute o comando abaixo na raiz do projeto para construir as imagens e subir os containers:
+
+```bash
+docker-compose up -d --build
+```
+### 2. Verificar os containers e portas mapeadas
+Use o comando:
+```bash
+docker ps
+```
+
+Você verá uma saída parecida com esta:
+```bash
+CONTAINER ID   NAME                  PORTS
+abc123         nexo_back_container   0.0.0.0:3002->5050/tcp
+def456         nexo_front_container  0.0.0.0:3001->5055/tcp
+```
+### Endpoints locais
+
+- Front-end: http://localhost:3001
+
+- Back-end (API): http://localhost:3002
 
 
-#### Good luck! The sky is the limit 🚀
+## Instalação Local (sem Docker)
+
+### 1. Clonar o repositório
+```bash
+git clone https://github.com/Ton-Chyod-s/nexo-task-api.git
+
+cd nexo-task-api
+```
+
+### 2. Configurar o Backend
+
+```bash
+cd back
+
+npm install
+
+npx prisma generate --schema=./prisma/schema.prisma
+```
+
+Crie um arquivo .env com:
+
+```env
+JWT_SECRET=***
+DATABASE_URL=postgresql://postgres:123@localhost:5433/nexoTaskApi
+DATABASE_URL_PROD=postgresql://postgres:123@localhost:5433/nexoTaskApi
+
+PORT=3002
+PORT_FRONT=3001
+
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=465
+PORT_SERVER=1000
+SMTP_USER=exemplo@gmail.com
+SMTP_PASSWORD=lolololol
+```
+
+Execute as migrations:
+
+```bash
+npx prisma migrate dev
+```
+
+Rode o servidor:
+
+```bash
+npm run dev
+```
+Acesse o sistema em http://localhost:3002
+
+### 3. Configurar o Frontend
+   
+```
+cd ../front
+
+npm install
+```
+
+Crie o .env:
+
+```env
+VITE_API_URL=http://localhost:3001
+```
+
+Inicie o front:
+
+```bash
+npm run dev
+```
+
+Acesse o sistema em http://localhost:3001
+
+## Modo Debug com VS Code
+
+Para executar o projeto em modo debug:
+
+1. Rode o **frontend**:
+
+```bash
+cd front
+
+npm run dev
+
+npm run dev:css
+```
+2. configure o **Debug Full Stack**
+   
+   - abra executar e depurar (Ctrl + Shift + D)
+  
+   - na opção executar e depurar deixe marcado **Debug Full Stack**
+
+3. No VS Code, com a pasta do projeto aberta, pressione F5 para iniciar o modo debug fullstack.
+   
+```text
+O VS Code utilizará o arquivo .vscode/launch.json já configurado para subir o servidor automaticamente com breakpoints habilitados.
+```
+
+3. Aguarde até ver no terminal algo como:
+   
+```bash
+Server running on http://localhost:3002
+
+```
