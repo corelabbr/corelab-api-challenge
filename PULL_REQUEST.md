@@ -92,3 +92,4 @@ Backend:  http://localhost:3002
 ```
 
 Para mais detalhes sobre instalação, configuração e execução, consulte o [README.md principal](./README.md) na raiz do projeto, bem como os arquivos `README.md` localizados nas pastas `back` e `front`, que contêm instruções específicas para cada parte da aplicação.
+
