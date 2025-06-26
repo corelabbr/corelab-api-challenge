@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Tarefa" ALTER COLUMN "cor" DROP NOT NULL;
