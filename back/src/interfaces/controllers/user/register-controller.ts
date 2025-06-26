@@ -13,16 +13,26 @@ export class RegisterController {
     async register(req: Request, res: Response): Promise<Response> {
         const dados: UsuarioDTO = req.body;
 
-        if (dados.email && !dados.email.includes("@")) {
-            return res.status(400).json({ message: "O email informado não é válido. Verifique e tente novamente." });
+        if (!dados.nome || !dados.email || !dados.senha) {
+            return res.status(400).json({ message: "Ops! Faltou preencher algum campo." });
+        }
+
+        const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dados.email);
+
+        if (!emailValido) {
+            return res.status(400).json({
+                message: "O e-mail parece estar em um formato inválido. Verifique e tente novamente.",
+            });
+        }
+
+        if (dados.email && !emailValido) {
+        return res.status(400).json({
+            message: "O e-mail informado não é válido. Verifique e tente novamente.",
+        });
         }
 
         if (dados.senha !== dados.confirmSenha) {
             return res.status(400).json({ message: "As senhas não são iguais. Dá uma conferida aí." });
-        }
-
-        if (!dados.nome || !dados.email || !dados.senha) {
-            return res.status(400).json({ message: "Ops! Faltou preencher algum campo." });
         }
 
         const hashedPassword = await hashPassword(dados.senha);
