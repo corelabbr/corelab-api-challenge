@@ -1,4 +1,5 @@
 import Note from '#models/note'
+import { saveNoteValidator } from '#validators/note'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class NotesController {
@@ -9,7 +10,10 @@ export default class NotesController {
   }
 
   async store({ request }: HttpContext) {
-    await Note.create(request.only(['title', 'body', 'color', 'favorited', 'user_id']))
+    const user = request.all()
+    await saveNoteValidator.validate(user)
+
+    await Note.create(user)
 
     return { message: 'Nota salva!' }
   }
@@ -24,10 +28,13 @@ export default class NotesController {
     const note = await Note.query().whereNull('deleted_at').where('id', params.id).first()
     if (!note) return response.status(422).json({ error: 'Nota não encontrada!' })
 
-    note.title = request.input('title')
-    note.body = request.input('body')
-    note.color = request.input('color')
-    note.favorited = request.input('favorited')
+    const user = request.all()
+    await saveNoteValidator.validate(user)
+
+    note.title = user.input('title')
+    note.body = user.input('body')
+    note.color = user.input('color')
+    note.favorited = user.input('favorited')
     await note.save()
 
     return { message: 'Nota atualizada!' }
