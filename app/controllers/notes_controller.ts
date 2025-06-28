@@ -20,9 +20,9 @@ export default class NotesController {
     return note
   }
 
-  async update({ params, request }: HttpContext) {
+  async update({ params, request, response }: HttpContext) {
     const note = await Note.query().whereNull('deleted_at').where('id', params.id).first()
-    if (!note) return { error: 'Nota não encontrada!' }
+    if (!note) return response.status(422).json({ error: 'Nota não encontrada!' })
 
     note.title = request.input('title')
     note.body = request.input('body')
@@ -33,18 +33,18 @@ export default class NotesController {
     return { message: 'Nota atualizada!' }
   }
 
-  async destroy({ params }: HttpContext) {
+  async destroy({ params, response }: HttpContext) {
     const note = await Note.query().whereNull('deleted_at').where('id', params.id).first()
-    if (!note) return { error: 'Nota não encontrada!' }
+    if (!note) return response.status(422).json({ error: 'Nota não encontrada!' })
 
     await note.delete()
 
     return { message: 'Nota removida!' }
   }
 
-  async restore({ params }: HttpContext) {
+  async restore({ params, response }: HttpContext) {
     const note = await Note.query().whereNotNull('deleted_at').where('id', params.id).first()
-    if (!note) return { error: 'Nota não encontrada!' }
+    if (!note) return response.status(422).json({ error: 'Nota não encontrada!' })
 
     await note.restore()
 
