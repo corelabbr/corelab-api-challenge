@@ -9,8 +9,11 @@
 
 import router from '@adonisjs/core/services/router'
 
-router.get('/', async () => {
-  return {
-    hello: 'world',
-  }
-})
+const NotesController = () => import('#controllers/notes_controller')
+
+router
+  .group(() => {
+    router.resource('notes', NotesController).apiOnly()
+    router.get('notes/restore/:id', [NotesController, 'restore'])
+  })
+  .prefix('/api')

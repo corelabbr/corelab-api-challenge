@@ -26,11 +26,21 @@ export default class Note extends BaseModel {
   declare user: BelongsTo<typeof User>
 
   @column.dateTime({ serializeAs: null })
-  declare deletedAt: DateTime
+  declare deletedAt: DateTime | null
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  public async delete() {
+    this.deletedAt = DateTime.local()
+    await this.save()
+  }
+
+  public async restore() {
+    this.deletedAt = null
+    await this.save()
+  }
 }

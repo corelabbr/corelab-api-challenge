@@ -29,7 +29,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare token: string | null
 
   @hasMany(() => Note)
-  declare tasks: HasMany<typeof Note>
+  declare notes: HasMany<typeof Note>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
