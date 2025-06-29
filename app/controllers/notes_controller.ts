@@ -4,16 +4,15 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 export default class NotesController {
   async index({}: HttpContext) {
-    const notes = await Note.query().whereNull('deleted_at').preload('user')
+    const notes = await Note.query().whereNull('deleted_at')
 
     return notes
   }
 
   async store({ request }: HttpContext) {
-    const user = request.all()
-    await saveNoteValidator.validate(user)
+    await saveNoteValidator.validate(request.all())
 
-    await Note.create(user)
+    await Note.create(request.all())
 
     return { message: 'Nota salva!' }
   }
@@ -29,13 +28,12 @@ export default class NotesController {
     const note = await Note.query().whereNull('deleted_at').where('id', params.id).first()
     if (!note) return response.status(422).json({ errors: [{ message: 'Nota não encontrada!' }] })
 
-    const user = request.all()
-    await saveNoteValidator.validate(user)
+    await saveNoteValidator.validate(request.all())
 
-    note.title = user.input('title')
-    note.body = user.input('body')
-    note.color = user.input('color')
-    note.favorited = user.input('favorited')
+    note.title = request.input('title')
+    note.body = request.input('body')
+    note.color = request.input('color')
+    note.favorited = request.input('favorited')
     await note.save()
 
     return { message: 'Nota atualizada!' }
