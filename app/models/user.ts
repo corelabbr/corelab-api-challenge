@@ -25,12 +25,6 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column({ serializeAs: null })
   declare password: string
 
-  @column()
-  declare token: string | null
-
-  @hasMany(() => Note)
-  declare notes: HasMany<typeof Note>
-
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
