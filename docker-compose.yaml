@@ -1,0 +1,15 @@
+services:
+  postgresql:
+    container_name: corenotes-postgresql
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=corenotes
+    volumes:
+      - postgresql:/var/lib/postgresql/data
+volumes:
+  postgresql:
+    driver: local

@@ -1,67 +1,40 @@
 {
-  "name": "corelab-api-challenge",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "node ace serve --watch",
-    "build": "node ace build --production",
-    "start": "node server.js",
-    "lint": "eslint . --ext=.ts",
-    "format": "prettier --write .",
-    "test": "node ace test",
-    "test:watch": "npm test --watch"
-  },
-  "eslintConfig": {
-    "extends": [
-      "plugin:adonis/typescriptApp",
-      "prettier"
-    ],
-    "plugins": [
-      "prettier"
-    ],
-    "rules": {
-      "prettier/prettier": [
-        "error"
-      ]
-    }
-  },
-  "eslintIgnore": [
-    "build"
+  "name": "@corenotes/server",
+  "type": "module",
+  "version": "2.0.2",
+  "types": "dist/server.d.ts",
+  "main": "dist/server.d.ts",
+  "files": [
+    "dist/server.d.ts"
   ],
-  "prettier": {
-    "trailingComma": "es5",
-    "semi": false,
-    "singleQuote": true,
-    "useTabs": false,
-    "quoteProps": "consistent",
-    "bracketSpacing": true,
-    "arrowParens": "always",
-    "printWidth": 100
-  },
-  "devDependencies": {
-    "@adonisjs/assembler": "^5.6.2",
-    "@japa/preset-adonis": "^1.0.15",
-    "@japa/runner": "^2.0.7",
-    "adonis-preset-ts": "^2.1.0",
-    "eslint": "^8.15.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-adonis": "^2.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "pino-pretty": "^7.6.1",
-    "prettier": "^2.6.2",
-    "typescript": "~4.6",
-    "youch": "^3.2.0",
-    "youch-terminal": "^2.1.3"
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsup",
+    "start": "node dist/server.js",
+    "lint": "biome check",
+    "lint:fix": "biome check --write",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
-    "@adonisjs/core": "^5.7.6",
-    "@adonisjs/repl": "^3.1.10",
-    "proxy-addr": "^2.0.7",
-    "reflect-metadata": "^0.1.13",
-    "source-map-support": "^0.5.21"
+    "@biomejs/biome": "^2.0.6",
+    "@hono/node-server": "^1.14.4",
+    "@hono/zod-validator": "^0.7.0",
+    "@scalar/hono-api-reference": "^0.9.7",
+    "date-fns": "^4.1.0",
+    "drizzle-orm": "^0.44.2",
+    "hono": "^4.8.3",
+    "hono-openapi": "^0.4.8",
+    "pg": "^8.16.3",
+    "resend": "^4.6.0",
+    "ulid": "^3.0.1",
+    "zod": "^3.25.67"
   },
-  "engines": {
-    "node": "^16.15.0",
-    "npm": "^8.5.5"
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "drizzle-kit": "^0.31.4",
+    "tsup": "^8.5.0",
+    "tsx": "^4.7.1",
+    "typescript": "^5.8.3"
   }
 }
