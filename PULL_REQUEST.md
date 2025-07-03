@@ -24,8 +24,8 @@
 
 2. Clone the [API](https://github.com/iuryveloso/corelab-api-challenge) repository.
 
-3. Create a copy of the ".env.example" file in the app's root folder. Rename it to ".env" and change the necessary information.
+3. Create a copy of the ```.env.example``` file in the app's root folder. Rename it to ```.env``` and change the necessary information.
 
-4. Open the terminal and run the command ```docker compose up -d```. Next, run the command ```docker exec -it corenote-api  bash``` to access the application container, and then run the command ```node ace migration:run``` and type "Y" for the question that appears.
+4. Open the terminal and run the command ```docker compose up -d```. Next, run the command ```docker exec -it corenote-api  bash``` to access the application container, and then run the command ```node ace migration:run``` and type ```y``` for the question that appears.
 
-5. Finally, open an API client (like [Postman](https://www.postman.com/)) and go to [http://localhost:3333](http://localhost:3333). If you already run the frontend [APP](https://github.com/iuryveloso/corelab-web-challenge) instructions, just open your browser and go to [http://localhost:3000](http://localhost:3000). Enjoy!
+5. Finally, open an API client (like [Postman](https://www.postman.com/)) and go to http://localhost:3333. If you already run the frontend [APP](https://github.com/iuryveloso/corelab-web-challenge) instructions, just open your browser and go to http://localhost:3000. Enjoy!
