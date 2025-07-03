@@ -1,85 +1,98 @@
-## Corelab Challenge:
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+</p>
 
-You are tasked with building a web application that allows users to create and manage their to-do lists. The application should consist of a responsive webpage built in React, and an API built in Node.js to store and manage the to-do lists.
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-### The repositories
-The [frontend repository](https://github.com/corelabbr/corelab-web-challenge)
+## Description
 
-If you feel more comfortable, you can pick another React framework and show us your skills.
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-The [backend repository](https://github.com/corelabbr/corelab-api-challenge)
+## Project setup
 
-If you feel more comfortable, you can pick another Node JS framework and show us your skills.
+```bash
+$ npm install
+```
 
-### The Layout
-Open the [layout mockup](https://www.figma.com/file/sQrUVHTlyogq3qGdkqGTXN/mockup?node-id=7%3A2&t=ANTOTiqjqGWYuoUr-0) in desktop and mobile version and follow this design as much as possible.
+## Compile and run the project
 
+```bash
+# development
+$ npm run start
 
-### The application should have the following functionality:
+# watch mode
+$ npm run start:dev
 
-1. Users should be able to create, read, update, and delete to-do items using the API.
-2. Users should be able to mark an item as a favorite.
-3. Users should be able to set a color for each to-do item.
-4. The React frontend should display the user's to-do list in a responsive and visually appealing manner, with the ability to filter by favorite items and color.
-5. The favorited items should be displayed at the top of the list.
+# production mode
+$ npm run start:prod
+```
 
-### Technical Requirements:
-1. The backend API should be built in Node.js framework and use a database of your choice (e.g., MongoDB, PostgreSQL, etc.).
-2. The frontend should be built in React and use modern web development tools and best practices.
-3. The application should be responsive and visually appealing.
+## Run tests
 
-### Deliverables:
-1. A link to a GitHub repository containing the complete source code for the project.
-2. A written description of how to set up and run the application locally.
+```bash
+# unit tests
+$ npm run test
 
+# e2e tests
+$ npm run test:e2e
 
-### Evaluation Criteria:
-1. Code Quality
-2. Code Format
-3. Code Perfomance
-4. Frontend Design
-5. If your code is Easily Readable
-6. Mobile First approach
-7. Code Responsability
-8. Features Work
-9. Responsiveness
-10. Does the application meet the functionality requirements listed above?
-11. Is the code well-organized, easy to read, and well-documented?
-12. Are modern web development tools and best practices used?
-13. Is the application visually appealing and responsive?
+# test coverage
+$ npm run test:cov
+```
 
-### Backend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: Adonis TS or any other node framework you know.
-4. Database: Choose your own, you can even save in memory.
+## Deployment
 
-### Frontend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: React TS
-4. Sass or other preprocessor
+When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
 
-### Want to impress us even more?
-If you feel comfortable and want to impress us even more, you can do the following:
+If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
 
-1. Work on correct types and interfaces
-2. Work on eslint rules
-3. Work prettier config
-4. Work on docker containers
-5. Work on tests
-6. Work on CI/CD
+```bash
+$ npm install -g @nestjs/mau
+$ mau deploy
+```
 
-### What to do when you finish?
+With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
 
-Create a file PULL_REQUEST.md where you will describe what you did and how in as much detail as possible. Feel free to add videos for better explanation.
+## Resources
 
-Create a new pull request using the same branch name for Backend and Frontend
+Check out a few resources that may come in handy when working with NestJS:
 
-Send us the pull requests and that's all!
+- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
+- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
+- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
+- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
+- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
+- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
+- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
+- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
 
+## Support
 
-#### Good luck! The sky is the limit 🚀
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+
+## Stay in touch
+
+- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## License
+
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
