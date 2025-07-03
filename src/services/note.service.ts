@@ -23,10 +23,10 @@ export const create = async (note: Note): Promise<Note> => {
 export const update = async (id: string, note: Note): Promise<Note> => {
   const result = await pool.query(
     `UPDATE notes 
-     SET title = $1, description = $2, favorite = $3, updated_at = now() 
-     WHERE id = $4 
-     RETURNING id, title, description, favorite, created_at as "createdAt", updated_at as "updatedAt"`,
-    [note.title, note.description, note.favorite, id]
+     SET title = $1, description = $2, updated_at = now() 
+     WHERE id = $3 
+     RETURNING id, title, description, favorite, color, created_at as "createdAt", updated_at as "updatedAt"`,
+    [note.title, note.description, id]
   );
   return result.rows[0];
 };
@@ -40,7 +40,7 @@ export const toggleFavorite = async (id: string): Promise<Note> => {
     `UPDATE notes 
      SET favorite = NOT favorite, updated_at = now() 
      WHERE id = $1 
-     RETURNING id, title, description, favorite, created_at as "createdAt", updated_at as "updatedAt"`,
+     RETURNING id, title, description, favorite, color, created_at as "createdAt", updated_at as "updatedAt"`,
     [id]
   );
   return result.rows[0];
