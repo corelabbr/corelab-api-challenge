@@ -1,0 +1,37 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: corenote-db
+    restart: unless-stopped
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    expose:
+      - ${DB_PORT}
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/data/application/init.sql
+    command: --init-file /data/application/init.sql
+    networks:
+      - corenote_api
+  api:
+    image: corenote_api
+    container_name: corenote-api
+    restart: unless-stopped
+    build:
+      context: .
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      - PORT=${PORT}
+    networks:
+      - corenote_api
+    depends_on:
+      - mysql
+networks:
+  corenote_api:
+    driver: bridge
+volumes:
+  mysql_data:
