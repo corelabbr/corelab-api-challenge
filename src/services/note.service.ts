@@ -3,7 +3,7 @@ import { Note } from '../types/note';
 
 export const getAll = async (): Promise<Note[]> => {
   const result = await pool.query(
-    `SELECT id, title, description, favorite, created_at as "createdAt", updated_at as "updatedAt" 
+    `SELECT id, title, description, favorite, color, created_at as "createdAt", updated_at as "updatedAt" 
      FROM notes 
      ORDER BY created_at DESC`
   );
@@ -12,10 +12,10 @@ export const getAll = async (): Promise<Note[]> => {
 
 export const create = async (note: Note): Promise<Note> => {
   const result = await pool.query(
-    `INSERT INTO notes (title, description, favorite) 
-     VALUES ($1, $2, $3) 
-     RETURNING id, title, description, favorite, created_at as "createdAt", updated_at as "updatedAt"`,
-    [note.title, note.description, note.favorite]
+    `INSERT INTO notes (title, description, favorite, color) 
+     VALUES ($1, $2, $3, $4) 
+     RETURNING id, title, description, favorite, color, created_at as "createdAt", updated_at as "updatedAt"`,
+    [note.title, note.description, note.favorite, note.color]
   );
   return result.rows[0];
 };
@@ -57,4 +57,5 @@ export const toggleColor = async (id: string, color: string): Promise<Note> => {
   );
   return result.rows[0];
 };
+
 

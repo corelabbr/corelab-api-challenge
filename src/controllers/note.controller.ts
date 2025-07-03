@@ -29,16 +29,6 @@ export const toggleFavorite = async (req: Request, res: Response) => {
 export const toggleColor = async (req: Request, res: Response) => {
   const { color } = req.body;
 
-  if (!color) {
-    return res.status(400).json({ message: "Cor não fornecida." });
-  }
-
-  try {
-    const updated = await NoteService.toggleColor(req.params.id, color);
-    res.json(updated);
-  } catch (error) {
-    console.error("Erro ao trocar cor:", error);
-    res.status(500).json({ message: "Erro interno do servidor." });
-  }
+  const updated = await NoteService.toggleColor(req.params.id, color);
+  res.json(updated);
 };
-
