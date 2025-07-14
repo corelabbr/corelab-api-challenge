@@ -26,7 +26,6 @@ export default class NotesController {
 
       return response.created(note)
     } catch (error) {
-      console.error(error)
       return response.internalServerError({ message: 'Não foi possível criar a nota.' })
     }
   }
@@ -40,7 +39,6 @@ export default class NotesController {
       })
       return response.ok(notes)
     } catch (error) {
-      console.error(error)
       return response.internalServerError({ message: 'Não foi possível buscar as notas.' })
     }
   }
@@ -57,8 +55,21 @@ export default class NotesController {
       })
       return response.ok(note)
     } catch (error) {
-      console.log(error)
       return response.internalServerError({ message: 'Não foi possível atualizar a nota' })
+    }
+  }
+
+  public async destroy({ params, response, request }: HttpContextContract) {
+    try {
+      const noteId = params.id
+      await prisma.note.delete({
+        where: {
+          id: Number(noteId),
+        },
+      })
+      return response.noContent()
+    } catch (error) {
+      return response.internalServerError({ message: 'Não foi possível deletar a nota.' })
     }
   }
 }

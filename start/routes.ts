@@ -27,3 +27,4 @@ Route.get('/', async () => {
 Route.post('/notes', 'NotesController.store')
 Route.get('/notes', 'NotesController.index')
 Route.patch('/notes/:id', 'NotesController.update')
+Route.delete('/notes/:id', 'NotesController.destroy')
