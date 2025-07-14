@@ -44,4 +44,21 @@ export default class NotesController {
       return response.internalServerError({ message: 'Não foi possível buscar as notas.' })
     }
   }
+
+  public async update({ params, response, request }: HttpContextContract) {
+    try {
+      const noteId = params.id
+      const updateDate = request.only(['title', 'content', 'isFavorite', 'color'])
+      const note = await prisma.note.update({
+        where: {
+          id: Number(noteId),
+        },
+        data: updateDate,
+      })
+      return response.ok(note)
+    } catch (error) {
+      console.log(error)
+      return response.internalServerError({ message: 'Não foi possível atualizar a nota' })
+    }
+  }
 }

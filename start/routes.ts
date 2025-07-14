@@ -25,4 +25,5 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 Route.post('/notes', 'NotesController.store')
-Route.get('/notes', 'NotesController.store')
+Route.get('/notes', 'NotesController.index')
+Route.patch('/notes/:id', 'NotesController.update')
