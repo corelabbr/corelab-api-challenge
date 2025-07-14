@@ -44,7 +44,7 @@ const corsConfig: CorsConfig = {
   |                     one of the above values.
   |
   */
-  origin: true,
+  origin: ['http://localhost:3000'],
 
   /*
   |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ const corsConfig: CorsConfig = {
   |
   | Following is the list of default methods. Feel free to add more.
   */
-  methods: ['GET', 'HEAD', 'POST', 'PUT', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
 
   /*
   |--------------------------------------------------------------------------
