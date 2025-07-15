@@ -20,4 +20,11 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/vehicles', 'VehiclesController.index');
+Route.get('/vehicles', 'VehiclesController.index')
+Route.get('/', async () => {
+  return { hello: 'world' }
+})
+Route.post('/notes', 'NotesController.store')
+Route.get('/notes', 'NotesController.index')
+Route.patch('/notes/:id', 'NotesController.update')
+Route.delete('/notes/:id', 'NotesController.destroy')
