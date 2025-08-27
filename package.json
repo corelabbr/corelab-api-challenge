@@ -55,10 +55,15 @@
   },
   "dependencies": {
     "@adonisjs/core": "^5.7.6",
+    "@adonisjs/lucid": "^18.0.0",
     "@adonisjs/repl": "^3.1.10",
+    "@types/supertest": "^6.0.2",
+    "luxon": "^3.5.0",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
-    "source-map-support": "^0.5.21"
+    "source-map-support": "^0.5.21",
+    "sqlite3": "^5.1.7",
+    "supertest": "^7.0.0"
   },
   "engines": {
     "node": "^16.15.0",
