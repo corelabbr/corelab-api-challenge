@@ -12,6 +12,8 @@ export default class extends BaseSchema {
       table.string('color').nullable().defaultTo('white')
       table.boolean('favorited').nullable().defaultTo('false')
 
+      table.integer('user_id').unsigned().references('users.id').onDelete('CASCADE')
+
       table.timestamp('deleted_at')
       table.timestamp('created_at')
       table.timestamp('updated_at')

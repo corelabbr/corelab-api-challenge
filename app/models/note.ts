@@ -1,5 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, hasOne } from '@adonisjs/lucid/orm'
+import * as relations from '@adonisjs/lucid/types/relations'
+import User from './user.js'
 
 export default class Note extends BaseModel {
   @column({ isPrimary: true })
@@ -16,6 +18,12 @@ export default class Note extends BaseModel {
 
   @column()
   declare favorited: boolean
+
+  @column()
+  declare userId: number
+
+  @belongsTo(() => User)
+  declare user: relations.BelongsTo<typeof User>
 
   @column.dateTime({ serializeAs: null })
   declare deletedAt: DateTime | null
