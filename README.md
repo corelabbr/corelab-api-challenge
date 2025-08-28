@@ -1,84 +1,209 @@
-## Corelab Challenge:
+# Corelab API Challenge — Tasks API
 
-You are tasked with building a web application that allows users to create and manage their to-do lists. The application should consist of a responsive webpage built in React, and an API built in Node.js to store and manage the to-do lists.
+API REST construída com **AdonisJS v5 + Lucid** para gerenciar tarefas (“notes”) conforme o desafio. Implementa **CRUD completo**, **filtros de busca** e **PostgreSQL** como banco de dados.
 
+---
 
-### The repositories
-The [frontend repository](https://github.com/corelabbr/corelab-web-challenge)
+## ✅ O que foi feito
 
-If you feel more comfortable, you can pick another React framework and show us your skills.
+### Stack
+- **AdonisJS v5** (Node 16.x requerido)
+- **Lucid ORM 18.x**
+- **PostgreSQL** (config via `.env`)
+- **Luxon** (`DateTime`) para timestamps
 
-The [backend repository](https://github.com/corelabbr/corelab-api-challenge)
+### Domínio `Task`
+**Campos:**
+- `id` (PK, auto-increment)
+- `title` (string, obrigatório)
+- `description` (text, opcional)
+- `color` (enum: `yellow` | `blue` | `green` | `peach`, padrão `yellow`)
+- `is_favorite` (boolean, padrão `false`)
+- `created_at` / `updated_at` (timestamps)
 
-If you feel more comfortable, you can pick another Node JS framework and show us your skills.
+### Migration
+- Cria **tipo enum nativo** no Postgres (`task_color`)
+- Cria tabela `tasks` com as colunas acima
 
-### The Layout
-Open the [layout mockup](https://www.figma.com/make/cy34jtb1qvVC5org8qSzfY/Core-Notes-Application?node-id=0-1&p=f&t=gPckDCQn55VpTAxr-0&fullscreen=1) in desktop and mobile version and follow this design as much as possible.
+### API REST
+- `GET /` — healthcheck simples  
+- `POST /tasks` — cria tarefa  
+- `GET /tasks` — lista tarefas (com filtros)  
+- `PATCH /tasks/:id` — atualização parcial  
+- `DELETE /tasks/:id` — exclusão
 
-### The application should have the following functionality:
+### Ajustes do projeto
+- `.adonisrc.json` atualizado (providers/commands do Lucid)
+- `config/database.ts` preparado para PostgreSQL
+- `.env` de exemplo com `PG_HOST`, `PG_PORT`, `PG_USER`, `PG_PASSWORD`, `PG_DB_NAME`, `DB_CONNECTION=pg`
+- Corrigido erro de datas do Lucid: uso de `@column.dateTime()` (substitui o legado `DateTimeColumn`)
+- Corrigido erro de env: inclusão de `DRIVE_DISK=local` quando o validador exige
 
-1. Users should be able to create, read, update, and delete to-do items using the API.
-2. Users should be able to mark an item as a favorite.
-3. Users should be able to set a color for each to-do item.
-4. The React frontend should display the user's to-do list in a responsive and visually appealing manner, with the ability to filter by favorite items and color.
-5. The favorited items should be displayed at the top of the list.
+---
 
-### Technical Requirements:
-1. The backend API should be built in Node.js framework and use a database of your choice (e.g., MongoDB, PostgreSQL, etc.).
-2. The frontend should be built in React and use modern web development tools and best practices.
-3. The application should be responsive and visually appealing.
+## 📁 Estrutura relevante
 
-### Deliverables:
-1. A link to a GitHub repository containing the complete source code for the project.
-2. A written description of how to set up and run the application locally.
+```
+app/
+  Controllers/
+    Http/
+      TasksController.ts
+  Models/
+    Task.ts
 
+config/
+  database.ts
 
-### Evaluation Criteria:
-1. Code Quality
-2. Code Format
-3. Code Perfomance
-4. Frontend Design
-5. If your code is Easily Readable
-6. Mobile First approach
-7. Code Responsability
-8. Features Work
-9. Responsiveness
-10. Does the application meet the functionality requirements listed above?
-11. Is the code well-organized, easy to read, and well-documented?
-12. Are modern web development tools and best practices used?
-13. Is the application visually appealing and responsive?
+database/
+  migrations/
+    0000000000000_create_tasks_table.ts
 
-### Backend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: Adonis TS or any other node framework you know.
-4. Database: Choose your own, you can even save in memory.
+start/
+  routes.ts
 
-### Frontend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: React TS
-4. Sass or other preprocessor
+.env (exemplo)
+```
 
-### Want to impress us even more?
-If you feel comfortable and want to impress us even more, you can do the following:
+---
 
-1. Work on correct types and interfaces
-2. Work on eslint rules
-3. Work prettier config
-4. Work on docker containers
-5. Work on tests
-6. Work on CI/CD
+## ⚙️ Como rodar localmente
 
-### What to do when you finish?
+### Pré-requisitos
+- **Node 16.x** (use `nvm` se necessário)
+- **PostgreSQL** rodando e com um database criado
 
-Create a file PULL_REQUEST.md where you will describe what you did and how in as much detail as possible. Feel free to add videos for better explanation.
+**Selecionar Node 16:**
+```bash
+nvm install 16
+nvm use 16
+```
 
-Create a new pull request using the same branch name for Backend and Frontend
+**Instalar dependências:**
+```bash
+npm ci
+```
 
-Send us the pull requests and that's all!
+**Configurar `.env`:**
+```dotenv
+# App
+PORT=3333
+HOST=0.0.0.0
+NODE_ENV=development
+APP_KEY=alguma-chave-secreta
 
+# Banco
+DB_CONNECTION=pg
+PG_HOST=127.0.0.1
+PG_PORT=5432
+PG_USER=corelab
+PG_PASSWORD=corelab
+PG_DB_NAME=corelab
 
-#### Good luck! The sky is the limit 🚀
+# Necessário para o validador de env do Adonis
+DRIVE_DISK=local
+```
+
+**Gerar/atualizar manifest do Ace (se precisar):**
+```bash
+node ace generate:manifest
+```
+
+**Rodar migrações:**
+```bash
+node ace migration:run
+```
+
+**Subir o servidor:**
+```bash
+npm run dev
+# http://127.0.0.1:3333
+```
+
+---
+
+## 🔀 Rotas & exemplos
+
+### Healthcheck
+**GET /**  
+**Resposta:**
+```json
+{ Rota_Está_Funcionando: true }
+```
+
+---
+
+### Criar tarefa
+**POST /tasks**  
+**Body:**
+```json
+{
+  "title": "Projeto Corelab",
+  "description": "Modelo + Controller",
+  "color": "yellow",
+  "isFavorite": false
+}
+```
+
+**cURL:**
+```bash
+curl -s -X POST http://127.0.0.1:3333/tasks   -H "Content-Type: application/json"   -d '{"title":"Projeto Corelab","description":"Modelo + Controller","color":"yellow","isFavorite":false}'
+```
+
+---
+
+### Listar tarefas (com filtros)
+**GET /tasks**  
+
+**Query params:**
+- `q` — busca parcial em `title` e `description`
+- `favorite` — `true` | `false`
+
+**Exemplos:**
+```bash
+curl -s http://127.0.0.1:3333/tasks | jq .
+curl -s "http://127.0.0.1:3333/tasks?q=Adonis&favorite=true" | jq .
+```
+
+---
+
+### Atualizar tarefa (parcial)
+**PATCH /tasks/:id**  
+
+**Body (exemplos):**
+```json
+{ "title": "Projeto Corelab V5", "color": "blue" }
+```
+```json
+{ "isFavorite": true }
+```
+
+**cURL:**
+```bash
+curl -s -X PATCH http://127.0.0.1:3333/tasks/1   -H "Content-Type: application/json"   -d '{"title":"Projeto Corelab V5","color":"blue"}' | jq .
+```
+
+---
+
+### Excluir tarefa
+**DELETE /tasks/:id**
+```bash
+curl -i -X DELETE http://127.0.0.1:3333/tasks/1
+```
+
+---
+
+## 🧠 Decisões de implementação
+- **Enum nativo Postgres (`task_color`)** para integridade e validação mais segura de `color`.
+- **Busca simples via `q`** em `title`/`description` e **filtro booleano `favorite`**.
+- **Compatibilidade**: projeto requer **Node ^16.15.0** — recomenda-se `nvm` para alternar versões.
+- **Correções conhecidas**:
+  - `DRIVE_DISK` ausente → definir `DRIVE_DISK=local` no `.env`.
+  - Decorators de data → usar `@column.dateTime()` (Lucid 18) no lugar do legado `DateTimeColumn`.
+
+---
+
+## 🚀 Próximos passos sugeridos
+- Validações com `@adonisjs/validator`.
+- Paginação no `GET /tasks`.
+- Testes automatizados (**Japa**) para fluxos e erros.
+- **CORS** / **rate-limit** caso seja exposto publicamente.
