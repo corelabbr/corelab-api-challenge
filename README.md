@@ -1,84 +1,116 @@
-## Corelab Challenge:
+# Core Notes — To‑do List (Next.js(ReactTS) + NestJS + PostgreSQL + Docker)
 
-You are tasked with building a web application that allows users to create and manage their to-do lists. The application should consist of a responsive webpage built in React, and an API built in Node.js to store and manage the to-do lists.
+Aplicação full‑stack de lista de tarefas (to‑do) chamada Core Notes. Front‑end em Next.js (React + TypeScript + TailwindCSS), back‑end em NestJS com PostgreSQL, ambos com suporte a execução local (npm) e via Docker Compose.
 
-
-### The repositories
-The [frontend repository](https://github.com/corelabbr/corelab-web-challenge)
-
-If you feel more comfortable, you can pick another React framework and show us your skills.
-
-The [backend repository](https://github.com/corelabbr/corelab-api-challenge)
-
-If you feel more comfortable, you can pick another Node JS framework and show us your skills.
-
-### The Layout
-Open the [layout mockup](https://www.figma.com/make/cy34jtb1qvVC5org8qSzfY/Core-Notes-Application?node-id=0-1&p=f&t=gPckDCQn55VpTAxr-0&fullscreen=1) in desktop and mobile version and follow this design as much as possible.
-
-### The application should have the following functionality:
-
-1. Users should be able to create, read, update, and delete to-do items using the API.
-2. Users should be able to mark an item as a favorite.
-3. Users should be able to set a color for each to-do item.
-4. The React frontend should display the user's to-do list in a responsive and visually appealing manner, with the ability to filter by favorite items and color.
-5. The favorited items should be displayed at the top of the list.
-
-### Technical Requirements:
-1. The backend API should be built in Node.js framework and use a database of your choice (e.g., MongoDB, PostgreSQL, etc.).
-2. The frontend should be built in React and use modern web development tools and best practices.
-3. The application should be responsive and visually appealing.
-
-### Deliverables:
-1. A link to a GitHub repository containing the complete source code for the project.
-2. A written description of how to set up and run the application locally.
+**Repositório**
+- Front-end: <a href="https://github.com/DavidBotelhoo/to-do-list-web-corelabbr">`to-do-list-web-corelabbr`</a>
+- Back-end: <a href="https://github.com/DavidBotelhoo/to-do-list-api-corelabbr">`to-do-list-api-corelabbr`</a>
 
 
-### Evaluation Criteria:
-1. Code Quality
-2. Code Format
-3. Code Perfomance
-4. Frontend Design
-5. If your code is Easily Readable
-6. Mobile First approach
-7. Code Responsability
-8. Features Work
-9. Responsiveness
-10. Does the application meet the functionality requirements listed above?
-11. Is the code well-organized, easy to read, and well-documented?
-12. Are modern web development tools and best practices used?
-13. Is the application visually appealing and responsive?
+**Visão Geral**
+- Core Notes permite criar, editar, excluir, buscar tarefas, e marcar como favoritas.
+- A API expõe endpoints REST com validação, paginação/filtros e documentação via Swagger.
+- No desenvolvimento local, o Next.js reescreve chamadas `/api/*` para o NestJS.
 
-### Backend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: Adonis TS or any other node framework you know.
-4. Database: Choose your own, you can even save in memory.
-
-### Frontend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: React TS
-4. Sass or other preprocessor
-
-### Want to impress us even more?
-If you feel comfortable and want to impress us even more, you can do the following:
-
-1. Work on correct types and interfaces
-2. Work on eslint rules
-3. Work prettier config
-4. Work on docker containers
-5. Work on tests
-6. Work on CI/CD
-
-### What to do when you finish?
-
-Create a file PULL_REQUEST.md where you will describe what you did and how in as much detail as possible. Feel free to add videos for better explanation.
-
-Create a new pull request using the same branch name for Backend and Frontend
-
-Send us the pull requests and that's all!
+Arquivos úteis para referência:
+- Rewrites do Next: `to-do-list-web/next.config.ts:8`
+- Base URL no front: `to-do-list-web/src/services/api.ts:5`
+- Porta do back (Nest): `to-do-list-api/src/main.ts:51`
+- Exemplo de env do back: `to-do-list-api/.env.example:1`
+- Compose unificado (web+api+db): `to-do-list-web/docker-compose.yml:1`
 
 
-#### Good luck! The sky is the limit 🚀
+**Funcionalidades**
+- Criar, listar, editar e excluir tarefas.
+- Marcar como favorita.
+- Busca por texto.
+- Ordenação por data de criação; seção dedicada para favoritos.
+- API com validação (class-validator), TypeORM + PostgreSQL e Swagger.
+
+
+**Stack**
+- Front-end: Next.js 15, React 19, TypeScript, TailwindCSS 4.
+- Back-end: NestJS 10, TypeORM, PostgreSQL 15, Swagger.
+- Infra: Docker/Docker Compose.
+
+
+**Pré‑requisitos**
+- Node.js 22+ (o front exige `"node": ">=22.0.0"`).
+- npm (ou outro gerenciador de pacotes).
+- Docker + Docker Compose (opcional, para subir tudo em contêineres ou apenas o banco).
+
+
+**Rodando com NPM (desenvolvimento local)**
+- Back‑end (NestJS):
+  1. Em `to-do-list-api`, duplique o `.env.example` para `.env` e ajuste as variáveis conforme seu ambiente (host/porta/credenciais do PostgreSQL). Exemplo pronto no repositório: `to-do-list-api/.env.example:1`.
+  2. Garanta um PostgreSQL acessível (pode ser local ou via Docker). Opções:
+     - Local: crie o banco `to-do-list-api` e um usuário compatível com seu `.env`.
+     - Docker (somente banco): na raiz do front, rode apenas o serviço do Postgres do compose unificado: `docker compose -f to-do-list-web/docker-compose.yml up -d postgres`.
+  3. Instale dependências e suba em modo watch:
+     - `cd to-do-list-api`
+     - `npm install`
+     - `npm run start:dev`
+  4. API disponível (por padrão do código) em `http://localhost:3001/api/v1`.
+     - Swagger: `http://localhost:3001/api/v1/docs`.
+
+- Front‑end (Next.js):
+  1. Em `to-do-list-web`, instale dependências e suba o dev server:
+     - `cd to-do-list-web`
+     - `npm install`
+     - `npm run dev`
+  2. Acesse `http://localhost:3000`.
+  3. As chamadas para `/api/*` são reescritas para o back local em `http://localhost:3001` (veja `to-do-list-web/next.config.ts:8`). Não é necessário definir `NEXT_PUBLIC_API_URL` para desenvolvimento, pois o cliente usa base relativa (`/api/v1`).
+
+
+**Rodando com Docker (compose unificado)**
+- O arquivo `to-do-list-web/docker-compose.yml` orquestra web, api e postgres.
+- Passos:
+  1. `cd to-do-list-web`
+  2. `docker-compose up -d --build`
+  3. Acesse o front em `http://localhost:3000`.
+  4. A API deve expor `http://localhost:3333/api/v1` segundo o compose. Importante: o código do back atualmente fixa a porta em 3001 (veja `to-do-list-api/src/main.ts:51`). Se a API não responder via `3333`, ajuste o mapeamento de portas no compose para `"3333:3001"` no serviço `backend`.
+     - Alternativas:
+       - Ajustar o compose para expor `3333:3001`.
+       - Ou alterar o back para ler `PORT` do `.env` (descomentando lógica) e recompilar a imagem.
+  5. Swagger: `http://localhost:3333/api/v1/docs` (considere o ajuste de porta acima).
+
+- Somente banco com Docker (para usar npm no front/back):
+  - `docker compose -f to-do-list-web/docker-compose.yml up -d postgres`
+
+
+**Variáveis de Ambiente**
+- Back‑end (`to-do-list-api/.env`):
+  - `DATABASE_HOST`, `DATABASE_PORT`, `DATABASE_NAME`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`.
+  - `NODE_ENV`, `API_PREFIX` (p.ex. `api/v1`).
+  - `JWT_SECRET`, `JWT_EXPIRES_IN` (planejado para autenticação futura).
+  - Exemplos em `to-do-list-api/.env.example:1`.
+- Front‑end (`to-do-list-web/.env`):
+  - `NEXT_PUBLIC_API_URL` pode ser usado em ambientes de produção. No dev local, o cliente usa base relativa e rewrites (ver `to-do-list-web/src/services/api.ts:5` e `to-do-list-web/next.config.ts:8`).
+
+
+**Endpoints Principais (API)**
+- Base: `/api/v1`
+- `GET /tasks`: lista com paginação e filtros (`status`, `isFavorite`, `search`).
+- `GET /tasks/stats`: estatísticas por status.
+- `GET /tasks/:id`: obtém tarefa por ID.
+- `POST /tasks`: cria tarefa.
+- `PATCH /tasks/:id`: atualiza tarefa.
+- `PATCH /tasks/:id/status`: atualiza status.
+- `PATCH /tasks/:id/favorite`: alterna favorito.
+- `DELETE /tasks/:id`: remove tarefa.
+
+
+**Estrutura de Pastas (raiz)**
+- `to-do-list-web`: aplicação Next.js (front).
+- `to-do-list-api`: aplicação NestJS (back).
+
+
+**Dicas de Desenvolvimento**
+- Node 22+ é necessário para o front (veja `to-do-list-web/package.json:38`).
+- CORS no back já permite `http://localhost:3000` (veja `to-do-list-api/src/main.ts:18`).
+- Se usar Docker Compose unificado, o Postgres é inicializado com um script (`init.sql`) montado em `to-do-list-web/docker-compose.yml:1`.
+- Scripts úteis:
+  - Back: `npm run start:dev`, `npm run build`, `npm test`, `npm run migration:run`.
+  - Front: `npm run dev`, `npm run build`, `npm start`, `npm run lint`.
+
+
