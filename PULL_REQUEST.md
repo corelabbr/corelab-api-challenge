@@ -33,10 +33,6 @@ project/
 │
 └─ index.ts # Ponto de entrada do projeto
 
-yaml
-Copiar código
-
----
 
 ## Configuração
 
@@ -48,23 +44,23 @@ DB_USER=root
 DB_PASS=sua_senha
 DB_NAME=nome_do_banco
 
-javascript
-Copiar código
+
 
 2. Instale as dependências:
 
-```bash
+
 npm install
 ou, se usar yarn:
 
-bash
-Copiar código
+
+
 yarn install
+
 Rode o projeto em modo de desenvolvimento:
 
-bash
-Copiar código
-npm run dev
+node --require ts-node/register src/index.ts
+
+
 Endpoints da API
 Listar tarefas
 GET /tasks
