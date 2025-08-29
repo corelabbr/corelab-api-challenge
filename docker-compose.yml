@@ -1,0 +1,70 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: to-do-list-api-postgres-api
+    restart: always
+    environment:
+      POSTGRES_DB: to-do-list-api
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - to-do-list-api-network
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: to-do-list-api-api
+    restart: always
+    ports:
+      - '3001:3001'
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - API_PREFIX=api/v1
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=to-do-list-api
+      - DATABASE_USERNAME=admin
+      - DATABASE_PASSWORD=admin123
+    depends_on:
+      - postgres
+    networks:
+      - to-do-list-api-network
+
+  api-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: to-do-list-api-dev
+    restart: always
+    ports:
+      - '3001:3001'
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      - API_PREFIX=api/v1
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=to-do-list-api
+      - DATABASE_USERNAME=admin
+      - DATABASE_PASSWORD=admin123
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+    networks:
+      - to-do-list-api-network
+
+volumes:
+  postgres_data:
+
+networks:
+  to-do-list-api-network:
+    driver: bridge
