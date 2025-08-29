@@ -3,8 +3,8 @@
 Aplicação full‑stack de lista de tarefas (to‑do) chamada Core Notes. Front‑end em Next.js (React + TypeScript + TailwindCSS), back‑end em NestJS com PostgreSQL, ambos com suporte a execução local (npm) e via Docker Compose.
 
 **Repositório**
-- Front-end: <a href="https://github.com/DavidBotelhoo/to-do-list-web-corelabbr">`to-do-list-web-corelabbr`</a>
-- Back-end: <a href="https://github.com/DavidBotelhoo/to-do-list-api-corelabbr">`to-do-list-api-corelabbr`</a>
+- Front-end: <a href="https://github.com/DavidBotelhoo/corelab-web-challenge">`corelab-web-challenge`</a>
+- Back-end: <a href="https://github.com/DavidBotelhoo/corelab-api-challenge">`corelab-api-challenge`</a>
 
 
 **Visão Geral**
