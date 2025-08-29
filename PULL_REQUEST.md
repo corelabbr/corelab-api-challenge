@@ -48,18 +48,18 @@ DB_NAME=nome_do_banco
 
 2. Instale as dependências:
 
-
+```bash
 npm install
 ou, se usar yarn:
 
-
+bash
 
 yarn install
-
 Rode o projeto em modo de desenvolvimento:
 
-node --require ts-node/register src/index.ts
+bash
 
+node --require ts-node/register src/index.ts
 
 Endpoints da API
 Listar tarefas
