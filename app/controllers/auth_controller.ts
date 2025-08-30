@@ -14,9 +14,7 @@ export default class AuthController {
     const isPasswordValid = await hash.verify(user?.password as string, request.input('password'))
 
     if (!user || !isPasswordValid) {
-      return response
-        .status(422)
-        .json({ errors: [{ message: 'As credenciais estão incorretas!' }] })
+      return response.status(422).json({ errors: [{ message: 'The credentials are incorrect!' }] })
     }
 
     const token = await User.accessTokens.create(user)
@@ -50,6 +48,6 @@ export default class AuthController {
 
     await User.accessTokens.delete(user, user.currentAccessToken.identifier)
 
-    return { message: 'Você saiu do sistema.' }
+    return { message: 'You have been logged out.' }
   }
 }

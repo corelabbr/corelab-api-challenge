@@ -22,6 +22,6 @@ export const updateAvatarValidator = vine.compile(
 export const updatePasswordValidator = vine.compile(
   vine.object({
     old_password: vine.string().trim().maxLength(255),
-    password: vine.string().trim().maxLength(255).confirmed(),
+    password: vine.string().trim().minLength(6).maxLength(255).confirmed(),
   })
 )

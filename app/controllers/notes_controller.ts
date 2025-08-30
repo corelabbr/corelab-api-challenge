@@ -15,9 +15,8 @@ export default class NotesController {
     await saveNoteValidator.validate(request.all())
 
     await user.related('notes').create(request.all())
-    // await Note.create(request.all())
 
-    return { message: 'Nota salva!' }
+    return { message: 'Note saved!' }
   }
 
   async show({ params, auth, response }: HttpContext) {
@@ -28,7 +27,7 @@ export default class NotesController {
       .whereNull('deleted_at')
       .where('id', params.id)
       .first()
-    if (!note) return response.status(422).json({ errors: [{ message: 'Nota não encontrada!' }] })
+    if (!note) return response.status(422).json({ errors: [{ message: 'Note not found!' }] })
 
     return note
   }
@@ -41,7 +40,7 @@ export default class NotesController {
       .whereNull('deleted_at')
       .where('id', params.id)
       .first()
-    if (!note) return response.status(422).json({ errors: [{ message: 'Nota não encontrada!' }] })
+    if (!note) return response.status(422).json({ errors: [{ message: 'Note not found!' }] })
 
     await saveNoteValidator.validate(request.all())
 
@@ -51,7 +50,7 @@ export default class NotesController {
     note.favorited = request.input('favorited')
     await note.save()
 
-    return { message: 'Nota atualizada!' }
+    return { message: 'Note updated!' }
   }
 
   async destroy({ params, auth, response }: HttpContext) {
@@ -62,11 +61,11 @@ export default class NotesController {
       .whereNull('deleted_at')
       .where('id', params.id)
       .first()
-    if (!note) return response.status(422).json({ errors: [{ message: 'Nota não encontrada!' }] })
+    if (!note) return response.status(422).json({ errors: [{ message: 'Note not found!' }] })
 
     await note.delete()
 
-    return { message: 'Nota removida!' }
+    return { message: 'Note removed!' }
   }
 
   async restore({ params, auth, response }: HttpContext) {
@@ -77,10 +76,10 @@ export default class NotesController {
       .whereNotNull('deleted_at')
       .where('id', params.id)
       .first()
-    if (!note) return response.status(422).json({ errors: [{ message: 'Nota não encontrada!' }] })
+    if (!note) return response.status(422).json({ errors: [{ message: 'Note not found!' }] })
 
     await note.restore()
 
-    return { message: 'Nota restaurada!' }
+    return { message: 'Note restored!' }
   }
 }

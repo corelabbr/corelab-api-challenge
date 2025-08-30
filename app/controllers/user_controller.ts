@@ -33,7 +33,7 @@ export default class UserController {
     user.email = request.input('email')
     await user.save()
 
-    return { message: 'Dados atualizados!' }
+    return { message: 'Data updated!' }
   }
 
   async updateAvatar({ request, auth }: HttpContext) {
@@ -49,7 +49,7 @@ export default class UserController {
     user.avatar = fileName
     user.save()
 
-    return { message: 'Avatar de perfil atualizado!' }
+    return { message: 'Profile avatar updated!' }
   }
 
   async updatePassword({ request, auth, response }: HttpContext) {
@@ -60,14 +60,12 @@ export default class UserController {
     const oldPasswordIsValid = await hash.verify(user.password, request.input('old_password'))
 
     if (!oldPasswordIsValid) {
-      return response
-        .status(422)
-        .json({ errors: [{ message: 'As credenciais estão incorretas!' }] })
+      return response.status(422).json({ errors: [{ message: 'The credentials are incorrect!' }] })
     }
 
     user.password = request.input('password')
     user.save()
 
-    return { message: 'Senha atualizada!' }
+    return { message: 'Password updated!' }
   }
 }
