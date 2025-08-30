@@ -41,10 +41,14 @@ export default class UserController {
 
     await updateAvatarValidator.validate(request.all())
 
+    const oldFileName = user.avatar
+
     const disk = drive.use()
     const file = request.file('file')
     const fileName = `${randomUUID()}.${file?.extname}`
     await file?.moveToDisk(`./avatar/${fileName}`, disk)
+
+    await disk.delete(`./avatar/${oldFileName}`)
 
     user.avatar = fileName
     user.save()
