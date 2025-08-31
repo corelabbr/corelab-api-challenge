@@ -35,10 +35,9 @@ export class UpdateUserController {
                 }
             });
             return response.status(200).json(patchUser);
-        } catch {
-            return response
-                .status(500)
-                .json({ msg: 'unexpected error in update user!' });
+        } catch (error) {
+            console.log(error);
+            return response.status(500).json({ msg: 'Internal server error!' });
         }
     }
 }

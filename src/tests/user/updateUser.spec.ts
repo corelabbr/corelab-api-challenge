@@ -63,7 +63,7 @@ describe('updateUser', ()=>{
 
           expect(mockResponse.status).toHaveBeenCalledWith(500);
           expect(mockResponse.json).toHaveBeenCalledWith({
-              msg: 'unexpected error in update user!'
+              msg: 'Internal server error!'
           });
       });
 })

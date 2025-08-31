@@ -25,7 +25,7 @@ describe('FindTaskById', () => {
             name: 'Task 1'
         });
     });
-    it('should return an error message with status code 400 if an unexpected error occurs during the search for tasks', async () => {
+    it('should return an error message with status code 500 if an unexpected error occurs during the search for tasks', async () => {
         const mockRequest = {
             body: {
                 id: 'validTaskId'
@@ -37,11 +37,11 @@ describe('FindTaskById', () => {
         };
         prismaClient_1.prismaClient.task.findFirst = jest
             .fn()
-            .mockRejectedValue(new Error('Unexpected error'));
+            .mockRejectedValue(new Error('Database connection failed'));
         await controller.handle(mockRequest, mockResponse);
-        expect(mockResponse.status).toHaveBeenCalledWith(400);
+        expect(mockResponse.status).toHaveBeenCalledWith(500);
         expect(mockResponse.json).toHaveBeenCalledWith({
-            msg: 'Unexpected error when searching for tasks!Please reload page and try again!'
+            msg: 'Internal server error!'
         });
     });
     it('should search for a task with an invalid or non-existent ID and return an error message with status code 404', async () => {
@@ -91,9 +91,9 @@ describe('FindTaskById', () => {
             .fn()
             .mockRejectedValue(new Error('Unexpected error'));
         await controller.handle(mockRequest, mockResponse);
-        expect(mockResponse.status).toHaveBeenCalledWith(400);
+        expect(mockResponse.status).toHaveBeenCalledWith(500);
         expect(mockResponse.json).toHaveBeenCalledWith({
-            msg: 'Unexpected error when searching for tasks!Please reload page and try again!'
+            msg: 'Internal server error!'
         });
     });
 });

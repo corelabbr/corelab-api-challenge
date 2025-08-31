@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { prismaClient } from '../../database/prismaClient';
 import { FindTaskByIdController } from '../../controllers/tasks/FindTaskByIdController';
+import { error } from 'console';
 
 const controller = new FindTaskByIdController();
 
@@ -29,10 +30,10 @@ describe('FindTaskById', () => {
             name: 'Task 1'
         });
     });
-    it('should return an error message with status code 400 if an unexpected error occurs during the search for tasks', async () => {
+    it('should return an error message with status code 500 if an unexpected error occurs during the search for tasks', async () => {
         const mockRequest = {
-            body: {
-                id: 'validTaskId'
+            body:{
+                id:'validTaskId'
             }
         } as Request;
         const mockResponse = {
@@ -42,13 +43,13 @@ describe('FindTaskById', () => {
 
         prismaClient.task.findFirst = jest
             .fn()
-            .mockRejectedValue(new Error('Unexpected error'));
+            .mockRejectedValue(new Error('Database connection failed'));
 
         await controller.handle(mockRequest, mockResponse);
 
-        expect(mockResponse.status).toHaveBeenCalledWith(400);
+        expect(mockResponse.status).toHaveBeenCalledWith(500);
         expect(mockResponse.json).toHaveBeenCalledWith({
-            msg: 'Unexpected error when searching for tasks!Please reload page and try again!'
+            msg: 'Internal server error!'
         });
     });
     it('should search for a task with an invalid or non-existent ID and return an error message with status code 404', async () => {
@@ -104,9 +105,9 @@ describe('FindTaskById', () => {
             .mockRejectedValue(new Error('Unexpected error'));
         await controller.handle(mockRequest, mockResponse);
 
-        expect(mockResponse.status).toHaveBeenCalledWith(400);
+        expect(mockResponse.status).toHaveBeenCalledWith(500);
         expect(mockResponse.json).toHaveBeenCalledWith({
-            msg: 'Unexpected error when searching for tasks!Please reload page and try again!'
+            msg: 'Internal server error!'
         });
     });
 });

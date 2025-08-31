@@ -43,9 +43,9 @@ describe('UpdateTask', () => {
 prismaClient.task.update=jest.fn().mockRejectedValue(new Error('Invalid input'));
         await controller.handle(mockRequest, mockResponse);
 
-        expect(mockResponse.status).toHaveBeenCalledWith(400);
+        expect(mockResponse.status).toHaveBeenCalledWith(500);
         expect(mockResponse.json).toHaveBeenCalledWith({
-            msg: 'Error on updated task!'
+            msg: 'Internal server error!'
         });
     });
 });

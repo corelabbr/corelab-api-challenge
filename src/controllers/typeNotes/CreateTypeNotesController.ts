@@ -18,9 +18,12 @@ export class CreateTypeNotesController {
                     createTypeNotes
                 });
             } catch (error) {
-                return response.status(400).json({ msg: error });
+                console.log(error);
+                return response
+                    .status(500)
+                    .json({ msg: 'Internal server error!' });
             }
         }
-        return response.status(404).json({msg:'Name as not empty!'});
+        return response.status(404).json({ msg: 'Name as not empty!' });
     }
 }

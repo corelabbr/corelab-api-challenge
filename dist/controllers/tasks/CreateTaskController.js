@@ -20,18 +20,21 @@ class CreateTaskController {
                 data: {
                     titulo: titulo,
                     task: task,
-                    userId: userId,
-                    createdAt: (0, date_fns_1.format)(createdAt, 'dd/MM/yyyy HH:mm:SS')
+                    createdAt: (0, date_fns_1.format)(createdAt, 'dd/MM/yyyy HH:mm:SS'),
+                    users: {
+                        connect: {
+                            id: userId
+                        }
+                    }
                 }
             });
             return response
                 .status(201)
                 .json({ msg: 'Task as created!', newTask });
         }
-        catch {
-            return response
-                .status(400)
-                .json({ msg: 'Error on create new Task!' });
+        catch (error) {
+            console.log(error);
+            return response.status(500).json({ msg: 'Internal server error!' });
         }
     }
 }

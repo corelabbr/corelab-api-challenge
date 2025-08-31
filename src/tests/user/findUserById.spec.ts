@@ -64,9 +64,9 @@ describe('FindUserById', () => {
 
         await controller.handle(mockRequest, mockResponse);
 
-        expect(mockResponse.status).toHaveBeenCalledWith(404);
+        expect(mockResponse.status).toHaveBeenCalledWith(500);
         expect(mockResponse.json).toHaveBeenCalledWith({
-            msg: 'Unexpected error in search user!'
+            msg: 'Internal server error!'
         });
     });
     it('should return a 401 status code and an error message when the id is null', async () => {
@@ -122,9 +122,9 @@ describe('FindUserById', () => {
 
         await controller.handle(mockRequest, mockResponse);
 
-        expect(mockResponse.status).toHaveBeenCalledWith(404);
+        expect(mockResponse.status).toHaveBeenCalledWith(500);
         expect(mockResponse.json).toHaveBeenCalledWith({
-            msg: 'Unexpected error in search user!'
+            msg: 'Internal server error!'
         });
     });
 });

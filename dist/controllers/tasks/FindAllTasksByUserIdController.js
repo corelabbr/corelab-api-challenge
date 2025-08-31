@@ -5,24 +5,28 @@ const prismaClient_1 = require("../../database/prismaClient");
 class FindAllTasksByUserIdController {
     async handle(request, response) {
         const { userId } = request.body;
-        try {
-            const findTaskByUserId = await prismaClient_1.prismaClient.user.findFirst({
-                where: {
-                    id: userId
-                },
-                include: {
-                    tasks: true
-                }
-            });
-            return response.status(200).json(findTaskByUserId);
+        if (userId !== null && userId.length !== 0) {
+            try {
+                const findTaskByUserId = await prismaClient_1.prismaClient.task.findMany({
+                    where: {
+                        userId: userId,
+                        AND: {
+                            typeNotes: null
+                        }
+                    },
+                    include: {
+                        users: true,
+                        typeNotes: true
+                    }
+                });
+                return response.status(200).json(findTaskByUserId);
+            }
+            catch (error) {
+                console.log(error);
+                return response.status(500).json({ msg: 'Internal server error!' });
+            }
         }
-        catch {
-            return response
-                .status(400)
-                .json({
-                msg: 'Unexpected error when searching for tasks!Please reload page and try again!'
-            });
-        }
+        return response.status(404).json({ msg: 'Person is not found!' });
     }
 }
 exports.FindAllTasksByUserIdController = FindAllTasksByUserIdController;

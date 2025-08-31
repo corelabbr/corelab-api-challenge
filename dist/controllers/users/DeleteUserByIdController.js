@@ -18,8 +18,9 @@ class DeleteUserByIdController {
             });
             return response.status(200).json({ msg: 'User was deleted!' });
         }
-        catch {
-            return response.status(400).json({ error: 'Error on delete user' });
+        catch (error) {
+            console.log(error);
+            return response.status(500).json({ msg: 'Internal server error!' });
         }
     }
 }

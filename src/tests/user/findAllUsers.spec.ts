@@ -31,9 +31,9 @@ describe('FindAllUsersController', () => {
 
         await controller.handle(mockRequest, mockResponse);
 
-        expect(mockResponse.status).toHaveBeenCalledWith(400);
+        expect(mockResponse.status).toHaveBeenCalledWith(500);
         expect(mockResponse.json).toHaveBeenCalledWith({
-            msg: 'Unexpected error in search users!Please reload page and try again!'
+            msg: 'Internal server error!'
         });
     });
 });

@@ -29,7 +29,7 @@ describe('CreateTask', () => {
             newTask: expect.any(Object)
         });
     });
-    it('should create a new task with empty strings for titulo and task fields and expect a 401 response with an error message', async () => {
+    it('should create a new task with empty strings for titulo and task fields and expect a 500 response with an error message', async () => {
         const mockRequest = {
             body: {
                 titulo: '',
@@ -52,7 +52,7 @@ describe('CreateTask', () => {
         });
     });
 
-      it('should create a new task with null values for titulo and task fields and expect a 401 response with an error message', async () => {
+      it('should create a new task with null values for titulo and task fields and expect a 500 response with an error message', async () => {
           const mockRequest = {
               body: {
                   titulo: undefined,

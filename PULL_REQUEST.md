@@ -46,6 +46,9 @@ Quanto ao request.params usei os ids buscando direto no body na minha opinião e
 
 -   Ao instalar o projeto/ iniciar do zero deve adicionar um novo .env e configurar a string de conexão do bd mongo `DATABASE_URL` e por fim executar o cmg `npx prisma generate` e irá subir o banco de dados .
 
+### Usabilidade
+- Foi criada uma tabela onde o tipo de nota e criado e others === null se mais tarde for necessario acrescentar novos tipos e so adicionar !
+
 ### Rotas
 
 #### `POST - /createTask`

@@ -18,10 +18,9 @@ export class FindTaskByIdController {
             } else {
                 return response.status(200).json(findTask);
             }
-        } catch {
-            return response.status(400).json({
-                msg: 'Unexpected error when searching for tasks!Please reload page and try again!'
-            });
+        } catch (error) {
+            console.log(error);
+            return response.status(500).json({ msg: 'Internal server error!' });
         }
     }
 }

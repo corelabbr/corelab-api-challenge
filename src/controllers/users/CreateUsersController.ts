@@ -14,9 +14,12 @@ export class CreateUsersController {
         const createdAt: number = Date.now();
         const { userName, email, password }: usersBody = request.body;
         if (
-            userName === (null || undefined) ||
-            email === (null || undefined) ||
-            password === (null || undefined)
+            userName === null ||
+            userName === undefined ||
+            email === null ||
+            email === undefined ||
+            password === null ||
+            password === undefined
         ) {
             return response
                 .status(404)
@@ -42,10 +45,9 @@ export class CreateUsersController {
             return response
                 .status(201)
                 .json({ msg: 'User as created!', users });
-        } catch {
-            return response.status(500).json({
-                msg: 'Error to create user!Please waiting for minutes and try again!'
-            });
+        } catch (error) {
+            console.log(error);
+            return response.status(500).json({ msg: 'Internal server error!' });
         }
     }
 }

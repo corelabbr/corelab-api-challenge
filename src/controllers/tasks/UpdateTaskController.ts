@@ -7,7 +7,7 @@ interface updateTaskBody {
     task: string;
     userId: string;
     favorite?: boolean;
-    other?: boolean
+    other?: boolean;
 }
 export class UpdateTaskController {
     async handle(request: Request, response: Response) {
@@ -31,12 +31,13 @@ export class UpdateTaskController {
                 return response
                     .status(200)
                     .json({ msg: 'Task as updated!', updateTask });
-            } catch {
+            } catch (error) {
+                console.log(error);
                 return response
-                    .status(400)
-                    .json({ msg: 'Error on updated task!' });
+                    .status(500)
+                    .json({ msg: 'Internal server error!' });
             }
         }
-        return response.status(500).json({msg:'Erro on server!'})
+        return response.status(500).json({ msg: 'Erro on server!' });
     }
 }

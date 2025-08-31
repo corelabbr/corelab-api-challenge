@@ -13,5 +13,5 @@ app.use(express_1.default.urlencoded({
     extended: true
 }));
 app.use(express_1.default.json());
-app.use(router_1.router);
+app.use('/api', router_1.router);
 app.listen(port, async () => console.log(`Iniciada aplicação na porta ${port}!`));

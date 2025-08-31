@@ -24,8 +24,8 @@ export class LoginController {
                 },
                 include: {
                     userImages: {
-                        select:{
-                            image:true
+                        select: {
+                            image: true
                         }
                     }
                 }
@@ -40,10 +40,9 @@ export class LoginController {
                     login
                 });
             }
-        } catch {
-            return response
-                .status(401)
-                .json({ msg: 'Unexpected error!Please try again!' });
+        } catch (error) {
+            console.log(error);
+            return response.status(500).json({ msg: 'Internal server error!' });
         }
     }
 }

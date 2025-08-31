@@ -15,10 +15,9 @@ export class DeleteTaskController {
             return response
                 .status(200)
                 .json({ msg: 'Task deleted successfully!', deleteTask });
-        } catch {
-            return response
-                .status(400)
-                .json({ msg: 'Error deleting the task!' });
+        } catch (error) {
+            console.log(error);
+            return response.status(500).json({ msg: 'Internal server error!' });
         }
     }
 }

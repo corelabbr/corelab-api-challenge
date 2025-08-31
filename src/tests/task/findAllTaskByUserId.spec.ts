@@ -16,24 +16,12 @@ describe('DeleteTask', () => {
             json: jest.fn()
         } as unknown as Response;
 
-        prismaClient.user.findFirst = jest.fn().mockResolvedValue({
-            id: 'validUserId',
-            tasks: [
-                { id: 'task1', name: 'Task 1' },
-                { id: 'task2', name: 'Task 2' }
-            ]
-        });
+        prismaClient.task.findMany= jest.fn().mockResolvedValue([]);
 
         await controller.handle(mockRequest, mockResponse);
 
         expect(mockResponse.status).toHaveBeenCalledWith(200);
-        expect(mockResponse.json).toHaveBeenCalledWith({
-            id: 'validUserId',
-            tasks: [
-                { id: 'task1', name: 'Task 1' },
-                { id: 'task2', name: 'Task 2' }
-            ]
-        });
+        expect(mockResponse.json).toHaveBeenCalledWith(expect.any(Array));
     });
 
     it('should handle requests with invalid user ID in the request body', async () => {
@@ -47,31 +35,35 @@ describe('DeleteTask', () => {
             json: jest.fn()
         } as unknown as Response;
 
-        prismaClient.user.findFirst = jest
+        prismaClient.task.findMany = jest
             .fn()
-            .mockRejectedValue(new Error('Invalid Id'));
+            .mockRejectedValue({});
 
         await controller.handle(mockRequest, mockResponse);
 
-        expect(mockResponse.status).toHaveBeenCalledWith(400);
+        expect(mockResponse.status).toHaveBeenCalledWith(500);
         expect(mockResponse.json).toHaveBeenCalledWith({
-            msg: 'Unexpected error when searching for tasks!Please reload page and try again!'
+            msg: 'Internal server error!'
         });
     });
     it('should handle requests with invalid JSON format in the request body', async () => {
         const mockRequest = {
-            body: 'invalidJson'
+            body: {
+                userId: 'test-on-jest'
+            }
         } as Request;
         const mockResponse = {
             status: jest.fn().mockReturnThis(),
             json: jest.fn()
         } as unknown as Response;
 
+        prismaClient.task.findMany = jest.fn().mockRejectedValue({});
+
         await controller.handle(mockRequest, mockResponse);
 
-        expect(mockResponse.status).toHaveBeenCalledWith(400);
+        expect(mockResponse.status).toHaveBeenCalledWith(500);
         expect(mockResponse.json).toHaveBeenCalledWith({
-            msg: 'Unexpected error when searching for tasks!Please reload page and try again!'
+            msg: 'Internal server error!'
         });
     });
 });

@@ -8,6 +8,7 @@ describe('UpdateTask', () => {
         const mockRequest = {
             body: {
                 id: 'validTaskId',
+                userId: 'validUserId',
                 titulo: 'New Title',
                 task: 'New Task'
             }
@@ -27,8 +28,9 @@ describe('UpdateTask', () => {
     it('should handle and return a 400 status code with an error message for invalid input data', async () => {
         const mockRequest = {
             body: {
-                id: 'validTaskId',
-                titulo: '',
+                id: undefined,
+                userId: undefined,
+                titulo: 123,
                 task: ''
             }
         };
@@ -38,9 +40,9 @@ describe('UpdateTask', () => {
         };
         prismaClient_1.prismaClient.task.update = jest.fn().mockRejectedValue(new Error('Invalid input'));
         await controller.handle(mockRequest, mockResponse);
-        expect(mockResponse.status).toHaveBeenCalledWith(400);
+        expect(mockResponse.status).toHaveBeenCalledWith(500);
         expect(mockResponse.json).toHaveBeenCalledWith({
-            msg: 'Error on updated task!'
+            msg: 'Internal server error!'
         });
     });
 });

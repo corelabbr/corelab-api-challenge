@@ -27,10 +27,9 @@ export class FindUserByIdController {
             } else {
                 return response.status(200).json(FindUser);
             }
-        } catch {
-            return response
-                .status(404)
-                .json({ msg: 'Unexpected error in search user!' });
+        }catch (error) {
+            console.log(error);
+            return response.status(500).json({ msg: 'Internal server error!' });
         }
     }
 }

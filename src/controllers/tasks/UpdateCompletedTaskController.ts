@@ -24,8 +24,9 @@ export class UpdateCompletedTaskController {
             return response
                 .status(200)
                 .json({ msg: 'Task as updated!', updateTask });
-        } catch {
-            return response.status(400).json({ msg: 'Error on updated task!' });
+        } catch (error) {
+            console.log(error);
+            return response.status(500).json({ msg: 'Internal server error!' });
         }
     }
 }
