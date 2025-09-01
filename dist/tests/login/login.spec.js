@@ -5,12 +5,7 @@ const prismaClient_1 = require("../../database/prismaClient");
 const controller = new LoginController_1.LoginController();
 describe('LoginController', () => {
     it('should successfully handle a valid login request with correct email and password', async () => {
-        prismaClient_1.prismaClient.user.findFirst = jest
-            .fn()
-            .mockResolvedValue({
-            email: 'test@example.com',
-            password: 'password123'
-        });
+        prismaClient_1.prismaClient.user.findFirst = jest.fn().mockResolvedValue({});
         const mockRequest = {
             body: {
                 email: 'test@example.com',
@@ -31,6 +26,7 @@ describe('LoginController', () => {
     it('should return a 400 error if email is not found in the request body', async () => {
         const mockRequest = {
             body: {
+                email: null,
                 password: 'password123'
             }
         };

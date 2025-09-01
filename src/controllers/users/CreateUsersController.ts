@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { prismaClient } from '../../database/prismaClient';
 import { format } from 'date-fns';
 
-interface usersBody {
+interface UsersBody {
     userName: string;
     email: string;
     password: string;
@@ -10,9 +10,9 @@ interface usersBody {
 }
 export class CreateUsersController {
     async handle(request: Request, response: Response) {
-        const imgBuffer: any = request.file?.buffer.toString('base64');
+        const imgBuffer: any = request.file.buffer.toString('base64');
         const createdAt: number = Date.now();
-        const { userName, email, password }: usersBody = request.body;
+        const { userName, email, password }: UsersBody = request.body;
         if (
             userName === null ||
             userName === undefined ||

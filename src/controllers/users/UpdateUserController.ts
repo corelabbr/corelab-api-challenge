@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { prismaClient } from '../../database/prismaClient';
-interface patchUserBody {
+interface PatchUserBody {
     id: string;
     userName: string;
     email: string;
@@ -10,8 +10,8 @@ interface patchUserBody {
 }
 export class UpdateUserController {
     async handle(request: Request, response: Response) {
-        const imgBuffer: any = request.file?.buffer.toString('base64');
-        const { id, userName, email, password, imgId }: patchUserBody =
+        const imgBuffer: any = request.file.buffer.toString('base64');
+        const { id, userName, email, password, imgId }: PatchUserBody =
             request.body;
         try {
             const patchUser = await prismaClient.user.update({

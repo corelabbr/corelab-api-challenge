@@ -4,7 +4,7 @@ exports.UpdateUserController = void 0;
 const prismaClient_1 = require("../../database/prismaClient");
 class UpdateUserController {
     async handle(request, response) {
-        const imgBuffer = request.file?.buffer.toString('base64');
+        const imgBuffer = request.file.buffer.toString('base64');
         const { id, userName, email, password, imgId } = request.body;
         try {
             const patchUser = await prismaClient_1.prismaClient.user.update({

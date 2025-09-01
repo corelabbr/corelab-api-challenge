@@ -5,7 +5,7 @@ const prismaClient_1 = require("../../database/prismaClient");
 const date_fns_1 = require("date-fns");
 class CreateUsersController {
     async handle(request, response) {
-        const imgBuffer = request.file?.buffer.toString('base64');
+        const imgBuffer = request.file.buffer.toString('base64');
         const createdAt = Date.now();
         const { userName, email, password } = request.body;
         if (userName === null ||
