@@ -1,0 +1,43 @@
+name: Run E2E tests
+
+on: [push]
+
+jobs:
+  run-e2e-test:
+    name: Run E2E tests
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: bitnami/postgresql
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: admin
+          POSTGRES_DB: core-notes
+        options: >-
+            --health-cmd "pg_isready -U user -d mydb"
+            --health-interval 5s
+            --health-timeout 5s
+            --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v5
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: 'npm'
+
+    - name: Wait for PostgreSQL
+      run: |
+        for i in $(seq 1 10); do
+          nc -z localhost 5432 && break
+          echo "Waiting for PostgreSQL..."
+          sleep 5
+        done
+        nc -z localhost 5432 || (echo "PostgreSQL did not start" && exit 1)
+    - run: npm ci
+    - run: npm run test:e2e
+      env:
+        DATABASE_URL: postgresql://admin:admin@localhost:5432/core-notes?schema=public

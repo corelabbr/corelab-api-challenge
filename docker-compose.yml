@@ -1,0 +1,37 @@
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - .:/usr/src/app
+    environment:
+      PORT: ${PORT}
+      DATABASE_URL: postgresql://${DATABASE_USER}:${DATABASE_PASSWORD}@database:5432/${DATABASE_NAME}?schema=public
+    networks:
+      - core-notes
+
+    depends_on:
+      - database
+
+
+  database:
+    image: bitnami/postgresql:latest
+    ports:
+      - 5432:5432
+    volumes:
+      - .:/usr/src/database
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+
+    networks:
+      - core-notes
+
+networks:
+  core-notes:
+    driver: bridge
+
