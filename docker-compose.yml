@@ -1,0 +1,40 @@
+services:
+  database:
+    image: mysql:8.4
+    restart: always
+    container_name: 'corenotes-db'
+    ports:
+      - 3316:3306
+    volumes:
+      - .:/usr/src/corenotes-db
+    environment:
+      - MYSQL_USER=docker
+      - MYSQL_PASSWORD=docker
+      - MYSQL_DATABASE=corenotes_db
+      - MYSQL_ROOT_PASSWORD=docker
+  redis:
+    image: redis:latest
+    restart: always
+    container_name: 'corenotes-redis'
+    ports:
+      - 6379:6379
+  app:
+    build: .
+    container_name: corenotes-api
+    ports:
+      - 3311:3333
+    volumes:
+      - .:/usr/src/corenotes-api
+    links:
+      - database
+      - redis
+    depends_on:
+      - database
+      - redis
+    command: sh -c "/wait; npm i; npx prisma generate; npx prisma migrate dev; npx prisma db seed; npm run start:dev"
+    environment:
+      - WAIT_HOSTS=database:3306,redis:6379
+      - WAIT_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=5
+      - WAIT_HOST_CONNECT_TIMEOUT=300
+      - PORT=3333

@@ -1,84 +1,109 @@
-## Corelab Challenge:
+## Corelab Challenge: Corenotes API
 
-You are tasked with building a web application that allows users to create and manage their to-do lists. The application should consist of a responsive webpage built in React, and an API built in Node.js to store and manage the to-do lists.
+## 📖 Index
+- [Description](#description)
+- [Installation](#installation)
+- [Used Tech](#used-tech)
 
+## Description  <a name="description"></a>
+This repository contains the implementation of the Corenotes API using NestJS, as part of the evaluation for the Full-stack Developer Role on the company.
 
-### The repositories
-The [frontend repository](https://github.com/corelabbr/corelab-web-challenge)
+The API has been designed to manage notes with functionalities to create, read, update, and delete notes, as well as an authentication system that prevents misaccess to other users' data.
 
-If you feel more comfortable, you can pick another React framework and show us your skills.
+The app counts with Redis for caching some of the data, in order to guarantee better performance and scalability.
 
-The [backend repository](https://github.com/corelabbr/corelab-api-challenge)
+## Installation <a name="installation"></a>
+In order to use the database locally, you require a Redis database to be used as the application's cache. The app provides support for both local environments (such as Docker Redis containers or the Redis CLI) or the Redis' dedicated databases.
 
-If you feel more comfortable, you can pick another Node JS framework and show us your skills.
+If you're using a dedicated Redis DB, you should define its configs at `./.env` in the following way (mock values are being used):
 
-### The Layout
-Open the [layout mockup](https://www.figma.com/make/cy34jtb1qvVC5org8qSzfY/Core-Notes-Application?node-id=0-1&p=f&t=gPckDCQn55VpTAxr-0&fullscreen=1) in desktop and mobile version and follow this design as much as possible.
+```
+NODE_ENV=production
+...
+# Redis Cache Production Settings
+REDIS_PRODUCTION_HOST="hostname-redis-example"
+REDIS_PRODUCTION_PORT=6379
+REDIS_PRODUCTION_USER=default
+REDIS_PRODUCTION_PASSWORD=root
+```
 
-### The application should have the following functionality:
+If you're going for Redis CLI or a Redis Image being run on Docker, the application won't require user and password to authenticate you in the database. It's enough to only set the following variables:
 
-1. Users should be able to create, read, update, and delete to-do items using the API.
-2. Users should be able to mark an item as a favorite.
-3. Users should be able to set a color for each to-do item.
-4. The React frontend should display the user's to-do list in a responsive and visually appealing manner, with the ability to filter by favorite items and color.
-5. The favorited items should be displayed at the top of the list.
+```
+NODE_ENV=development | local | test
+...
+# Redis Cache Settings
+REDIS_HOST=localhost
+REDIS_PORT=6379
+```
 
-### Technical Requirements:
-1. The backend API should be built in Node.js framework and use a database of your choice (e.g., MongoDB, PostgreSQL, etc.).
-2. The frontend should be built in React and use modern web development tools and best practices.
-3. The application should be responsive and visually appealing.
+Since the application uses AES-256 cryptography, it's mandatory to set it's two keys. You can generate them [here](https://acte.ltd/utils/randomkeygen), then set them in the `./.env` file the following way:
 
-### Deliverables:
-1. A link to a GitHub repository containing the complete source code for the project.
-2. A written description of how to set up and run the application locally.
+```
+# Cryptography Settings
+CRYPTO_SECRET=(use the 'Basic 8' generated key)
+CRYPTO_IV=(use the 'Basic 16' generated key)
+```
 
+As for the JWT, the `APP_SECRET` variable should be set. Any value will do, but I personally recommend you to use a key provided by the generator above.
 
-### Evaluation Criteria:
-1. Code Quality
-2. Code Format
-3. Code Perfomance
-4. Frontend Design
-5. If your code is Easily Readable
-6. Mobile First approach
-7. Code Responsability
-8. Features Work
-9. Responsiveness
-10. Does the application meet the functionality requirements listed above?
-11. Is the code well-organized, easy to read, and well-documented?
-12. Are modern web development tools and best practices used?
-13. Is the application visually appealing and responsive?
+```
+APP_SECRET=something_nice
+```
 
-### Backend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: Adonis TS or any other node framework you know.
-4. Database: Choose your own, you can even save in memory.
+As for the last configs, you shall set any PORT you desire, as long as it's not 3000 or the port being used by your local front-end application.
 
-### Frontend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: React TS
-4. Sass or other preprocessor
+Since we're using Prisma, you only need to set the DB's connection string in the `DATABASE_URL` variable. The application supports both PostgreSQL and MySQL, so you can choose any of them. The connection string should be set in the following way:
 
-### Want to impress us even more?
-If you feel comfortable and want to impress us even more, you can do the following:
+```
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=public"
+```
 
-1. Work on correct types and interfaces
-2. Work on eslint rules
-3. Work prettier config
-4. Work on docker containers
-5. Work on tests
-6. Work on CI/CD
+Once everything's set, you can install the dependencies by running:
 
-### What to do when you finish?
+```bash
+npm install
+```
 
-Create a file PULL_REQUEST.md where you will describe what you did and how in as much detail as possible. Feel free to add videos for better explanation.
+Then, you can run the application in development mode by running:
 
-Create a new pull request using the same branch name for Backend and Frontend
+```
+npx prisma generate
 
-Send us the pull requests and that's all!
+npx prisma migrate <migration-name>
 
+npm run start:dev
+```
 
-#### Good luck! The sky is the limit 🚀
+After that, the API should be up and running. To access its Swagger documentation, you only need to add the `/swagger` path after the API's URL on your browser. For example, if you're running the API on `http://localhost:5000`, you should access `http://localhost:5000/swagger`.
+
+## Used Tech <a name="used-tech"></a>
+- [Axios](https://www.npmjs.com/package/axios)
+- [BCrypt](https://www.npmjs.com/package/bcrypt)
+- [Cache Manager](https://www.npmjs.com/package/cache-manager)
+- [Cacheable](https://www.npmjs.com/package/cacheable)
+- [Class Transformer](https://www.npmjs.com/package/class-transformer)
+- [Class Validator](https://www.npmjs.com/package/class-validator)
+- [Crypto](https://www.npmjs.com/package/crypto)
+- [CORS](https://www.npmjs.com/package/cors)
+- [Date-fns](https://www.npmjs.com/package/date-fns)
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/gettingstarted/)
+- [ESLint](https://eslint.org/)
+- [Express](https://expressjs.com/)
+- [Faker](https://www.npmjs.com/package/faker)
+- [Jest](https://jestjs.io/)
+- [JWT](https://www.npmjs.com/package/jsonwebtoken)
+- [Keyv](https://www.npmjs.com/package/keyv)
+- [MySQL](https://www.mysql.com/)
+- [NestJS](https://nestjs.com/)
+- [NestJS-Zod](https://www.npmjs.com/package/nestjs-zod/)
+- [Node.js](https://nodejs.org/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Prisma](https://www.prisma.io/)
+- [Prettier](https://www.npmjs.com/package/prettier)
+- [Redis](https://redis.io/)
+- [Supertest](https://www.npmjs.com/package/supertest)
+- [Swagger](https://swagger.io/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Zod](https://zod.dev/)

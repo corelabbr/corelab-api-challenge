@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-3.0.x", "linux-musl-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model User {
+  id_user String @id @default(cuid())
+  name           String   @db.LongText
+  password       String   @db.LongText
+  email          String   @unique @db.Char(255)
+  
+  createdAt     DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  deletedAt DateTime? @map("deleted_at")
+
+  user_notes Note[]
+
+  @@map("users")
+}
+
+model Note {
+  id_note String @id @default(cuid())
+  note_title String @db.LongText
+  note_text String @db.LongText
+  note_color NoteColors
+  starred Boolean @default(false)
+
+  user_id       String
+
+  createdAt     DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  deletedAt DateTime? @map("deleted_at")
+
+  user User @relation(fields: [user_id], references: [id_user])
+  @@map("notes")
+}
+
+enum NoteColors {
+  green
+  yellow
+  red
+  blue
+}
