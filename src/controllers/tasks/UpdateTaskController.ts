@@ -1,0 +1,43 @@
+import { Request, Response } from 'express';
+import { prismaClient } from '../../database/prismaClient';
+import { format } from 'date-fns';
+interface updateTaskBody {
+    id: string;
+    titulo: string;
+    task: string;
+    userId: string;
+    favorite?: boolean;
+    other?: boolean;
+}
+export class UpdateTaskController {
+    async handle(request: Request, response: Response) {
+        const { id, titulo, task, userId }: updateTaskBody = request.body;
+        const updatedAt = Date.now();
+        if (id !== null || userId !== null) {
+            try {
+                const updateTask = await prismaClient.task.update({
+                    where: {
+                        id: id,
+                        AND: {
+                            userId: userId
+                        }
+                    },
+                    data: {
+                        titulo: titulo,
+                        task: task,
+                        updatedAt: format(updatedAt, 'dd/MM/yyyy HH:mm:SS')
+                    }
+                });
+                return response
+                    .status(200)
+                    .json({ msg: 'Task as updated!', updateTask });
+            } catch (error) {
+                console.log(error);
+                return response
+                    .status(500)
+                    .json({ msg: 'Internal server error!' });
+            }
+        }
+        return response.status(500).json({ msg: 'Erro on server!' });
+    }
+}

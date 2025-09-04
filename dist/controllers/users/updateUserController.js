@@ -1,0 +1,38 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UpdateUserController = void 0;
+const prismaClient_1 = require("../../database/prismaClient");
+class UpdateUserController {
+    async handle(request, response) {
+        const imgBuffer = request.file?.buffer.toString('base64');
+        const { id, userName, email, password, imgId } = request.body;
+        try {
+            const patchUser = await prismaClient_1.prismaClient.user.update({
+                where: {
+                    id: id
+                },
+                data: {
+                    userName: userName,
+                    email: email,
+                    password: password,
+                    userImages: {
+                        update: {
+                            where: {
+                                id: imgId
+                            },
+                            data: {
+                                image: imgBuffer
+                            }
+                        }
+                    }
+                }
+            });
+            return response.status(200).json(patchUser);
+        }
+        catch (error) {
+            console.log(error);
+            return response.status(500).json({ msg: 'Internal server error!' });
+        }
+    }
+}
+exports.UpdateUserController = UpdateUserController;
