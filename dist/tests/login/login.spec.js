@@ -5,11 +5,11 @@ const prismaClient_1 = require("../../database/prismaClient");
 const controller = new LoginController_1.LoginController();
 describe('LoginController', () => {
     it('should successfully handle a valid login request with correct email and password', async () => {
-        prismaClient_1.prismaClient.user.findFirst = jest.fn().mockResolvedValue({});
+        prismaClient_1.prismaClient.user.findFirst = jest.fn();
         const mockRequest = {
             body: {
                 email: 'test@example.com',
-                password: 'password123'
+                password: 'testpass123'
             }
         };
         const mockResponse = {
@@ -19,7 +19,7 @@ describe('LoginController', () => {
         await controller.handle(mockRequest, mockResponse);
         expect(mockResponse.status).toHaveBeenCalledWith(200);
         expect(mockResponse.json).toHaveBeenCalledWith({
-            msg: 'Login sucessfully!',
+            msg: 'Login successfully!',
             login: expect.any(Object)
         });
     });
@@ -27,7 +27,7 @@ describe('LoginController', () => {
         const mockRequest = {
             body: {
                 email: null,
-                password: 'password123'
+                password: 'testpass123'
             }
         };
         const mockResponse = {
@@ -60,8 +60,8 @@ describe('LoginController', () => {
         prismaClient_1.prismaClient.user.findFirst = jest.fn();
         const mockRequest = {
             body: {
-                email: 'sgfsdgsg',
-                password: 'wdfsdfgsdg'
+                email: 'test@gmail.com',
+                password: 'test1234'
             }
         };
         const mockResponse = {

@@ -28,7 +28,7 @@ const upload = Multer();
 
 //-------------Creates------------------------------------
 const createUser = new CreateUsersController();
-router.post('/createUser', upload.single('imgUser'), createUser.handle);
+router.post('/createUser', upload.single('image'), createUser.handle);
 
 const loginUser = new LoginController();
 router.post('/login', loginUser.handle);
@@ -50,10 +50,10 @@ const findTaskId = new FindTaskByIdController();
 router.get('/findTaskId', findTaskId.handle);
 
 const findAllTaskByUser = new FindAllTasksByUserIdController();
-router.get('/findTasksByUser', findAllTaskByUser.handle);
+router.get('/findTasks/:id', findAllTaskByUser.handle);
 
 const findFavoritesTasks = new FindFavoritesTasksController();
-router.get('/findFavorites',findFavoritesTasks.handle)
+router.get('/findFavorites/:id',findFavoritesTasks.handle)
 
 //-------------Updates------------------------------------
 const updateUser = new UpdateUserController();
@@ -65,13 +65,13 @@ router.patch('/updateTask', updateTask.handle);
 const updateCompleteTask = new UpdateCompletedTaskController();
 router.patch('/updateCompleteTask', updateCompleteTask.handle);
 const updateTypeController= new UpdateTypeController();
-router.patch('/updateType', updateTypeController.handle);
+router.patch('/updateType/id', updateTypeController.handle);
 
 //-------------Deletes------------------------------------
 const deleteUser = new DeleteUserByIdController();
 router.delete('/deleteUser', deleteUser.handle);
 
 const deleteTask = new DeleteTaskController();
-router.delete('/deleteTask', deleteTask.handle);
+router.delete('/deleteTask/:id', deleteTask.handle);
 
 export { router };

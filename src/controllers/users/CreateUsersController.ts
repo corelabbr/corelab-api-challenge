@@ -10,7 +10,7 @@ interface UsersBody {
 }
 export class CreateUsersController {
     async handle(request: Request, response: Response) {
-        const imgBuffer: any = request.file.buffer.toString('base64');
+        const imgBuffer: any = request.file?.buffer.toString('base64');
         const createdAt: number = Date.now();
         const { userName, email, password }: UsersBody = request.body;
         if (

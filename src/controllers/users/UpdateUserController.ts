@@ -4,13 +4,12 @@ interface PatchUserBody {
     id: string;
     userName: string;
     email: string;
-    password: string;
-    image?: string;
+    password: string;   
     imgId: string;
 }
 export class UpdateUserController {
     async handle(request: Request, response: Response) {
-        const imgBuffer: any = request.file.buffer.toString('base64');
+        const imgBuffer: any = request.file?.buffer.toString('base64');
         const { id, userName, email, password, imgId }: PatchUserBody =
             request.body;
         try {

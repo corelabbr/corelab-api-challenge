@@ -1,16 +1,13 @@
 import { Request, Response } from 'express';
 import { prismaClient } from '../../database/prismaClient';
 import { format } from 'date-fns';
-interface updateTaskBody {
-    id: string;
-    userId: string;
-    typeId?: string;
-}
+
 export class UpdateTypeController {
     async handle(request: Request, response: Response) {
-        const { id, userId, typeId }: updateTaskBody = request.body;
+        const id = request.params.id;
+        const typeId = '68b30e2856e18c21c1298cce';
         const updatedAt = Date.now();
-        if (id !== null || userId !== null) {
+        if (id !== null || typeId !== null) {
             try {
                 const updateTask = await prismaClient.task.update({
                     where: {
@@ -36,6 +33,8 @@ export class UpdateTypeController {
                     .json({ msg: 'Internal server error!' });
             }
         }
-        return response.status(404).json({ msg: 'Person or type is not found!' });
+        return response
+            .status(404)
+            .json({ msg: 'Person or type is not found!' });
     }
 }

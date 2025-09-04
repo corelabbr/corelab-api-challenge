@@ -1,20 +1,20 @@
 import { Request, Response } from 'express';
 import { prismaClient } from '../../database/prismaClient';
-interface findTaskByUserIdBody {
-    userId: string;
-    typeId: string;
-}
+
 export class FindFavoritesTasksController {
     async handle(request: Request, response: Response) {
-        const { userId, typeId }: findTaskByUserIdBody = request.body;
+        const id: string = request.params.id;
 
         try {
-            const findTaskByUserId = await prismaClient.typeNote.findMany({
-                where: {
-                    id: typeId
+            const findTaskByUserId = await prismaClient.task.findMany({
+                where: {  
+                    userId: id,
+                    AND:{
+                        typeId: '68b30e2856e18c21c1298cce',
+                    }
                 },
                 include: {
-                    tasks: true
+                    typeNotes: true
                 }
             });
             return response.status(200).json(findTaskByUserId);

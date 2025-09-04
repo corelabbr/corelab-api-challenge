@@ -1,11 +1,9 @@
 import { Request, Response } from 'express';
 import { prismaClient } from '../../database/prismaClient';
-interface deleteTaskBody {
-    id: string;
-}
+
 export class DeleteTaskController {
     async handle(request: Request, response: Response) {
-        const { id }: deleteTaskBody = request.body;
+        const id:string = request.params.id;
         try {
             const deleteTask = await prismaClient.task.delete({
                 where: {

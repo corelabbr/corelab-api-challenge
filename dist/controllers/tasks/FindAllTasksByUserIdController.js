@@ -4,12 +4,12 @@ exports.FindAllTasksByUserIdController = void 0;
 const prismaClient_1 = require("../../database/prismaClient");
 class FindAllTasksByUserIdController {
     async handle(request, response) {
-        const { userId } = request.body;
-        if (userId !== null && userId.length !== 0) {
+        const id = request.params.id;
+        if (id !== null && id !== '' && id !== undefined) {
             try {
                 const findTaskByUserId = await prismaClient_1.prismaClient.task.findMany({
                     where: {
-                        userId: userId,
+                        userId: id,
                         AND: {
                             typeNotes: null
                         }
@@ -23,7 +23,9 @@ class FindAllTasksByUserIdController {
             }
             catch (error) {
                 console.log(error);
-                return response.status(500).json({ msg: 'Internal server error!' });
+                return response
+                    .status(500)
+                    .json({ msg: 'Internal server error!' });
             }
         }
         return response.status(404).json({ msg: 'Person is not found!' });
