@@ -13,7 +13,7 @@ test('display vehicles', async ({ client }) => {
       isFavorite: false,
       year: 2018,
       color: '#ff00ff',
-      price: 22000
-    }
+      price: 22000,
+    },
   ])
 })
