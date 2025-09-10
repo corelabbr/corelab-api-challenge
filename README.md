@@ -1,84 +1,152 @@
-## Corelab Challenge:
+# Corelab Backend API
 
-You are tasked with building a web application that allows users to create and manage their to-do lists. The application should consist of a responsive webpage built in React, and an API built in Node.js to store and manage the to-do lists.
+API RESTful para gerenciamento de tarefas (to-do list) desenvolvida em Node.js com Express e TypeScript.
 
+## Tecnologias Utilizadas
 
-### The repositories
-The [frontend repository](https://github.com/corelabbr/corelab-web-challenge)
+- **Node.js**: Runtime JavaScript
+- **Express.js**: Framework web
+- **TypeScript**: Superset tipado do JavaScript
+- **MongoDB**: Banco de dados NoSQL
+- **Mongoose**: ODM para MongoDB
+- **CORS**: Middleware para Cross-Origin Resource Sharing
 
-If you feel more comfortable, you can pick another React framework and show us your skills.
+## Funcionalidades
 
-The [backend repository](https://github.com/corelabbr/corelab-api-challenge)
+- CRUD completo de tarefas
+- Sistema de favoritos
+- Sistema de cores personalizadas
+- Filtros por favoritos e cores
+- Validação de dados
+- Tratamento de erros
 
-If you feel more comfortable, you can pick another Node JS framework and show us your skills.
+## Instalação
 
-### The Layout
-Open the [layout mockup](https://www.figma.com/make/cy34jtb1qvVC5org8qSzfY/Core-Notes-Application?node-id=0-1&p=f&t=gPckDCQn55VpTAxr-0&fullscreen=1) in desktop and mobile version and follow this design as much as possible.
+1. Clone o repositório
+2. Instale as dependências:
+```bash
+npm install
+```
 
-### The application should have the following functionality:
+3. Configure as variáveis de ambiente criando um arquivo `.env`:
+```
+PORT=3001
+MONGODB_URI=mongodb://localhost:27017/corelab-todos
+```
 
-1. Users should be able to create, read, update, and delete to-do items using the API.
-2. Users should be able to mark an item as a favorite.
-3. Users should be able to set a color for each to-do item.
-4. The React frontend should display the user's to-do list in a responsive and visually appealing manner, with the ability to filter by favorite items and color.
-5. The favorited items should be displayed at the top of the list.
+4. Inicie o MongoDB:
+```bash
+sudo systemctl start mongod
+```
 
-### Technical Requirements:
-1. The backend API should be built in Node.js framework and use a database of your choice (e.g., MongoDB, PostgreSQL, etc.).
-2. The frontend should be built in React and use modern web development tools and best practices.
-3. The application should be responsive and visually appealing.
+5. Execute a aplicação:
+```bash
+# Desenvolvimento
+npm run dev
 
-### Deliverables:
-1. A link to a GitHub repository containing the complete source code for the project.
-2. A written description of how to set up and run the application locally.
+# Produção
+npm run build
+npm start
+```
 
+## API Endpoints
 
-### Evaluation Criteria:
-1. Code Quality
-2. Code Format
-3. Code Perfomance
-4. Frontend Design
-5. If your code is Easily Readable
-6. Mobile First approach
-7. Code Responsability
-8. Features Work
-9. Responsiveness
-10. Does the application meet the functionality requirements listed above?
-11. Is the code well-organized, easy to read, and well-documented?
-12. Are modern web development tools and best practices used?
-13. Is the application visually appealing and responsive?
+### GET /api/todos
+Lista todas as tarefas com filtros opcionais.
 
-### Backend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: Adonis TS or any other node framework you know.
-4. Database: Choose your own, you can even save in memory.
+**Query Parameters:**
+- `favorite=true`: Filtra apenas tarefas favoritas
+- `color=#hexcode`: Filtra por cor específica
 
-### Frontend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: React TS
-4. Sass or other preprocessor
+**Resposta:**
+```json
+[
+  {
+    "_id": "...",
+    "title": "Minha tarefa",
+    "description": "Descrição da tarefa",
+    "isFavorite": false,
+    "color": "#ffffff",
+    "createdAt": "2025-09-07T03:00:00.000Z",
+    "updatedAt": "2025-09-07T03:00:00.000Z"
+  }
+]
+```
 
-### Want to impress us even more?
-If you feel comfortable and want to impress us even more, you can do the following:
+### GET /api/todos/:id
+Busca uma tarefa específica pelo ID.
 
-1. Work on correct types and interfaces
-2. Work on eslint rules
-3. Work prettier config
-4. Work on docker containers
-5. Work on tests
-6. Work on CI/CD
+### POST /api/todos
+Cria uma nova tarefa.
 
-### What to do when you finish?
+**Body:**
+```json
+{
+  "title": "Título da tarefa",
+  "description": "Descrição opcional",
+  "isFavorite": false,
+  "color": "#ffffff"
+}
+```
 
-Create a file PULL_REQUEST.md where you will describe what you did and how in as much detail as possible. Feel free to add videos for better explanation.
+### PUT /api/todos/:id
+Atualiza uma tarefa existente.
 
-Create a new pull request using the same branch name for Backend and Frontend
+### DELETE /api/todos/:id
+Remove uma tarefa.
 
-Send us the pull requests and that's all!
+## Estrutura do Projeto
 
+```
+src/
+├── models/
+│   └── Todo.ts              # Modelo de dados do MongoDB
+├── controllers/
+│   └── todoController.ts    # Lógica de negócio da API
+├── routes/
+│   └── todoRoutes.ts        # Definição das rotas RESTful
+├── config/
+│   └── database.ts          # Configuração do MongoDB
+├── app.ts                   # Configuração principal do Express
+└── server.ts                # Inicialização do servidor
+```
 
-#### Good luck! The sky is the limit 🚀
+## Modelo de Dados
+
+```typescript
+interface ITodo {
+  title: string;           // Obrigatório
+  description?: string;    // Opcional
+  isFavorite: boolean;     // Padrão: false
+  color: string;           // Padrão: "#ffffff"
+  createdAt: Date;         // Automático
+  updatedAt: Date;         // Automático
+}
+```
+
+## Scripts Disponíveis
+
+- `npm run dev`: Executa em modo de desenvolvimento
+- `npm run build`: Compila o TypeScript
+- `npm start`: Executa a versão compilada
+- `npm test`: Executa os testes (a implementar)
+
+## Configuração CORS
+
+A API está configurada para aceitar requisições de qualquer origem durante o desenvolvimento. Para produção, recomenda-se configurar origens específicas.
+
+## Tratamento de Erros
+
+A API retorna erros padronizados com códigos HTTP apropriados:
+
+- `400`: Bad Request (dados inválidos)
+- `404`: Not Found (recurso não encontrado)
+- `500`: Internal Server Error (erro interno)
+
+## Validações
+
+- **title**: Campo obrigatório, string não vazia
+- **description**: Campo opcional, string
+- **isFavorite**: Boolean, padrão false
+- **color**: String, padrão "#ffffff"
+
