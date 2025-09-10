@@ -20,4 +20,10 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/vehicles', 'VehiclesController.index');
+Route.get('/vehicles', 'VehiclesController.index')
+
+Route.get('/card', 'CardsController.index')
+Route.get('/card/:id', 'CardsController.getById')
+Route.post('/card', 'CardsController.store')
+Route.put('/card/:id', 'CardsController.update')
+Route.delete('/card/:id', 'CardsController.destroy')
