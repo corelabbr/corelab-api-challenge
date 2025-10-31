@@ -20,4 +20,7 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/vehicles', 'VehiclesController.index');
+Route.get('/notes', 'NotesController.index');
+Route.post('/notes', 'NotesController.store');
+Route.put('/notes/:_id', 'NotesController.update');
+Route.delete('/notes/:_id', 'NotesController.destroy');
