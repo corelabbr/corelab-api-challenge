@@ -12,8 +12,7 @@ test('display vehicles', async ({ client }) => {
       plate: 'DDT-0012',
       isFavorite: false,
       year: 2018,
-      color: '#ff00ff',
-      price: 22000
-    }
+      price: 22000,
+    },
   ])
 })
