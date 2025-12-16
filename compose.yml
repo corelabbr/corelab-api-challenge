@@ -1,0 +1,30 @@
+version: '3'
+services:
+  corenotes-api:
+    container_name: corenotes-api
+    image: corenotes
+    ports:
+      - '3002:3000'
+    build: 
+      context: .
+    environment:
+      - MONGO_URL=mongodb://corenotes-db:27017/todo
+    volumes:
+      - .:/app
+    networks:
+      - corenotes
+
+  corenotes-db:
+    container_name: corenotes-db
+    image: mongo
+    volumes:
+      - corenotes-db://data/db
+    networks:
+        - corenotes
+  
+volumes: 
+  corenotes-db:
+
+networks:
+  corenotes:
+
