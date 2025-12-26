@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  nestapp:
+    container_name: corelab_api
+    image: jsilva23/corelab_api:1.0.0
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USERNAME=admin
+      - DB_PASSWORD=admin
+      - DB_NAME=corelab
+    depends_on:
+      - db_corelab
+  db_corelab:
+    container_name: db_corelab     
+    image: postgres:16-alpine
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=corelab   
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata: {}
