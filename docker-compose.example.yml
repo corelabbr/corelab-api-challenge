@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo-container
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+    networks:
+      - corelab-api-network
+  corelab-api:
+    build: ./
+    container_name: corelab-api-container
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_HOST=mongo
+
+      - MONGO_PORT=27017
+
+      - MONGO_DATABASE=MY_DATABASE
+
+      - MONGO_PASSWORD=123456
+
+      - MONGO_USER=admin
+    networks:
+      - corelab-api-network
+    depends_on:
+      - mongo
+ 
+networks:
+  corelab-api-network: 
+volumes:
+  mongo-data:

@@ -1,17 +1,27 @@
 {
-  "extends": "./node_modules/adonis-preset-ts/tsconfig",
-  "include": ["**/*"],
-  "exclude": ["node_modules", "build"],
-  "compilerOptions": {
-    "outDir": "build",
-    "rootDir": "./",
-    "sourceMap": true,
-    "paths": {
-      "App/*": ["./app/*"],
-      "Config/*": ["./config/*"],
-      "Contracts/*": ["./contracts/*"],
-      "Database/*": ["./database/*"]
+    "compilerOptions": {
+      "target": "es2020",
+      "module": "commonjs",
+      "outDir": "./dist",
+      "rootDir": "./src",
+      "noEmit": true,
+      "strict": false,
+      "strictPropertyInitialization": false,
+      "resolveJsonModule": true,
+      "baseUrl": "./src",
+      "allowJs": true,
+      "moduleResolution": "node",
+      "paths": {
+        "@modules/": ["modules/"],
+        "@config/": ["config/"],
+        "@shared/": ["shared/"],
+        "@utils/": ["utils/"]
+      },
+      "esModuleInterop": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true
     },
-    "types": ["@adonisjs/core", "@adonisjs/repl", "@japa/preset-adonis/build/adonis-typings"]
+    "include": ["src"]
   }
-}
