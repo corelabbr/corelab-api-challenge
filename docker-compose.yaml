@@ -1,0 +1,41 @@
+version: '3'
+services:
+  postgres:
+    container_name: postgress_database
+    image: postgres:13
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: ${PG_DB_NAME}
+    networks:
+      - corelab-network
+
+  adonis_api:
+    container_name: corelab_api
+    restart: always
+    depends_on:
+      - postgres
+    build:
+      context: .
+      target: dependencies
+    ports:
+      - ${PORT}:${PORT}
+      - 9229:9229
+    env_file:
+      - .env
+    volumes:
+      - ./:/home/node/app
+    command: dumb-init node ace serve --watch --node-args="--inspect=0.0.0.0"
+    networks:
+      - corelab-network
+
+networks:
+  corelab-network:
+    driver: 'bridge'
+
+volumes:
+  postgres-data:
