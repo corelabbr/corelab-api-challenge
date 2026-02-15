@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /*
 |--------------------------------------------------------------------------
 | Routes
@@ -20,4 +21,10 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/vehicles', 'VehiclesController.index');
+Route.get('/notes/favorites', 'NotesController.favorites')
+Route.get('/notes/others', 'NotesController.others')
+Route.get('/notes/search/:param', 'NotesController.search')
+
+Route.post('/notes', 'NotesController.store')
+Route.put('/notes/:id', 'NotesController.update')
+Route.delete('/notes/:id', 'NotesController.destroy')
